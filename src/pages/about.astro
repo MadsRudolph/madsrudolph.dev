@@ -11,12 +11,20 @@ import Base from '../layouts/Base.astro';
     <h1>About me</h1>
   </div>
 
-  <p>
-    I'm a 5th-semester Elektroteknologi (B.Eng. in Electrical Engineering) student at DTU. Most
-    of what I know about electronics comes from building things that had to actually work:
-    firmware that runs unattended for months, boards that carry real current, and tools I built
-    because the ones I wanted didn't exist.
-  </p>
+  <div class="about-head">
+    <figure class="about-portrait">
+      <div class="frame">
+        <img src="/media/mads-rudolph.jpg" width="380" height="475" alt="Portrait of Mads Rudolph" />
+      </div>
+      <figcaption>Mads Rudolph · Kgs. Lyngby</figcaption>
+    </figure>
+    <p>
+      I'm a 5th-semester Elektroteknologi (B.Eng. in Electrical Engineering) student at DTU. Most
+      of what I know about electronics comes from building things that had to actually work:
+      firmware that runs unattended for months, boards that carry real current, and tools I built
+      because the ones I wanted didn't exist.
+    </p>
+  </div>
 
   <h2>The fabrication line</h2>
   <p>
@@ -40,19 +48,21 @@ import Base from '../layouts/Base.astro';
 
   <h2>Working with AI</h2>
   <p>
-    I'm fast and fluent with AI as an engineering tool, and I treat that as a real skill — knowing
-    when to reach for a model, how to drive it precisely, and, most importantly, how to verify what
-    it hands back. I use LLMs to scaffold firmware, explore design options, and turn a datasheet
-    into working code in a fraction of the time, then apply my own judgment and a scope probe to
-    everything that matters — the debugging is still mine.
+    I treat directing AI as a core engineering skill — arguably the one compounding fastest right
+    now. The hardware, the debugging, and the design decisions are hands-on and mine. But for the
+    software-heavy work — building this site, the heavy-duty Python behind tools like
+    <a href="/projects/componentbot">Componentbot</a> — I don't hand-write it. I orchestrate it. I
+    bring the requirements, the architecture, and the standards; I know what "done right" looks like
+    and where the best-practice lines are; and I direct an AI to implement against that.
   </p>
   <p>
-    I also build AI into what I ship. <a href="/projects/componentbot">Componentbot</a>
-    is a grounded local-LLM assistant that helps classmates find parts in the DTU component shop;
-    <a href="https://github.com/MadsRudolph/SPICEPilot">SPICEPilot</a> is work on using LLMs to
-    generate SPICE/KiCad schematics; and several of my home-lab tools have Claude-backed features.
-    "Good with AI" isn't a buzzword on my CV — it's a workflow I use every day and a class of system
-    I know how to design, prompt, and keep honest.
+    What makes it trustworthy is verification. I have it write tests the whole way through and prove
+    each piece works before anything new is built on top — the same discipline as the rest of this
+    site: nothing moves forward until it's checked. Knowing exactly what to build, to what standard,
+    and how to keep an AI honest with tests is, to me, precisely the skill this decade rewards — and
+    I also build AI into what I ship, from <a href="/projects/componentbot">Componentbot</a> to
+    <a href="https://github.com/MadsRudolph/SPICEPilot">SPICEPilot</a> and the Claude-backed features
+    in my home-lab tools.
   </p>
 
   <h2>Beyond the bench</h2>
