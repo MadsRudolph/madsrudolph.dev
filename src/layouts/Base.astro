@@ -5,38 +5,56 @@ import '@fontsource/ibm-plex-mono/400.css';
 import '@fontsource/ibm-plex-mono/500.css';
 import '@fontsource/ibm-plex-mono/600.css';
 import '../styles/global.css';
+import { ui, type Lang } from '../i18n';
 
 interface Props {
   title: string;
   description: string;
   wide?: boolean;
+  lang?: Lang;
+  /** URL of this same page in the other language, for the toggle + hreflang. */
+  altUrl?: string;
 }
 
-const { title, description, wide = false } = Astro.props;
+const { title, description, wide = false, lang = 'en', altUrl } = Astro.props;
+const t = ui[lang];
+const base = lang === 'da' ? '/da' : '';
+const homeHref = base || '/';
+
 const path = Astro.url.pathname;
+const norm = (p: string) => p.replace(/\.html$/, '').replace(/\/+$/, '') || '/';
+const cur = norm(path);
 
 const nav = [
-  { href: '/projects', label: 'Projects' },
-  { href: '/about', label: 'About' },
-  { href: '/cv', label: 'CV' },
+  { href: `${base}/projects`, label: t.navProjects },
+  { href: `${base}/about`, label: t.navAbout },
+  { href: `${base}/cv`, label: t.navCv },
 ];
 
-const isCurrent = (href: string) =>
-  path === href || (href !== '/' && path.startsWith(href + '/')) || path === href + '.html';
+const isCurrent = (href: string) => {
+  const h = norm(href);
+  return cur === h || (h !== homeHref && cur.startsWith(h + '/'));
+};
 
+// hreflang alternates
+const enUrl = lang === 'en' ? path : altUrl;
+const daUrl = lang === 'da' ? path : altUrl;
 const year = new Date().getFullYear();
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0e1116" />
+    <meta name="theme-color" content="#0d1014" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href={new URL(path, Astro.site)} />
+    {enUrl && <link rel="alternate" hreflang="en" href={new URL(enUrl, Astro.site)} />}
+    {daUrl && <link rel="alternate" hreflang="da" href={new URL(daUrl, Astro.site)} />}
+    {enUrl && <link rel="alternate" hreflang="x-default" href={new URL(enUrl, Astro.site)} />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
@@ -44,16 +62,35 @@ const year = new Date().getFullYear();
   <body>
     <header class="site-header">
       <div class="inner">
-        <a class="name" href="/">madsrudolph<span class="tld">.dev</span></a>
-        <nav>
-          {
-            nav.map((item) => (
-              <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
-                {item.label}
-              </a>
-            ))
-          }
-        </nav>
+        <a class="name" href={homeHref}>madsrudolph<span class="tld">.dev</span></a>
+        <div class="nav-group">
+          <nav>
+            {
+              nav.map((item) => (
+                <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                  {item.label}
+                </a>
+              ))
+            }
+          </nav>
+          <div class="lang-toggle" aria-label="Language">
+            {
+              lang === 'en' ? (
+                <span class="on">EN</span>
+              ) : (
+                <a href={altUrl ?? '/'}>EN</a>
+              )
+            }
+            <span class="sep">/</span>
+            {
+              lang === 'da' ? (
+                <span class="on">DA</span>
+              ) : (
+                <a href={altUrl ?? '/da'}>DA</a>
+              )
+            }
+          </div>
+        </div>
       </div>
     </header>
     <main class:list={[{ wide }]}>
@@ -61,10 +98,10 @@ const year = new Date().getFullYear();
     </main>
     <footer class="site-footer">
       <div class="inner">
-        <span>© {year} Mads Rudolph · Kgs. Lyngby, Denmark</span>
+        <span>© {year} Mads Rudolph · {t.footerLoc}</span>
         <span>
           <a href="https://github.com/MadsRudolph">github.com/MadsRudolph</a>
-          · static site, no trackers
+          · {t.footerTag}
         </span>
       </div>
     </footer>

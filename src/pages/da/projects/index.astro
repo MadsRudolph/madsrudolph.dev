@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import Base from '../../layouts/Base.astro';
-import ProjectCard from '../../components/ProjectCard.astro';
+import Base from '../../../layouts/Base.astro';
+import ProjectCard from '../../../components/ProjectCard.astro';
 
 const projects = (await getCollection('projects')).sort(
   (a, b) => a.data.order - b.data.order || b.data.date.valueOf() - a.data.date.valueOf()
@@ -11,22 +11,25 @@ const allTags = [...new Set(projects.flatMap((p) => p.data.tags))].sort();
 ---
 
 <Base
-  title="Projects — Mads Rudolph"
-  description="Hardware and firmware projects: PCB fabrication, ESP32 firmware, reverse engineering, and lab tooling. Filter by skill."
-  lang="en"
-  altUrl="/da/projects"
+  title="Projekter — Mads Rudolph"
+  description="Hardware- og firmware-projekter: PCB-fabrikation, ESP32-firmware, reverse engineering og laboratorieværktøj. Filtrér efter kompetence."
+  lang="da"
+  altUrl="/projects"
 >
   <div class="page-head">
-    <span class="label">Index</span>
-    <h1>Projects</h1>
+    <span class="label">Oversigt</span>
+    <h1>Projekter</h1>
     <p class="lede">
-      Filter by tool or skill. Every writeup follows the same structure: what it is, how it's
-      built, what went wrong, and what came out of it.
+      Filtrér efter værktøj eller kompetence. Hver beskrivelse følger samme struktur: hvad det er,
+      hvordan det er bygget, hvad der gik galt, og hvad der kom ud af det.
+    </p>
+    <p style="color: var(--muted); font-size: 0.9rem;">
+      De uddybende projektbeskrivelser er skrevet på engelsk.
     </p>
   </div>
 
   <div class="filter-bar" id="filter-bar" hidden>
-    <button type="button" data-tag="" aria-pressed="true">all</button>
+    <button type="button" data-tag="" aria-pressed="true">alle</button>
     {
       allTags.map((tag) => (
         <button type="button" data-tag={tag} aria-pressed="false">
@@ -37,11 +40,10 @@ const allTags = [...new Set(projects.flatMap((p) => p.data.tags))].sort();
   </div>
 
   <ul class="project-list" id="project-list">
-    {projects.map((project, i) => <ProjectCard project={project} index={i} />)}
+    {projects.map((project, i) => <ProjectCard project={project} index={i} lang="da" />)}
   </ul>
 
   <script>
-    // Progressive enhancement: tag filter. Without JS the full list renders.
     const bar = document.getElementById('filter-bar')!;
     const cards = document.querySelectorAll<HTMLElement>('#project-list .project-card');
     bar.hidden = false;

@@ -18,7 +18,7 @@ const { title, summary, date, tags, repo, status } = project.data;
 const dateLabel = date.toLocaleDateString('en-GB', { year: 'numeric', month: 'long' });
 ---
 
-<Base title={`${title} — Mads Rudolph`} description={summary}>
+<Base title={`${title} — Mads Rudolph`} description={summary} lang="en" altUrl="/da/projects">
   <div class="page-head">
     <span class="label">Project · {dateLabel} · {status.replace('-', ' ')}</span>
     <h1>{title}</h1>

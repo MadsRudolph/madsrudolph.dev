@@ -1,0 +1,75 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const projects = await getCollection('projects');
+const featured = projects
+  .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+---
+
+<Base
+  title="Mads Rudolph — elektroteknologistuderende, DTU"
+  description="Portfolio for Mads Rudolph: PCB-design, embedded firmware og fejlfinding på elektronik. Søger ingeniørpraktik fra januar 2027."
+  lang="da"
+  altUrl="/"
+>
+  <section class="hero">
+    <h1>Mads Rudolph<span class="accent">.</span><span class="caret" aria-hidden="true"></span></h1>
+
+    <div class="scope" aria-hidden="true">
+      <span class="scope-tag">trinrespons · lukket sløjfe</span>
+      <span class="scope-legend"><span class="ch1">CH1</span><span class="ch2">CH2</span></span>
+      <svg viewBox="0 0 1200 118" preserveAspectRatio="none" role="presentation">
+        <path
+          class="scope-trace ch1"
+          d="M0,80 L150,80 C185,80 200,20 250,20 C300,20 300,104 355,96 C410,88 410,52 470,58 C528,64 528,92 590,88 C650,84 650,73 712,76 C775,79 800,80 1200,79"
+        />
+        <path
+          class="scope-trace ch2"
+          d="M0,88 L120,88 C170,88 180,54 240,54 C300,54 300,110 360,104 C420,99 430,74 500,78 C570,82 580,96 650,93 C720,90 730,84 800,86 C880,88 900,87 1200,87"
+        />
+      </svg>
+    </div>
+
+    <p class="status-line">
+      <span class="dot" aria-hidden="true"></span>
+      søger praktik fra jan. 2027 · åben for studiejob
+    </p>
+
+    <ul class="specs">
+      <li><b>DTU</b> · Elektroteknologi (diploming.)</li>
+      <li>PCB · Embedded · Fejlfinding</li>
+      <li><b>AI</b> i loopet</li>
+      <li>Kgs. Lyngby, DK</li>
+    </ul>
+
+    <p>
+      Jeg er diplomingeniørstuderende i Elektroteknologi på DTU, og jeg bygger og fejlfinder rigtig
+      hardware: printplader designet i KiCad og fremstillet på mit eget fiberlaser- og CNC-workflow,
+      ESP32-firmware der kører i månedsvis, og laboratorieværktøj bygget, når det rette instrument
+      ikke fandtes. Jeg arbejder hurtigt — ofte med AI i loopet som ingeniørværktøj — og verificerer
+      alt med tests og på bænken. Denne side er beviset: hvert projekt linker til sit repository, og
+      hver beskrivelse fortæller, hvad der gik galt, og hvordan jeg fandt fejlen.
+    </p>
+  </section>
+
+  <div class="section-rule"><span class="label">Udvalgte projekter</span></div>
+  <ul class="project-list">
+    {featured.map((project, i) => <ProjectCard project={project} index={i} lang="da" />)}
+  </ul>
+  <p style="margin-top: 1.25rem;">
+    <a href="/da/projects">Alle projekter →</a>
+  </p>
+  <p style="color: var(--muted); font-size: 0.9rem;">
+    De uddybende projektbeskrivelser er på engelsk.
+  </p>
+
+  <div class="section-rule"><span class="label">Kontakt</span></div>
+  <p>
+    E-mail: <a href="mailto:mads28122001@hotmail.dk">mads28122001@hotmail.dk</a> ·
+    GitHub: <a href="https://github.com/MadsRudolph">MadsRudolph</a>
+  </p>
+</Base>

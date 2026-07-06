@@ -1,18 +1,26 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import type { Lang } from '../i18n';
 
 interface Props {
   project: CollectionEntry<'projects'>;
   index?: number;
+  lang?: Lang;
 }
 
-const { project, index } = Astro.props;
+const { project, index, lang = 'en' } = Astro.props;
 const { title, summary, date, tags, status } = project.data;
 
-const dateLabel = date.toLocaleDateString('en-GB', { year: 'numeric', month: 'short' });
-const statusLabel = { working: 'working', 'in-progress': 'in progress', archived: 'archived' }[
-  status
-];
+const locale = lang === 'da' ? 'da-DK' : 'en-GB';
+const dateLabel = date.toLocaleDateString(locale, { year: 'numeric', month: 'short' });
+
+const statusLabels = {
+  en: { working: 'working', 'in-progress': 'in progress', archived: 'archived' },
+  da: { working: 'fungerer', 'in-progress': 'i gang', archived: 'arkiveret' },
+};
+const statusLabel = statusLabels[lang][status];
+
+// Writeups are English-only, so cards always link to the English page.
 const idx = typeof index === 'number' ? String(index + 1).padStart(2, '0') : null;
 ---
 

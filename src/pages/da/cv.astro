@@ -1,0 +1,126 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const experience = [
+  {
+    role: 'Tjener',
+    org: "Hotel D'Angleterre",
+    place: 'København',
+    period: 'Dec. 2024 — nu',
+    notes:
+      'Service i højt tempo på højt niveau. Fuldt fleksible vagter, bevidst holdt på deltid, så studie og teknisk arbejde er førsteprioritet.',
+  },
+  { role: 'Bartender / tjener', org: 'Visselulles Vinbar', place: 'Sønderborg', period: 'Maj 2023 — aug. 2024' },
+  { role: 'Kok', org: 'Mommark Marina', place: 'Mommark', period: 'Juni 2021 — juni 2024' },
+  { role: 'Skiinstruktør', org: 'Sun Peaks Resort', place: 'British Columbia, Canada', period: 'Dec. 2022 — apr. 2023' },
+  { role: 'Produktionsmedarbejder', org: 'JKS (hos Danfoss)', place: 'Nordborg', period: 'Aug. 2022 — nov. 2023' },
+];
+
+const education = [
+  {
+    title: 'Diplomingeniør (B.Eng.) i Elektroteknologi',
+    org: 'DTU — Danmarks Tekniske Universitet, Kongens Lyngby',
+    period: 'Sep. 2024 — nu',
+    notes: 'Forventet færdig sommer 2027. Obligatorisk praktikperiode fra sidst i januar 2027.',
+  },
+  { title: 'Skiinstruktør niveau 1 (certificering)', org: 'CSIA, Sun Peaks', period: 'Nov. 2022 — dec. 2023' },
+  { title: 'STX, Matematik A / Fysik A', org: 'Sønderborg Statsskole', period: 'Aug. 2019 — juni 2022' },
+];
+
+const skillGroups = [
+  {
+    label: 'Hardware',
+    items: ['KiCad (diagram, footprints, PCB-layout)', 'PCB-fabrikation (fiberlaser, CNC, reflow)', 'Analog & digital elektronik', 'Fusion 360 CAD'],
+  },
+  {
+    label: 'Firmware & software',
+    items: ['C / Embedded C', 'ESP32 (ESP-IDF, ESPHome)', 'Python', 'Git'],
+  },
+  {
+    label: 'Bænk',
+    items: ['Oscilloskop & logikanalysator', 'Reverse engineering af protokoller', 'Fejlfinding & hardware/firmware-integration'],
+  },
+  {
+    label: 'AI-orkestreret udvikling',
+    items: ['Styre AI til at bygge software efter spec (web, tung Python)', 'Testdrevet verifikation i hvert trin', 'Bygge LLM-integrerede værktøjer (Componentbot, SPICEPilot)'],
+  },
+];
+---
+
+<Base
+  title="CV — Mads Rudolph"
+  description="CV for Mads Rudolph — diplomingeniørstuderende i Elektroteknologi på DTU. PCB-design, embedded firmware og fejlfinding."
+  lang="da"
+  altUrl="/cv"
+>
+  <div class="page-head">
+    <span class="label">CV</span>
+    <h1>Curriculum vitae</h1>
+    <p class="lede">
+      Den korte version står nedenfor. <a href="/da/projects">Projektbeskrivelserne</a> er den lange
+      version — beviset bag hver kompetence her. Vil du have et formateret PDF eller referencer, så
+      <a href="mailto:mads28122001@hotmail.dk">skriv til mig</a>.
+    </p>
+  </div>
+
+  <h2>Profil</h2>
+  <p>
+    Elektroteknologistuderende på DTU med stærkt fokus på elektronik og embedded systemer. Jeg
+    designer og fremstiller print i KiCad, skriver firmware til mikrocontroller-baseret hardware og
+    fejlfinder på bænken — fra en enkelt footprint til en færdig enhed. Nysgerrig og selvkørende; jeg
+    bygger værktøjet, når det rigtige ikke findes. Søger ingeniørpraktik fra januar 2027 og studiejob
+    ved siden af studiet.
+  </p>
+
+  <h2>Kompetencer</h2>
+  {
+    skillGroups.map((group) => (
+      <p>
+        <span class="label">{group.label}</span><br />
+        {group.items.join(' · ')}
+      </p>
+    ))
+  }
+
+  <h2>Uddannelse</h2>
+  {
+    education.map((item) => (
+      <div style="margin-bottom: 1.1rem;">
+        <span class="label">{item.period}</span>
+        <div><strong>{item.title}</strong></div>
+        <div style="color: var(--ink-soft);">{item.org}</div>
+        {item.notes && <div style="color: var(--muted); font-size: 0.92rem;">{item.notes}</div>}
+      </div>
+    ))
+  }
+
+  <h2>Erhvervserfaring</h2>
+  <p style="color: var(--muted); font-size: 0.92rem; margin-top: -0.25rem;">
+    Service- og sæsonarbejde gennem studiet — fleksibelt nok til at holde ingeniørarbejdet først, og
+    hvert job lærte mig at holde overblik og kommunikere under pres.
+  </p>
+  {
+    experience.map((item) => (
+      <div style="margin-bottom: 1.1rem;">
+        <span class="label">{item.period}</span>
+        <div>
+          <strong>{item.role}</strong>, {item.org} — {item.place}
+        </div>
+        {item.notes && <div style="color: var(--ink-soft); font-size: 0.92rem;">{item.notes}</div>}
+      </div>
+    ))
+  }
+
+  <h2>Sprog & interesser</h2>
+  <p>
+    Dansk (modersmål), engelsk (flydende). Uden for ingeniørarbejdet: hi-fi og vinyl, CAD-modellering,
+    FPV-drone-racing og madlavning.
+  </p>
+
+  <hr />
+  <p>
+    <span class="label">Kontakt</span><br />
+    <a href="mailto:mads28122001@hotmail.dk">mads28122001@hotmail.dk</a> ·
+    <a href="https://github.com/MadsRudolph">github.com/MadsRudolph</a> · Kgs. Lyngby, Danmark
+  </p>
+</Base>

@@ -302,9 +302,44 @@ pre code {
   color: var(--accent);
 }
 
+.nav-group {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+}
+
 .site-header nav {
   display: flex;
   gap: 1.4rem;
+}
+
+.lang-toggle {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  padding-left: 1rem;
+  border-left: 1px solid var(--rule);
+}
+
+.lang-toggle a {
+  color: var(--muted);
+  background: none;
+  padding: 0;
+}
+
+.lang-toggle a:hover {
+  color: var(--accent-ink);
+}
+
+.lang-toggle .on {
+  color: var(--accent);
+}
+
+.lang-toggle .sep {
+  color: var(--rule);
 }
 
 .site-header nav a {
