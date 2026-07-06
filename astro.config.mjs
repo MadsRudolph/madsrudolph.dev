@@ -9,5 +9,8 @@ export default defineConfig({
   build: {
     format: 'file',
   },
+  markdown: {
+    shikiConfig: { theme: 'github-dark' },
+  },
   integrations: [sitemap()],
 });

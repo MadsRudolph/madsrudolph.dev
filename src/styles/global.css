@@ -1,19 +1,20 @@
-/* madsrudolph.dev — "engineering paper" theme.
-   Warm paper background with a faint 5 mm grid, ink text, signal-orange accent.
+/* madsrudolph.dev — dark "blueprint" theme.
+   Near-black background with a faint 5 mm grid, off-white ink, signal-orange accent.
    IBM Plex Mono for headings/labels, IBM Plex Sans for body. */
 
 :root {
-  --paper: #faf7f1;
-  --paper-raised: #fffdf8;
-  --grid-line: rgba(28, 27, 24, 0.055);
-  --ink: #1c1b18;
-  --ink-soft: #4a4740;
-  --muted: #7a766c;
-  --accent: #c94f00;
-  --accent-ink: #a54100;
-  --rule: #d8d3c6;
-  --rule-strong: #1c1b18;
-  --code-bg: #f1ede3;
+  color-scheme: dark;
+  --paper: #0e1116;
+  --paper-raised: #161a21;
+  --grid-line: rgba(200, 214, 235, 0.05);
+  --ink: #e9e6df;
+  --ink-soft: #aeaba1;
+  --muted: #7c7f88;
+  --accent: #ff7a33;
+  --accent-ink: #ff9d63;
+  --rule: #272c35;
+  --rule-strong: #e9e6df;
+  --code-bg: #191d25;
 
   --font-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Code', Menlo, monospace;
   --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
@@ -405,8 +406,8 @@ article.writeup th {
     -45deg,
     transparent,
     transparent 12px,
-    rgba(28, 27, 24, 0.02) 12px,
-    rgba(28, 27, 24, 0.02) 24px
+    rgba(200, 214, 235, 0.03) 12px,
+    rgba(200, 214, 235, 0.03) 24px
   );
 }
 
