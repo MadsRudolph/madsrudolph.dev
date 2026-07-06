@@ -15,11 +15,36 @@ const featured = projects
   description="Portfolio of Mads Rudolph: PCB design, embedded firmware, and electronics debugging. Seeking an engineering internship (praktik) from January 2027."
 >
   <section class="hero">
-    <h1>Mads Rudolph<span class="accent">.</span></h1>
+    <h1>Mads Rudolph<span class="accent">.</span><span class="caret" aria-hidden="true"></span></h1>
+
+    <div class="scope" aria-hidden="true">
+      <span class="scope-tag">step response · closed loop</span>
+      <span class="scope-legend"><span class="ch1">CH1</span><span class="ch2">CH2</span></span>
+      <svg viewBox="0 0 1200 118" preserveAspectRatio="none" role="presentation">
+        <!-- CH1: a damped step response settling to the baseline -->
+        <path
+          class="scope-trace ch1"
+          d="M0,80 L150,80 C185,80 200,20 250,20 C300,20 300,104 355,96 C410,88 410,52 470,58 C528,64 528,92 590,88 C650,84 650,73 712,76 C775,79 800,80 1200,79"
+        />
+        <!-- CH2: a lower-amplitude second channel, phase-shifted -->
+        <path
+          class="scope-trace ch2"
+          d="M0,88 L120,88 C170,88 180,54 240,54 C300,54 300,110 360,104 C420,99 430,74 500,78 C570,82 580,96 650,93 C720,90 730,84 800,86 C880,88 900,87 1200,87"
+        />
+      </svg>
+    </div>
+
     <p class="status-line">
       <span class="dot" aria-hidden="true"></span>
       seeking praktik from Jan 2027 · open to student jobs
     </p>
+
+    <ul class="specs">
+      <li><b>DTU</b> · Elektroteknologi (B.Eng.)</li>
+      <li>PCB · Embedded · Debugging</li>
+      <li>Kgs. Lyngby, DK</li>
+    </ul>
+
     <p>
       I'm an Elektroteknologi (B.Eng.) student at DTU who builds and debugs real hardware: PCBs
       designed in KiCad and fabricated on my own fiber-laser and CNC workflow, ESP32 firmware
@@ -27,6 +52,7 @@ const featured = projects
       site is the evidence — every project links to its repository, and every writeup includes
       what went wrong and how I diagnosed it.
     </p>
+
     <p class="dansk" lang="da">
       Jeg er diplomingeniørstuderende i Elektroteknologi på DTU og søger praktikplads fra januar
       2027 samt studiejob inden for elektronik og embedded udvikling. Skriv gerne på engelsk
@@ -36,7 +62,7 @@ const featured = projects
 
   <div class="section-rule"><span class="label">Featured projects</span></div>
   <ul class="project-list">
-    {featured.map((project) => <ProjectCard project={project} />)}
+    {featured.map((project, i) => <ProjectCard project={project} index={i} />)}
   </ul>
   <p style="margin-top: 1.25rem;">
     <a href="/projects">All projects →</a>

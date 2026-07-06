@@ -3,21 +3,28 @@ import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   project: CollectionEntry<'projects'>;
+  index?: number;
 }
 
-const { project } = Astro.props;
+const { project, index } = Astro.props;
 const { title, summary, date, tags, status } = project.data;
 
 const dateLabel = date.toLocaleDateString('en-GB', { year: 'numeric', month: 'short' });
 const statusLabel = { working: 'working', 'in-progress': 'in progress', archived: 'archived' }[
   status
 ];
+const idx = typeof index === 'number' ? String(index + 1).padStart(2, '0') : null;
 ---
 
 <li class="project-card" data-tags={tags.join(',')}>
   <div class="meta">
+    {idx && <span class="idx">{idx}</span>}
     <span class="label">{dateLabel}</span>
-    <span class="label">{statusLabel}</span>
+    <span class="spacer"></span>
+    <span class="status" data-status={status}>
+      <span class="led" aria-hidden="true"></span>
+      {statusLabel}
+    </span>
   </div>
   <h3><a href={`/projects/${project.id}`}>{title}</a></h3>
   <p>{summary}</p>

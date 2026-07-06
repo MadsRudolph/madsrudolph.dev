@@ -35,7 +35,7 @@ const allTags = [...new Set(projects.flatMap((p) => p.data.tags))].sort();
   </div>
 
   <ul class="project-list" id="project-list">
-    {projects.map((project) => <ProjectCard project={project} />)}
+    {projects.map((project, i) => <ProjectCard project={project} index={i} />)}
   </ul>
 
   <script>
