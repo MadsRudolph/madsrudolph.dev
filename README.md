@@ -79,26 +79,45 @@ public/
 
 Tags are free-form strings; reuse existing tag spellings so the filter groups them correctly.
 
-## Deploying to Cloudflare Pages
+## Deployment
 
-The domain `madsrudolph.dev` is already on Cloudflare. One-time setup:
+The Cloudflare Pages project (`madsrudolph-dev`) and the custom domain `madsrudolph.dev` are
+already set up. Deploys happen automatically via GitHub Actions.
 
-1. Push this repo to GitHub (e.g. `MadsRudolph/madsrudolph.dev`).
-2. Cloudflare dashboard → **Workers & Pages** → **Create** → **Pages** → **Connect to Git**, and
-   pick the repo.
-3. Build settings:
-   - **Framework preset:** Astro
-   - **Build command:** `npm run build`
-   - **Build output directory:** `dist`
-   - **Node version:** set env var `NODE_VERSION` = `22` (or 18+).
-4. Save and deploy. Every push to the production branch redeploys automatically; pull requests get
-   preview deployments.
-5. **Custom domain:** Pages project → **Custom domains** → add `madsrudolph.dev` (and
-   `www.madsrudolph.dev` if wanted). Since the domain is already on Cloudflare, the DNS records are
-   created for you. `astro.config.mjs` already sets `site: 'https://madsrudolph.dev'` for correct
-   canonical URLs.
+### Automatic (CI, the normal path)
 
-No environment secrets are required — the site is fully static.
+`.github/workflows/deploy.yml` builds the site and deploys it to Cloudflare Pages on every push to
+`main` (and on manual dispatch from the Actions tab). It needs two repository secrets:
+
+| Secret | Value |
+|--------|-------|
+| `CLOUDFLARE_API_TOKEN` | A scoped token — Cloudflare dashboard → **My Profile → API Tokens → Create Token**, template **"Edit Cloudflare Workers"** or a custom token with **Account → Cloudflare Pages → Edit**. |
+| `CLOUDFLARE_ACCOUNT_ID` | The account ID (already added as a repo secret). |
+
+Add the token once:
+
+```bash
+gh secret set CLOUDFLARE_API_TOKEN --repo MadsRudolph/madsrudolph.dev
+# paste the token value when prompted
+```
+
+After that, `git push` is the whole deploy story.
+
+### Manual (fallback)
+
+```bash
+npm run build
+npx wrangler pages deploy dist --project-name madsrudolph-dev --branch main
+```
+
+### Custom domain
+
+`madsrudolph.dev` is attached to the Pages project with a proxied apex `CNAME` →
+`madsrudolph-dev.pages.dev`, TLS issued by Cloudflare. To add `www`: Pages project →
+**Custom domains** → **Set up a custom domain** → `www`. `astro.config.mjs` sets
+`site: 'https://madsrudolph.dev'` so canonical URLs and the sitemap are correct.
+
+The site is fully static — no runtime secrets, no backend.
 
 ## Before you share the link
 
