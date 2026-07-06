@@ -8,6 +8,7 @@ date: 2026-07-06
 tags: ['Python', 'PySide6', 'CNC / grbl', 'Arduino', 'SPI', 'Reverse engineering', 'Computational geometry', 'KiCad']
 repo: 'https://github.com/MadsRudolph/srm-cam'
 featured: true
+flagship: true
 order: 1
 status: working
 hero: ''
@@ -21,7 +22,7 @@ heroAlt: 'SRM-CAM 3D toolpath preview next to the Roland SRM-20 milling a board'
 
 The Roland SRM-20 is a small desktop CNC mill that can isolation-route PCBs — cut the copper away from around the traces instead of etching it. The stock toolchain for that is slow web tools (mods.io) or fragile wrappers around FlatCAM. **SRM-CAM is my replacement: one Python package with both a GUI and a CLI that takes KiCad Gerber + Excellon files and produces the machine code the SRM-20 actually runs.** It previews the cut in 3D, probes and compensates for a warped board, handles double-sided registration, and re-cuts individual failed traces without regenerating the whole job.
 
-It's the tool that drives the CNC half of my [dorm-room PCB fabrication line](/about), and it's used by other students at the DTU Ballerup fab lab.
+It's the tool that drives the CNC half of my [dorm-room PCB fabrication line](/about), and it's used by other students at the DTU Ballerup fab lab. It's also the project I'm proudest of — the one I've poured the most hours into, a lot of them late nights and even between classes at school. If you only read one page on this site, I'd want it to be this one.
 
 ## Problem / motivation
 

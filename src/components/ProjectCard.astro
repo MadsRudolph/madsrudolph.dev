@@ -9,7 +9,9 @@ interface Props {
 }
 
 const { project, index, lang = 'en' } = Astro.props;
-const { title, summary, date, tags, status } = project.data;
+const { title, summary, date, tags, status, flagship } = project.data;
+
+const flagshipLabel = lang === 'da' ? 'flagskib' : 'flagship';
 
 const locale = lang === 'da' ? 'da-DK' : 'en-GB';
 const dateLabel = date.toLocaleDateString(locale, { year: 'numeric', month: 'short' });
@@ -24,9 +26,10 @@ const statusLabel = statusLabels[lang][status];
 const idx = typeof index === 'number' ? String(index + 1).padStart(2, '0') : null;
 ---
 
-<li class="project-card" data-tags={tags.join(',')}>
+<li class:list={['project-card', { flagship }]} data-tags={tags.join(',')}>
   <div class="meta">
     {idx && <span class="idx">{idx}</span>}
+    {flagship && <span class="flag">★ {flagshipLabel}</span>}
     <span class="label">{dateLabel}</span>
     <span class="spacer"></span>
     <span class="status" data-status={status}>

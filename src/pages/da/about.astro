@@ -7,82 +7,122 @@ import Base from '../../layouts/Base.astro';
   description="Elektroteknologistuderende på DTU. PCB-design, embedded firmware, fejlfinding på elektronik og en printplade-fabrikation på kollegieværelset."
   lang="da"
   altUrl="/about"
+  wide
 >
   <div class="page-head">
     <span class="label">Om mig</span>
     <h1>Om mig</h1>
   </div>
 
-  <div class="about-head">
-    <figure class="about-portrait">
-      <div class="frame">
-        <img src="/media/mads-rudolph.jpg" width="380" height="475" alt="Portræt af Mads Rudolph" />
+  <div class="about-layout">
+    <aside class="about-aside">
+      <div class="glass-card profile-card">
+        <span class="pc-tag">Profil</span>
+        <img
+          class="pc-photo"
+          src="/media/mads-rudolph.jpg"
+          width="380"
+          height="475"
+          alt="Portræt af Mads Rudolph"
+        />
+        <h2 class="pc-name">Mads Rudolph</h2>
+        <p class="pc-role">Elektroteknologi (diploming.) · DTU</p>
+        <dl class="pc-info">
+          <div>
+            <dt>Fra</dt>
+            <dd>Sønderborg → Kgs. Lyngby, DK</dd>
+          </div>
+          <div>
+            <dt>Studerer</dt>
+            <dd>Elektroteknologi, DTU — 5. semester</dd>
+          </div>
+          <div>
+            <dt>Bedst til</dt>
+            <dd class="accent">Fejlfinding & troubleshooting på hardware</dd>
+          </div>
+          <div>
+            <dt>Uden for skolen</dt>
+            <dd>Hi-fi & vinyl · FPV-drone-racing · CAD-modellering · madlavning</dd>
+          </div>
+        </dl>
       </div>
-      <figcaption>Mads Rudolph · Kgs. Lyngby</figcaption>
-    </figure>
-    <p>
-      Jeg går på 5. semester af diplomingeniøruddannelsen i Elektroteknologi på DTU. Det meste af,
-      hvad jeg kan inden for elektronik, kommer fra at bygge ting, der rent faktisk skulle virke:
-      firmware der kører uovervåget i månedsvis, print der fører rigtig strøm, og værktøj jeg selv
-      byggede, fordi det, jeg havde brug for, ikke fandtes.
-    </p>
+    </aside>
+
+    <div class="about-main">
+      <p>
+        Jeg går på 5. semester af diplomingeniøruddannelsen i Elektroteknologi på DTU. Det meste af,
+        hvad jeg kan inden for elektronik, kommer fra at bygge ting, der rent faktisk skulle virke:
+        firmware der kører uovervåget i månedsvis, print der fører rigtig strøm, og værktøj jeg selv
+        byggede, fordi det, jeg havde brug for, ikke fandtes.
+      </p>
+
+      <h2>Det arbejde jeg vil have</h2>
+      <p>
+        Det job, jeg søger, er fejlfinding på hardware. Giv mig noget, der burde virke, men ikke gør —
+        et print, et instrument, en protokol der ikke vil svare — og at finde ud af <em>hvorfor</em>
+        er den del, jeg virkelig elsker. Problemløsning er den kompetence, jeg trækker mest på, og den,
+        jeg er bedst til; de fleste projekter her findes, fordi jeg fulgte en fejl, til den gav mening.
+        Har jeres team hardware, der skal fejlfindes af en, der er stædig og metodisk, så er det præcis
+        det arbejde, jeg vil lave.
+      </p>
+
+      <h2>Fabrikationslinjen</h2>
+      <p>
+        Den del af mit setup, folk husker: jeg kan gå fra et KiCad-diagram til et loddet,
+        reflow-loddet print uden at forlade bygningen. Print bliver ætset på en xTool F1
+        Ultra-fiberlaser eller fræset på en Roland SRM-20 — styret af
+        <a href="/projects/srm-cam">et CAM-værktøj jeg selv har skrevet</a> — og reflow-loddet på
+        <a href="/projects/esp32-reflow-hotplate">en varmeplade jeg har designet fra bunden</a>. Tiden
+        fra en diagramændring til et testet print måles i timer, ikke uger. Jeg har dokumenteret hele
+        workflowet som <a href="https://github.com/MadsRudolph/DTU-PCB-prototyping">en guide, andre
+        DTU-studerende bruger</a>.
+      </p>
+
+      <h2>Sådan arbejder jeg</h2>
+      <p>
+        Jeg skriver ned, hvad der gik galt. Hver projektside her har et afsnit om fejl, og hvordan de
+        blev fundet, for det er i fejlfindingen, den egentlige ingeniørkunst ligger — scope-optagelser,
+        protokol-dumps og print, der opførte sig skidt, indtil de ikke gjorde. Jeg viser hellere en
+        fejl, jeg fandt med en logikanalysator, end et tillægsord.
+      </p>
+
+      <h2>At arbejde med AI</h2>
+      <p>
+        Jeg betragter det at styre AI som en central ingeniørkompetence — måske den, der vokser
+        hurtigst lige nu. Hardwaren, fejlfindingen og designbeslutningerne er hands-on og mine egne.
+        Men det softwaretunge — at bygge denne side, den tunge Python bag værktøjer som
+        <a href="/projects/componentbot">Componentbot</a> — skriver jeg ikke i hånden. Jeg orkestrerer
+        det. Jeg leverer kravene, arkitekturen og standarderne; jeg ved, hvordan "gjort ordentligt" ser
+        ud, og hvor best practice går; og jeg dirigerer en AI til at implementere efter det.
+      </p>
+      <p>
+        Det, der gør det til at stole på, er verifikation. Jeg får den til at skrive tests hele vejen
+        igennem og bevise, at hvert stykke virker, før noget nyt bygges ovenpå — samme disciplin som
+        resten af denne side: intet går videre, før det er tjekket. At vide præcis hvad der skal
+        bygges, til hvilken standard, og hvordan man holder en AI ærlig med tests, er efter min mening
+        præcis den kompetence, dette årti belønner — og jeg bygger også AI ind i det, jeg leverer, fra
+        <a href="/projects/componentbot">Componentbot</a> til
+        <a href="https://github.com/MadsRudolph/SPICEPilot">SPICEPilot</a> og de Claude-drevne
+        funktioner i mine home-lab-værktøjer.
+      </p>
+
+      <h2>Ud over bænken</h2>
+      <p>
+        Jeg driver et lille home lab (Home Assistant OS, Proxmox, selv-hostede tjenester på Raspberry
+        Pi'er og genbrugte laptops), som samtidig fungerer som deployment-mål for min egen firmware og
+        software. 3D-print (Prusa MK2S), fiberlaser og CNC-fræsning dækker den mekaniske side.
+      </p>
+
+      <h2>Praktisk</h2>
+      <ul>
+        <li>Søger: ingeniørpraktik fra sidst i januar 2027, samt studiejob.</li>
+        <li>Bor i Kgs. Lyngby / København-området, Danmark.</li>
+        <li>Dansk modersmål, flydende engelsk.</li>
+        <li>
+          Kontakt: <a href="mailto:mads28122001@hotmail.dk">mads28122001@hotmail.dk</a> ·
+          <a href="https://github.com/MadsRudolph">GitHub</a>
+        </li>
+      </ul>
+    </div>
   </div>
-
-  <h2>Fabrikationslinjen</h2>
-  <p>
-    Den del af mit setup, folk husker: jeg kan gå fra et KiCad-diagram til et loddet, reflow-loddet
-    print uden at forlade bygningen. Print bliver ætset på en xTool F1 Ultra-fiberlaser eller fræset
-    på en Roland SRM-20 — styret af <a href="/projects/srm-cam">et CAM-værktøj jeg selv har
-    skrevet</a> — og reflow-loddet på <a href="/projects/esp32-reflow-hotplate">en varmeplade jeg
-    har designet fra bunden</a>. Tiden fra en diagramændring til et testet print måles i timer, ikke
-    uger. Jeg har dokumenteret hele workflowet som
-    <a href="https://github.com/MadsRudolph/DTU-PCB-prototyping">en guide, andre DTU-studerende
-    bruger</a>.
-  </p>
-
-  <h2>Sådan arbejder jeg</h2>
-  <p>
-    Jeg skriver ned, hvad der gik galt. Hver projektside her har et afsnit om fejl, og hvordan de
-    blev fundet, for det er i fejlfindingen, den egentlige ingeniørkunst ligger — scope-optagelser,
-    protokol-dumps og print, der opførte sig skidt, indtil de ikke gjorde. Jeg viser hellere en fejl,
-    jeg fandt med en logikanalysator, end et tillægsord.
-  </p>
-
-  <h2>At arbejde med AI</h2>
-  <p>
-    Jeg betragter det at styre AI som en central ingeniørkompetence — måske den, der vokser hurtigst
-    lige nu. Hardwaren, fejlfindingen og designbeslutningerne er hands-on og mine egne. Men det
-    softwaretunge — at bygge denne side, den tunge Python bag værktøjer som
-    <a href="/projects/componentbot">Componentbot</a> — skriver jeg ikke i hånden. Jeg orkestrerer
-    det. Jeg leverer kravene, arkitekturen og standarderne; jeg ved, hvordan "gjort ordentligt" ser
-    ud, og hvor best practice går; og jeg dirigerer en AI til at implementere efter det.
-  </p>
-  <p>
-    Det, der gør det til at stole på, er verifikation. Jeg får den til at skrive tests hele vejen
-    igennem og bevise, at hvert stykke virker, før noget nyt bygges ovenpå — samme disciplin som
-    resten af denne side: intet går videre, før det er tjekket. At vide præcis hvad der skal bygges,
-    til hvilken standard, og hvordan man holder en AI ærlig med tests, er efter min mening præcis den
-    kompetence, dette årti belønner — og jeg bygger også AI ind i det, jeg leverer, fra
-    <a href="/projects/componentbot">Componentbot</a> til
-    <a href="https://github.com/MadsRudolph/SPICEPilot">SPICEPilot</a> og de Claude-drevne funktioner
-    i mine home-lab-værktøjer.
-  </p>
-
-  <h2>Ud over bænken</h2>
-  <p>
-    Jeg driver et lille home lab (Home Assistant OS, Proxmox, selv-hostede tjenester på Raspberry
-    Pi'er og genbrugte laptops), som samtidig fungerer som deployment-mål for min egen firmware og
-    software. 3D-print (Prusa MK2S), fiberlaser og CNC-fræsning dækker den mekaniske side.
-  </p>
-
-  <h2>Praktisk</h2>
-  <ul>
-    <li>Søger: ingeniørpraktik fra sidst i januar 2027, samt studiejob.</li>
-    <li>Bor i Kgs. Lyngby / København-området, Danmark.</li>
-    <li>Dansk modersmål, flydende engelsk.</li>
-    <li>
-      Kontakt: <a href="mailto:mads28122001@hotmail.dk">mads28122001@hotmail.dk</a> ·
-      <a href="https://github.com/MadsRudolph">GitHub</a>
-    </li>
-  </ul>
 </Base>

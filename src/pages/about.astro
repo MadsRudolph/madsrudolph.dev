@@ -7,82 +7,123 @@ import Base from '../layouts/Base.astro';
   description="Elektroteknologi student at DTU. PCB design, embedded firmware, electronics debugging, and a dorm-room PCB fabrication line."
   lang="en"
   altUrl="/da/about"
+  wide
 >
   <div class="page-head">
     <span class="label">About</span>
     <h1>About me</h1>
   </div>
 
-  <div class="about-head">
-    <figure class="about-portrait">
-      <div class="frame">
-        <img src="/media/mads-rudolph.jpg" width="380" height="475" alt="Portrait of Mads Rudolph" />
+  <div class="about-layout">
+    <aside class="about-aside">
+      <div class="glass-card profile-card">
+        <span class="pc-tag">Profile</span>
+        <img
+          class="pc-photo"
+          src="/media/mads-rudolph.jpg"
+          width="380"
+          height="475"
+          alt="Portrait of Mads Rudolph"
+        />
+        <h2 class="pc-name">Mads Rudolph</h2>
+        <p class="pc-role">Elektroteknologi (B.Eng.) · DTU</p>
+        <dl class="pc-info">
+          <div>
+            <dt>From</dt>
+            <dd>Sønderborg → Kgs. Lyngby, DK</dd>
+          </div>
+          <div>
+            <dt>Studying</dt>
+            <dd>Electrical Engineering, DTU — 5th semester</dd>
+          </div>
+          <div>
+            <dt>Best at</dt>
+            <dd class="accent">Hardware troubleshooting & debugging</dd>
+          </div>
+          <div>
+            <dt>Outside school</dt>
+            <dd>Hi-Fi & vinyl · FPV drone racing · CAD modelling · cooking</dd>
+          </div>
+        </dl>
       </div>
-      <figcaption>Mads Rudolph · Kgs. Lyngby</figcaption>
-    </figure>
-    <p>
-      I'm a 5th-semester Elektroteknologi (B.Eng. in Electrical Engineering) student at DTU. Most
-      of what I know about electronics comes from building things that had to actually work:
-      firmware that runs unattended for months, boards that carry real current, and tools I built
-      because the ones I wanted didn't exist.
-    </p>
+    </aside>
+
+    <div class="about-main">
+      <p>
+        I'm a 5th-semester Elektroteknologi (B.Eng. in Electrical Engineering) student at DTU. Most
+        of what I know about electronics comes from building things that had to actually work:
+        firmware that runs unattended for months, boards that carry real current, and tools I built
+        because the ones I wanted didn't exist.
+      </p>
+
+      <h2>The work I want</h2>
+      <p>
+        The role I'm after is hardware troubleshooting. Hand me something that should work and
+        doesn't — a board, an instrument, a protocol that won't talk — and finding out <em>why</em>
+        is the part I genuinely love. Problem-solving is the skill I lean on hardest and the one I'm
+        best at; most of the projects on this site exist because I chased a fault until it made
+        sense. If your team has hardware that needs someone stubborn and methodical to debug it,
+        that's exactly the work I want to be doing.
+      </p>
+
+      <h2>The fabrication line</h2>
+      <p>
+        The part of my setup people remember: I can go from a KiCad schematic to a soldered,
+        reflowed PCB without leaving the building. Boards are etched on an xTool F1 Ultra fiber
+        laser or milled on a Roland SRM-20 — driven by
+        <a href="/projects/srm-cam">a CAM tool I wrote myself</a> — and reflowed on
+        <a href="/projects/esp32-reflow-hotplate">a hotplate I designed from scratch</a>. Iteration
+        time from schematic change to tested board is measured in hours, not weeks. I've documented
+        the whole workflow as <a href="https://github.com/MadsRudolph/DTU-PCB-prototyping">a guide
+        other DTU students use</a>.
+      </p>
+
+      <h2>How I work</h2>
+      <p>
+        I write down what went wrong. Every project page on this site has a section on failures and
+        how they were diagnosed, because the debugging is where the actual engineering happens —
+        scope captures, protocol dumps, and boards that behaved badly until they didn't. I'd rather
+        show a fault I found with a logic analyzer than an adjective.
+      </p>
+
+      <h2>Working with AI</h2>
+      <p>
+        I treat directing AI as a core engineering skill — arguably the one compounding fastest right
+        now. The hardware, the debugging, and the design decisions are hands-on and mine. But for the
+        software-heavy work — building this site, the heavy-duty Python behind tools like
+        <a href="/projects/componentbot">Componentbot</a> — I don't hand-write it. I orchestrate it. I
+        bring the requirements, the architecture, and the standards; I know what "done right" looks
+        like and where the best-practice lines are; and I direct an AI to implement against that.
+      </p>
+      <p>
+        What makes it trustworthy is verification. I have it write tests the whole way through and
+        prove each piece works before anything new is built on top — the same discipline as the rest
+        of this site: nothing moves forward until it's checked. Knowing exactly what to build, to what
+        standard, and how to keep an AI honest with tests is, to me, precisely the skill this decade
+        rewards — and I also build AI into what I ship, from
+        <a href="/projects/componentbot">Componentbot</a> to
+        <a href="https://github.com/MadsRudolph/SPICEPilot">SPICEPilot</a> and the Claude-backed
+        features in my home-lab tools.
+      </p>
+
+      <h2>Beyond the bench</h2>
+      <p>
+        I run a small home lab (Home Assistant OS, Proxmox, self-hosted services on Raspberry Pis
+        and repurposed laptops) that doubles as a deployment target for my own firmware and
+        software. 3D printing (Prusa MK2S), fiber laser, and CNC milling cover the mechanical side.
+      </p>
+
+      <h2>Practical details</h2>
+      <ul>
+        <li>Seeking: engineering internship (praktik) from late January 2027, and student jobs.</li>
+        <li>Based in Kgs. Lyngby / Copenhagen area, Denmark.</li>
+        <li>Danish native speaker, fluent English.</li>
+        <li>
+          Contact: <a href="mailto:mads28122001@hotmail.dk">mads28122001@hotmail.dk</a> ·
+          <a href="https://github.com/MadsRudolph">GitHub</a>
+          <!-- VERIFY: email matches your CVs (hotmail.dk); add LinkedIn if wanted -->
+        </li>
+      </ul>
+    </div>
   </div>
-
-  <h2>The fabrication line</h2>
-  <p>
-    The part of my setup people remember: I can go from a KiCad schematic to a soldered,
-    reflowed PCB without leaving the building. Boards are etched on an xTool F1 Ultra fiber
-    laser or milled on a Roland SRM-20 — driven by
-    <a href="/projects/srm-cam">a CAM tool I wrote myself</a> — and reflowed on
-    <a href="/projects/esp32-reflow-hotplate">a hotplate I designed from scratch</a>. Iteration
-    time from schematic change to tested board is measured in hours, not weeks. I've documented
-    the whole workflow as <a href="https://github.com/MadsRudolph/DTU-PCB-prototyping">a guide
-    other DTU students use</a>.
-  </p>
-
-  <h2>How I work</h2>
-  <p>
-    I write down what went wrong. Every project page on this site has a section on failures and
-    how they were diagnosed, because the debugging is where the actual engineering happens —
-    scope captures, protocol dumps, and boards that behaved badly until they didn't. I'd rather
-    show a fault I found with a logic analyzer than an adjective.
-  </p>
-
-  <h2>Working with AI</h2>
-  <p>
-    I treat directing AI as a core engineering skill — arguably the one compounding fastest right
-    now. The hardware, the debugging, and the design decisions are hands-on and mine. But for the
-    software-heavy work — building this site, the heavy-duty Python behind tools like
-    <a href="/projects/componentbot">Componentbot</a> — I don't hand-write it. I orchestrate it. I
-    bring the requirements, the architecture, and the standards; I know what "done right" looks like
-    and where the best-practice lines are; and I direct an AI to implement against that.
-  </p>
-  <p>
-    What makes it trustworthy is verification. I have it write tests the whole way through and prove
-    each piece works before anything new is built on top — the same discipline as the rest of this
-    site: nothing moves forward until it's checked. Knowing exactly what to build, to what standard,
-    and how to keep an AI honest with tests is, to me, precisely the skill this decade rewards — and
-    I also build AI into what I ship, from <a href="/projects/componentbot">Componentbot</a> to
-    <a href="https://github.com/MadsRudolph/SPICEPilot">SPICEPilot</a> and the Claude-backed features
-    in my home-lab tools.
-  </p>
-
-  <h2>Beyond the bench</h2>
-  <p>
-    I run a small home lab (Home Assistant OS, Proxmox, self-hosted services on Raspberry Pis
-    and repurposed laptops) that doubles as a deployment target for my own firmware and
-    software. 3D printing (Prusa MK2S), fiber laser, and CNC milling cover the mechanical side.
-  </p>
-
-  <h2>Practical details</h2>
-  <ul>
-    <li>Seeking: engineering internship (praktik) from late January 2027, and student jobs.</li>
-    <li>Based in Kgs. Lyngby / Copenhagen area, Denmark.</li>
-    <li>Danish native speaker, fluent English.</li>
-    <li>
-      Contact: <a href="mailto:mads28122001@hotmail.dk">mads28122001@hotmail.dk</a> ·
-      <a href="https://github.com/MadsRudolph">GitHub</a>
-      <!-- VERIFY: email matches your CVs (hotmail.dk); add LinkedIn if wanted -->
-    </li>
-  </ul>
 </Base>

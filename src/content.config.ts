@@ -11,6 +11,8 @@ const projects = defineCollection({
     tags: z.array(z.string()),
     repo: z.string().url().optional(),
     featured: z.boolean().default(false),
+    /** Marks the standout project — gets a "flagship" badge on its card. */
+    flagship: z.boolean().default(false),
     /** Sort key on the index page; lower comes first. */
     order: z.number().default(99),
     status: z.enum(['working', 'in-progress', 'archived']).default('working'),
