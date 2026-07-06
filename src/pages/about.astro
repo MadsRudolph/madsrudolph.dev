@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="About — Mads Rudolph"
+  description="Elektroteknologi student at DTU. PCB design, embedded firmware, electronics debugging, and a dorm-room PCB fabrication line."
+>
+  <div class="page-head">
+    <span class="label">About</span>
+    <h1>About me</h1>
+  </div>
+
+  <p>
+    I'm a 5th-semester Elektroteknologi (B.Eng. in Electrical Engineering) student at DTU. Most
+    of what I know about electronics comes from building things that had to actually work:
+    firmware that runs unattended for months, boards that carry real current, and tools I built
+    because the ones I wanted didn't exist.
+  </p>
+
+  <h2>The fabrication line</h2>
+  <p>
+    The part of my setup people remember: I can go from a KiCad schematic to a soldered,
+    reflowed PCB without leaving the building. Boards are etched on an xTool F1 Ultra fiber
+    laser or milled on a Roland SRM-20 — driven by
+    <a href="/projects/srm-cam">a CAM tool I wrote myself</a> — and reflowed on
+    <a href="/projects/esp32-reflow-hotplate">a hotplate I designed from scratch</a>. Iteration
+    time from schematic change to tested board is measured in hours, not weeks. I've documented
+    the whole workflow as <a href="https://github.com/MadsRudolph/DTU-PCB-prototyping">a guide
+    other DTU students use</a>.
+  </p>
+
+  <h2>How I work</h2>
+  <p>
+    I write down what went wrong. Every project page on this site has a section on failures and
+    how they were diagnosed, because the debugging is where the actual engineering happens —
+    scope captures, protocol dumps, and boards that behaved badly until they didn't. I'd rather
+    show a fault I found with a logic analyzer than an adjective.
+  </p>
+
+  <h2>Beyond the bench</h2>
+  <p>
+    I run a small home lab (Home Assistant OS, Proxmox, self-hosted services on Raspberry Pis
+    and repurposed laptops) that doubles as a deployment target for my own firmware and
+    software. 3D printing (Prusa MK2S), fiber laser, and CNC milling cover the mechanical side.
+  </p>
+
+  <h2>Practical details</h2>
+  <ul>
+    <li>Seeking: engineering internship (praktik) from late January 2027, and student jobs.</li>
+    <li>Based in Kgs. Lyngby / Copenhagen area, Denmark.</li>
+    <li>Danish native speaker, fluent English.</li>
+    <li>
+      Contact: <a href="mailto:mads28122001@gmail.com">mads28122001@gmail.com</a> ·
+      <a href="https://github.com/MadsRudolph">GitHub</a>
+      <!-- VERIFY: confirm contact details + add LinkedIn if wanted -->
+    </li>
+  </ul>
+</Base>
