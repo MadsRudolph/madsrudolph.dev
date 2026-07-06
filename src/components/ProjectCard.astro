@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, summary, date, tags, status } = project.data;
+
+const dateLabel = date.toLocaleDateString('en-GB', { year: 'numeric', month: 'short' });
+const statusLabel = { working: 'working', 'in-progress': 'in progress', archived: 'archived' }[
+  status
+];
+---
+
+<li class="project-card" data-tags={tags.join(',')}>
+  <div class="meta">
+    <span class="label">{dateLabel}</span>
+    <span class="label">{statusLabel}</span>
+  </div>
+  <h3><a href={`/projects/${project.id}`}>{title}</a></h3>
+  <p>{summary}</p>
+  <div class="tags">
+    {tags.map((tag) => <span class="tag">{tag}</span>)}
+  </div>
+</li>
