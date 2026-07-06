@@ -11,12 +11,14 @@ featured: true
 flagship: true
 order: 1
 status: working
-hero: ''
-heroAlt: 'SRM-CAM 3D toolpath preview next to the Roland SRM-20 milling a board'
+hero: '/media/srm-cam/gui-main.png'
+heroAlt: 'SRM-CAM main interface with a two-layer board loaded in the X-ray register preview'
 ---
 
-<!-- PHOTO NEEDED: SRM-CAM GUI (3D toolpath preview) on screen, with the Roland SRM-20 mid-cut in the background. Landscape, ~1600px wide. -->
-<div class="media-placeholder">HERO: SRM-CAM interface + SRM-20 mid-cut</div>
+<figure>
+  <img src="/media/srm-cam/gui-main.png" alt="SRM-CAM main interface with a two-layer board loaded in the X-ray register preview" width="1673" height="932" />
+  <figcaption>SRM-CAM's main page — a double-sided board (the DTU multimeter) loaded, both copper layers shown in the X-ray register preview before milling.</figcaption>
+</figure>
 
 ## What it is
 
@@ -41,8 +43,10 @@ The package (`gerber2rml`) is split into an engine that has no GUI dependencies 
 
 The engine is heavily unit-tested (54 test files, ~6k lines of tests — roughly a 42% test-to-code ratio on a geometry- and GUI-heavy project), with GUI tests running headless via `QT_QPA_PLATFORM=offscreen`.
 
-<!-- DIAGRAM NEEDED: pipeline block diagram — KiCad → Gerber/Excellon → parse → toolpath → registration/leveling → G-code/RML → SRM-20. I can draft this from the description. -->
-<div class="media-placeholder">DIAGRAM: KiCad → toolpath → leveling → SRM-20 pipeline</div>
+<figure>
+  <img src="/media/srm-cam/3d-traces.png" alt="SRM-CAM 3D toolpath viewer showing the isolation traces and cut-out path for a board" width="1311" height="743" />
+  <figcaption>The 3D toolpath viewer — isolation traces and the board cut-out, previewed exactly as the machine will run them.</figcaption>
+</figure>
 
 ## What went wrong and how it was diagnosed
 
@@ -51,6 +55,11 @@ This is where the project actually lives. A handful of the concrete failures:
 **Dowel holes came out 0.4 mm undersize.** Double-sided boards wouldn't re-register after the flip — the alignment pins physically wouldn't seat. Measured holes were ~2.7 mm where 3.1 mm was commanded. The cause is that the SRM-20's internal compensation undershoots on interpolated (circular) cuts. I dialed in per-pin clearance compensation empirically with a *swept fit-test coupon* — one drill job with holes stepped across a range of diameters, cut once, pick the snug one by hand — landing on +0.20 mm for the 3.1 mm pins and +0.15 mm for the 1.9 mm pins. The offsets are non-linear, which is why each pin size needed its own. Registered boards then held to under 0.1 mm.
 
 **"Leveling" made the middle of the board worse.** After probing a board with the first-generation 3-point routine, center traces cut shallow and corners cut deep. A test board measured 130 µm of bow. The bug was that three points can only ever fit a *plane* — the routine was correcting tilt while assuming the board was flat, when the real error was curvature. Fixed by probing a full grid and doing bilinear interpolation (`HeightMap.from_grid` auto-selects plane vs. bilinear by point count), plus a two-phase probe: a fast coarse raster at 25 µm steps, then a fine re-probe of only the last ~1 mm at the machine's native 10 µm resolution.
+
+<figure>
+  <img src="/media/srm-cam/bed-leveling.png" alt="SRM-CAM bed-leveling view showing the probed height map as a warped surface under the toolpaths" width="1311" height="743" />
+  <figcaption>The probed height map, rendered as the warped surface the cuts are draped over — every Z is corrected to the real board, not an assumed flat plane.</figcaption>
+</figure>
 
 **Endmills snapped on first contact with copper.** The SRM-20 has no `S` word — spindle RPM is a front-panel slider, and `M3` starts the spindle *concurrently* with motion rather than waiting for it to spin up. So the bit was hitting copper mid-acceleration. Two independent fixes: a `G04 X2.` dwell emitted after every `M3` so the spindle reaches full speed before any motion, and a ramped lead-in (`engine/leadin.py`) that descends to full depth over the first ~1 mm of the cut path instead of plunging vertically. The G-code parser had to learn to skip `G04` lines so the simulator didn't read the dwell's `X2.` as an X coordinate.
 
@@ -64,8 +73,13 @@ This is where the project actually lives. A handful of the concrete failures:
 - Grid probe of a typical board completes in ~5 minutes.
 - 334 passing tests at last count; ships as a Windows installer built in CI.
 
-<!-- PHOTO NEEDED: a finished double-sided milled board, close-up, showing clean isolation traces and registered vias. -->
-<div class="media-placeholder">PHOTO: finished milled double-sided board, close-up</div>
+<figure>
+  <div class="img-pair">
+    <img src="/media/srm-cam/board-front.jpg" alt="Milled double-sided PCB, front copper, held to the light" width="2132" height="2740" />
+    <img src="/media/srm-cam/board-back.jpg" alt="Milled double-sided PCB, back copper, held to the light" width="2132" height="2740" />
+  </div>
+  <figcaption>A finished double-sided board off the SRM-20 — front and back copper, held to the light. The two faces register to under 0.1 mm after the flip.</figcaption>
+</figure>
 
 <!-- VERIFY: confirm the repo is safe to link publicly — an audit flagged local Windows paths (C:\Users\Mads2\...) in a few docs/ and packaging files. Harmless but worth scrubbing before recruiters read it. -->
 

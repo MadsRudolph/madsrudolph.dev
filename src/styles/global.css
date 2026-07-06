@@ -599,6 +599,47 @@ article.writeup img {
   border-radius: 4px;
 }
 
+article.writeup figure {
+  margin: 1.5rem 0;
+}
+
+article.writeup figure img {
+  display: block;
+  width: 100%;
+}
+
+article.writeup figure figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+article.writeup figure figcaption::before {
+  content: '◇ ';
+  color: var(--accent-2);
+}
+
+/* two board photos side by side */
+article.writeup .img-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+article.writeup .img-pair img {
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 480px) {
+  article.writeup .img-pair {
+    grid-template-columns: 1fr;
+  }
+}
+
 article.writeup table {
   border-collapse: collapse;
   width: 100%;
