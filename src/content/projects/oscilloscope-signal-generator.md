@@ -30,7 +30,7 @@ A complete little **oscilloscope-plus-signal-generator** system built for DTU's 
 
 The MCU is the hub: it streams sampled data up to LabVIEW over UART, receives waveform settings (shape, frequency, amplitude) back down, and forwards them to the FPGA over SPI. The FPGA synthesises the waveform via PWM, which an active low-pass filter turns back into a clean analog output.
 
-A group project (I was the top contributor), covering the MCU firmware, the FPGA VHDL, the protocol, and the analog output filter.
+A group project spanning the MCU firmware, the FPGA VHDL, the protocol, and the analog output filter.
 
 ## How it fits together
 

@@ -24,7 +24,7 @@ heroAlt: '3D CAD render of the assembled metal detector — control housing with
 
 A working VLF (very-low-frequency) **induction-balance metal detector**, built for DTU's **34621 Electromagnetic Sensors & Digital Signal Processing** course. A transmitter coil is driven at 2 kHz; a receiver coil picks up the field re-radiated by nearby metal; and the firmware runs a **single-bin DFT** on the sampled receiver signal to recover its amplitude *and phase*. The phase is what matters — it's how the detector distinguishes ferrous from non-ferrous metal, not just "there's something there." Output goes to an OLED HUD and a variable-tone buzzer.
 
-This was a four-person group project; I was the top contributor and worked across the DSP firmware, the coil/driver electronics, and the board.
+This was a group project — the four of us built it together, across the DSP firmware, the coil/driver electronics, and the board.
 
 ## How it works
 

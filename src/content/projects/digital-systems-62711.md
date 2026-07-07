@@ -21,7 +21,7 @@ A complete **16-bit soft processor**, designed in VHDL and run on a Nexys 4 DDR 
 - **PWB — microprogram controller:** program counter, instruction register, sign extender, zero filler, and the instruction-decoder/controller (a microcoded state machine).
 - **PWF — the full microprocessor:** PWA + PWB combined with a 256×16 block RAM, an 8×8 port register, the data-bus MUX, and a seven-segment driver into one top-level system, running microcode programs (assembled with the group's `dsdasm` tool) both in GHDL/Vivado simulation and on the board.
 
-A four-person group project (top contributor: me), verified with ~27 VHDL testbenches across the phases and documented in a 67-page combined report.
+A four-person group project, verified with ~27 VHDL testbenches across the phases and documented in a 67-page combined report.
 
 ## What went wrong and how it was diagnosed
 
