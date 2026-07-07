@@ -7,7 +7,7 @@ const projects = await getCollection('projects');
 const featured = projects
   .filter((p) => p.data.featured)
   .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 5);
+  .slice(0, 4);
 ---
 
 <Base
@@ -69,6 +69,13 @@ const featured = projects
     </p>
   </section>
 
+  <div class="home-stats">
+    <div class="stat"><span class="n">{projects.length}</span><span class="l">projects</span></div>
+    <div class="stat"><span class="n">110</span><span class="l">ECTS completed</span></div>
+    <div class="stat"><span class="n">5th</span><span class="l">semester · DTU</span></div>
+    <div class="stat"><span class="n">Jan 2027</span><span class="l">praktik available</span></div>
+  </div>
+
   <div class="section-rule"><span class="label">Hardware Toolbox</span></div>
   <div class="skills-matrix">
     <div class="skill-category">
@@ -102,7 +109,7 @@ const featured = projects
 
   <div class="section-rule"><span class="label">Featured projects</span></div>
   <ul class="project-list">
-    {featured.map((project, i) => <ProjectCard project={project} index={i} />)}
+    {featured.map((project, i) => <ProjectCard project={project} index={i} image />)}
   </ul>
   <p style="margin-top: 1.25rem;">
     <a href="/projects">All projects →</a>

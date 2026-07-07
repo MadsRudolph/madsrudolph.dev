@@ -7,7 +7,7 @@ summary: >-
 date: 2026-06-30
 tags: ['Embedded C', 'ESP32 / ESP-IDF', 'KiCad', 'PID control', 'Power electronics', 'Safety-critical', 'Firmware testing', '3D CAD']
 repo: 'https://github.com/MadsRudolph/esp32-reflow-hotplate'
-featured: true
+featured: false
 order: 2
 status: in-progress
 hero: ''

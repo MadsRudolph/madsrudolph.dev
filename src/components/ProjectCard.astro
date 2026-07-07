@@ -6,10 +6,12 @@ interface Props {
   project: CollectionEntry<'projects'>;
   index?: number;
   lang?: Lang;
+  /** Show the project's hero image as a thumbnail (used on the home featured grid). */
+  image?: boolean;
 }
 
-const { project, index, lang = 'en' } = Astro.props;
-const { title, summary, date, tags, status, flagship } = project.data;
+const { project, index, lang = 'en', image = false } = Astro.props;
+const { title, summary, date, tags, status, flagship, hero, heroAlt } = project.data;
 
 const flagshipLabel = lang === 'da' ? 'flagskib' : 'flagship';
 
@@ -26,7 +28,14 @@ const statusLabel = statusLabels[lang][status];
 const idx = typeof index === 'number' ? String(index + 1).padStart(2, '0') : null;
 ---
 
-<li class:list={['project-card', { flagship }]} data-tags={tags.join(',')}>
+<li class:list={['project-card', { flagship, 'has-thumb': image && hero }]} data-tags={tags.join(',')}>
+  {
+    image && hero && (
+      <a class="card-thumb" href={`/projects/${project.id}`} tabindex="-1" aria-hidden="true">
+        <img src={hero} alt={heroAlt ?? ''} loading="lazy" />
+      </a>
+    )
+  }
   <div class="meta">
     {idx && <span class="idx">{idx}</span>}
     {flagship && <span class="flag">★ {flagshipLabel}</span>}
