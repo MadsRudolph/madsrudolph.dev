@@ -654,6 +654,20 @@ article.writeup .fig-row {
   }
 }
 
+/* inlined mermaid diagram (rendered to SVG at build time) */
+article.writeup figure.diagram {
+  overflow-x: auto;
+  padding-bottom: 0.4rem;
+}
+
+article.writeup figure.diagram svg {
+  display: block;
+  width: 100%;
+  min-width: 560px;
+  height: auto;
+  border: 0;
+}
+
 /* responsive video embed (e.g. a YouTube demo) */
 article.writeup .video-frame {
   position: relative;
