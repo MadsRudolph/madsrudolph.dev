@@ -19,7 +19,21 @@ A **programmable calculator** built in VHDL on a Digilent **Basys 2** FPGA, as t
 
 > `RESULT = (InputA  Op1  InputB)  Op2  InputC`
 
-where the three 8-bit operands and the two operators are entered on switches and buttons, and the result is shown on the seven-segment display. It supports the four arithmetic operations — add, subtract, multiply, and divide — and there's a [demo video](https://www.youtube.com/watch?v=NvBr_hBevYs) of it running on the board.
+where the three 8-bit operands and the two operators are entered on switches and buttons, and the result is shown on the seven-segment display. It supports the four arithmetic operations — add, subtract, multiply, and divide.
+
+<figure>
+  <div class="video-frame">
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/NvBr_hBevYs"
+      title="FPGA calculator demo running on the Basys 2 board"
+      loading="lazy"
+      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+  </div>
+  <figcaption>Demo: entering three operands and two operators on the Basys 2, and computing a two-stage result live on the seven-segment display.</figcaption>
+</figure>
 
 ## How it works
 

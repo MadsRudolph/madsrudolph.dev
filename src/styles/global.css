@@ -640,6 +640,37 @@ article.writeup .img-pair img {
   }
 }
 
+/* two landscape figures side by side (no forced crop) */
+article.writeup .fig-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  align-items: start;
+}
+
+@media (max-width: 480px) {
+  article.writeup .fig-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* responsive video embed (e.g. a YouTube demo) */
+article.writeup .video-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+}
+
+article.writeup .video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 article.writeup table {
   border-collapse: collapse;
   width: 100%;

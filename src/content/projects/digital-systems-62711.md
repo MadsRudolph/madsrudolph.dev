@@ -29,6 +29,11 @@ The interesting failures were all in the seams between blocks:
 
 **The left two seven-segment digits could never show a non-zero value.** A store to the high port-register address (`0xF9` → MR1) always wrote `0x00`, no matter the data. The cause was a data-bus mismatch: the `PortReg8x8` block latches MR1 from `Data_In(15 downto 8)`, but the `Zero_Filler_2` upstream always pads those upper bits to zero. So the byte destined for MR1 was zeroed before it ever arrived — the two left digits were structurally stuck at `00`. The one-line fix is to source MR1 from `Data_In(7 downto 0)` like the other registers. It was the kind of bug that only shows up once you write a program that actually tries to display data there.
 
+<figure>
+  <img src="/media/digital-systems-62711/timing.png" alt="Simulation timing diagram of the port register write path" width="1760" height="1303" />
+  <figcaption>Port-register write timing in simulation — the kind of waveform trace used to pin down where the byte bound for MR1 was getting zeroed.</figcaption>
+</figure>
+
 **AND and OR were swapped versus the textbook.** Our hardware decoded `OR = 0001000` and `AND = 0001001`; the course textbook (and the reference Java assembler) use the opposite. Assemble a program with the wrong tool and every AND/OR silently does the other operation. The fix was to standardise on our own Python assembler (`dsdasm`), whose opcodes match the hardware, and to document the discrepancy so nobody reached for the Java tool by mistake.
 
 **Branch-on-zero tests the wrong thing if you assume.** `BRZ` branches on the zero flag of `R[SA]` — the register named in the branch instruction's own source slot, evaluated combinationally through the ALU — not on "the result of the previous instruction." Getting that wrong makes conditional loops branch on stale state. Writing it down as "put the value you want tested in BRZ's source slot" saved a lot of confused single-stepping.

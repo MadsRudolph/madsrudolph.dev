@@ -11,7 +11,14 @@ repo: 'https://github.com/Skab101/Oscilloscope_Project'
 featured: false
 order: 12
 status: working
+hero: '/media/oscilloscope/combined.png'
+heroAlt: 'LabVIEW oscilloscope display showing a captured sine wave with the generator signal overlaid'
 ---
+
+<figure>
+  <img src="/media/oscilloscope/combined.png" alt="LabVIEW oscilloscope display showing a captured sine wave with the generator signal overlaid" width="1176" height="500" />
+  <figcaption>The LabVIEW front end plotting a sine wave captured by the MCU (blue), with the FPGA generator's PWM activity overlaid (red) — the whole loop in one view.</figcaption>
+</figure>
 
 ## What it is
 
