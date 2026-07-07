@@ -72,7 +72,7 @@
     "additions": 963572,
     "deletions": 28240,
     "linesChanged": 991812,
-    "language": "HTML",
+    "language": "Python",
     "private": false
   },
   "MadsRudolph/srm-cam": {
@@ -92,6 +92,161 @@
     "deletions": 3235,
     "linesChanged": 69209,
     "language": "Python",
+    "private": false
+  },
+  "Skab101/34621-Metal-Detector": {
+    "repo": "Skab101/34621-Metal-Detector",
+    "url": "https://github.com/Skab101/34621-Metal-Detector",
+    "commits": 121,
+    "contributors": 4,
+    "contributorList": [
+      {
+        "login": "MadsRudolph",
+        "contributions": 78,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/68565302?v=4",
+        "htmlUrl": "https://github.com/MadsRudolph"
+      },
+      {
+        "login": "gigurd",
+        "contributions": 21,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/214793026?v=4",
+        "htmlUrl": "https://github.com/gigurd"
+      },
+      {
+        "login": "MotherFrogher",
+        "contributions": 10,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/186678886?v=4",
+        "htmlUrl": "https://github.com/MotherFrogher"
+      },
+      {
+        "login": "AndreasSJacobsen",
+        "contributions": 1,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/187390669?v=4",
+        "htmlUrl": "https://github.com/AndreasSJacobsen"
+      }
+    ],
+    "additions": 482204,
+    "deletions": 153042,
+    "linesChanged": 635246,
+    "language": "C",
+    "private": false
+  },
+  "Skab101/Design-of-digital-systems-62711": {
+    "repo": "Skab101/Design-of-digital-systems-62711",
+    "url": "https://github.com/Skab101/Design-of-digital-systems-62711",
+    "commits": 196,
+    "contributors": 4,
+    "contributorList": [
+      {
+        "login": "MadsRudolph",
+        "contributions": 106,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/68565302?v=4",
+        "htmlUrl": "https://github.com/MadsRudolph"
+      },
+      {
+        "login": "AndreasSJacobsen",
+        "contributions": 27,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/187390669?v=4",
+        "htmlUrl": "https://github.com/AndreasSJacobsen"
+      },
+      {
+        "login": "MotherFrogher",
+        "contributions": 27,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/186678886?v=4",
+        "htmlUrl": "https://github.com/MotherFrogher"
+      },
+      {
+        "login": "gigurd",
+        "contributions": 13,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/214793026?v=4",
+        "htmlUrl": "https://github.com/gigurd"
+      }
+    ],
+    "additions": 17365,
+    "deletions": 4609,
+    "linesChanged": 21974,
+    "language": "VHDL",
+    "private": false
+  },
+  "Skab101/FPGA_Calculator": {
+    "repo": "Skab101/FPGA_Calculator",
+    "url": "https://github.com/Skab101/FPGA_Calculator",
+    "commits": 52,
+    "contributors": 1,
+    "contributorList": [
+      {
+        "login": "MadsRudolph",
+        "contributions": 52,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/68565302?v=4",
+        "htmlUrl": "https://github.com/MadsRudolph"
+      }
+    ],
+    "additions": 263935,
+    "deletions": 246631,
+    "linesChanged": 510566,
+    "language": "C",
+    "private": false
+  },
+  "Skab101/Oscilloscope_Project": {
+    "repo": "Skab101/Oscilloscope_Project",
+    "url": "https://github.com/Skab101/Oscilloscope_Project",
+    "commits": 161,
+    "contributors": 5,
+    "contributorList": [
+      {
+        "login": "MadsRudolph",
+        "contributions": 74,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/68565302?v=4",
+        "htmlUrl": "https://github.com/MadsRudolph"
+      },
+      {
+        "login": "MotherFrogher",
+        "contributions": 47,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/186678886?v=4",
+        "htmlUrl": "https://github.com/MotherFrogher"
+      },
+      {
+        "login": "gigurd",
+        "contributions": 35,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/214793026?v=4",
+        "htmlUrl": "https://github.com/gigurd"
+      },
+      {
+        "login": "AndreasSJacobsen",
+        "contributions": 2,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/187390669?v=4",
+        "htmlUrl": "https://github.com/AndreasSJacobsen"
+      },
+      {
+        "login": "joakimbutenko",
+        "contributions": 2,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/180465727?v=4",
+        "htmlUrl": "https://github.com/joakimbutenko"
+      }
+    ],
+    "additions": 276341,
+    "deletions": 103517,
+    "linesChanged": 379858,
+    "language": "C",
+    "private": false
+  },
+  "Skab101/REGBOT-Balance": {
+    "repo": "Skab101/REGBOT-Balance",
+    "url": "https://github.com/Skab101/REGBOT-Balance",
+    "commits": 91,
+    "contributors": 1,
+    "contributorList": [
+      {
+        "login": "MadsRudolph",
+        "contributions": 91,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/68565302?v=4",
+        "htmlUrl": "https://github.com/MadsRudolph"
+      }
+    ],
+    "additions": 18450,
+    "deletions": 6359,
+    "linesChanged": 24809,
+    "language": "MATLAB",
     "private": false
   }
 }

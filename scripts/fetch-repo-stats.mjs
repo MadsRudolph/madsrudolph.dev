@@ -61,12 +61,15 @@ for (const repo of [...repos].sort()) {
   process.stderr.write(`Fetching ${repo}…\n`);
   const contributors = JSON.parse(
     gh(`repos/${repo}/contributors?per_page=100`, ['--paginate']) || '[]',
-  ).map((c) => ({
-    login: c.login,
-    contributions: c.contributions,
-    avatarUrl: c.avatar_url,
-    htmlUrl: c.html_url,
-  }));
+  )
+    .filter((c) => c.type !== 'Bot' && !/\[bot\]$/.test(c.login)) // drop CI bots
+    .sort((a, b) => b.contributions - a.contributions)
+    .map((c) => ({
+      login: c.login,
+      contributions: c.contributions,
+      avatarUrl: c.avatar_url,
+      htmlUrl: c.html_url,
+    }));
 
   const commitsFromContribs = contributors.reduce((s, c) => s + c.contributions, 0);
   const commits = totalCommitCount(repo) ?? commitsFromContribs;
@@ -81,6 +84,23 @@ for (const repo of [...repos].sort()) {
 
   const meta = JSON.parse(gh(`repos/${repo}`));
 
+  // Prefer the dominant *programming* language by bytes, not markup/docs
+  // (repos with a report or timeline page otherwise report as HTML/TeX).
+  const NON_CODE = new Set([
+    'HTML', 'CSS', 'SCSS', 'Less', 'TeX', 'Makefile', 'CMake', 'Batchfile',
+    'Dockerfile', 'Roff', 'Shell', 'PowerShell', 'Jupyter Notebook',
+  ]);
+  let language = meta.language ?? null;
+  try {
+    const langs = JSON.parse(gh(`repos/${repo}/languages`));
+    const code = Object.entries(langs)
+      .filter(([name]) => !NON_CODE.has(name))
+      .sort((a, b) => b[1] - a[1]);
+    if (code.length) language = code[0][0];
+  } catch {
+    /* keep meta.language */
+  }
+
   out[repo] = {
     repo,
     url: `https://github.com/${repo}`,
@@ -90,7 +110,7 @@ for (const repo of [...repos].sort()) {
     additions,
     deletions,
     linesChanged: additions + deletions,
-    language: meta.language ?? null,
+    language,
     private: meta.private,
   };
 }

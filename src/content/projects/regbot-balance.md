@@ -7,6 +7,7 @@ summary: >-
   validated on the real robot.
 date: 2026-04-22
 tags: ['MATLAB', 'Simulink', 'Simscape Multibody', 'Control systems', 'System identification', 'Frequency-domain design']
+repo: 'https://github.com/Skab101/REGBOT-Balance'
 featured: true
 order: 1.5
 status: working
