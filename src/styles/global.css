@@ -919,6 +919,21 @@ article.writeup th {
   line-height: 1.05;
   color: var(--accent-ink);
   font-variant-numeric: tabular-nums;
+  min-height: 1.6rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.repo-stats .rs-solo {
+  align-items: flex-start;
+}
+
+.repo-stats .rs-solo-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  margin-bottom: 0.1rem;
 }
 
 .repo-stats .rs-label {

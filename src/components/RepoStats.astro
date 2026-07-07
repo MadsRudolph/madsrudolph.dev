@@ -18,51 +18,56 @@ const fmt = (n: number) => {
   return `${(n / 1_000_000).toFixed(1)}M`;
 };
 
-const tiles = data
-  ? [
-      { num: fmt(data.commits), label: data.commits === 1 ? 'commit' : 'commits' },
-      { num: fmt(data.linesChanged), label: 'lines changed' },
-      {
-        num: fmt(data.contributors),
-        label: data.contributors === 1 ? 'contributor' : 'contributors',
-      },
-    ]
-  : [];
-
-const avatars = (data?.contributorList ?? []).slice(0, 6);
+const solo = data && data.contributors === 1;
+const lead = data?.contributorList?.[0];
 ---
 
 {
   data && (
     <aside class="glass-card repo-stats" aria-label="Repository statistics">
       <div class="rs-head">
-        <span class="rs-tag">Repository{data.language ? ` · ${data.language}` : ''}</span>
+        <span class="rs-tag">Repository</span>
         <a class="rs-link" href={data.url} target="_blank" rel="noopener">
           {key} ↗
         </a>
       </div>
 
       <div class="rs-grid">
-        {tiles.map((t) => (
-          <div class="rs-stat">
-            <span class="rs-num">{t.num}</span>
-            <span class="rs-label">{t.label}</span>
+        <div class="rs-stat">
+          <span class="rs-num">{fmt(data.commits)}</span>
+          <span class="rs-label">{data.commits === 1 ? 'commit' : 'commits'}</span>
+        </div>
+
+        <div class="rs-stat">
+          <span class="rs-num">{data.language ?? '—'}</span>
+          <span class="rs-label">language</span>
+        </div>
+
+        {solo ? (
+          <div class="rs-stat rs-solo">
+            {lead && <img class="rs-solo-avatar" src={lead.avatarUrl} alt={lead.login} width="34" height="34" loading="lazy" />}
+            <span class="rs-label">solo build</span>
           </div>
-        ))}
+        ) : (
+          <div class="rs-stat">
+            <span class="rs-num">{fmt(data.contributors)}</span>
+            <span class="rs-label">contributors</span>
+          </div>
+        )}
       </div>
 
-      <div class="rs-people">
-        <div class="rs-avatars">
-          {avatars.map((c: any) => (
-            <a href={c.htmlUrl} target="_blank" rel="noopener" title={`${c.login} · ${c.contributions} commits`}>
-              <img src={c.avatarUrl} alt={c.login} width="26" height="26" loading="lazy" />
-            </a>
-          ))}
+      {!solo && data.contributorList?.length > 0 && (
+        <div class="rs-people">
+          <div class="rs-avatars">
+            {data.contributorList.slice(0, 8).map((c: any) => (
+              <a href={c.htmlUrl} target="_blank" rel="noopener" title={`${c.login} · ${c.contributions} commits`}>
+                <img src={c.avatarUrl} alt={c.login} width="26" height="26" loading="lazy" />
+              </a>
+            ))}
+          </div>
+          <span class="rs-people-label">{data.contributorList.map((c: any) => c.login).join(', ')}</span>
         </div>
-        <span class="rs-people-label">
-          {avatars.map((c: any) => c.login).join(', ')}
-        </span>
-      </div>
+      )}
     </aside>
   )
 }

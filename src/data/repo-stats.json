@@ -75,25 +75,6 @@
     "language": "HTML",
     "private": false
   },
-  "MadsRudolph/regbot-studio": {
-    "repo": "MadsRudolph/regbot-studio",
-    "url": "https://github.com/MadsRudolph/regbot-studio",
-    "commits": 1,
-    "contributors": 1,
-    "contributorList": [
-      {
-        "login": "MadsRudolph",
-        "contributions": 1,
-        "avatarUrl": "https://avatars.githubusercontent.com/u/68565302?v=4",
-        "htmlUrl": "https://github.com/MadsRudolph"
-      }
-    ],
-    "additions": 15443,
-    "deletions": 0,
-    "linesChanged": 15443,
-    "language": "TypeScript",
-    "private": false
-  },
   "MadsRudolph/srm-cam": {
     "repo": "MadsRudolph/srm-cam",
     "url": "https://github.com/MadsRudolph/srm-cam",
