@@ -48,21 +48,56 @@ const featured = projects
       <li>Kgs. Lyngby, DK</li>
     </ul>
 
-    <p>
-      I'm an Elektroteknologi (B.Eng.) student at DTU who builds and debugs real hardware: PCBs
-      designed in KiCad and fabricated on my own fiber-laser and CNC workflow, ESP32 firmware
-      that runs for months, and lab tooling built when the right instrument didn't exist. I move
-      fast — often with AI in the loop as an engineering tool — and verify everything at the
-      bench. This site is the evidence: every project links to its repository, and every writeup
-      includes what went wrong and how I diagnosed it.
-    </p>
+    <div class="hero-summary">
+      <p>I build and debug real hardware. This site is the evidence:</p>
+      <ul class="hero-bullets">
+        <li><strong>PCB Design & Fabrication:</strong> From KiCad to my own CNC/fiber-laser workflow.</li>
+        <li><strong>Embedded Firmware:</strong> C/C++ on ESP32 that runs for months.</li>
+        <li><strong>Bench Verification:</strong> Every project details the bugs, the tools, and the fix.</li>
+      </ul>
+      <div class="hero-actions">
+        <a href="/cv" class="btn primary">View Full CV</a>
+        <a href="mailto:mads28122001@hotmail.dk" class="btn secondary">Email Me</a>
+      </div>
+    </div>
 
-    <p class="dansk" lang="da">
+    <p class="dansk" lang="da" style="margin-top: 1.5rem;">
       Jeg er diplomingeniørstuderende i Elektroteknologi på DTU og søger praktikplads fra januar
       2027 samt studiejob inden for elektronik og embedded udvikling. Skriv gerne på engelsk
       eller dansk.
     </p>
   </section>
+
+  <div class="section-rule"><span class="label">Hardware Toolbox</span></div>
+  <div class="skills-matrix">
+    <div class="skill-category">
+      <h3>Hardware & PCBs</h3>
+      <ul>
+        <li>KiCad (Schematic & Layout)</li>
+        <li>Fiber Laser & CNC Fab</li>
+        <li>Analog & Digital Circuits</li>
+        <li>Power Electronics</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <h3>Firmware & Software</h3>
+      <ul>
+        <li>C / C++ (Embedded)</li>
+        <li>ESP32 / ESP-IDF</li>
+        <li>Python</li>
+        <li>Digital Signal Processing</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <h3>Bench & Debugging</h3>
+      <ul>
+        <li>Oscilloscopes & Logic Analyzers</li>
+        <li>Protocol Reverse Engineering</li>
+        <li>Hardware/Firmware Integration</li>
+        <li>Failure Diagnosis <button class="easter-egg-btn" onclick="alert('Debug successful: Hire this engineer.')">Fix</button></li>
+      </ul>
+    </div>
+  </div>
 
   <div class="section-rule"><span class="label">Featured projects</span></div>
   <ul class="project-list">

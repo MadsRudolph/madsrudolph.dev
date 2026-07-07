@@ -1110,3 +1110,201 @@ article.writeup th {
     transform: none;
   }
 }
+
+/* ---------- hero conversion actions ---------- */
+
+.hero-summary {
+  margin-top: 1.5rem;
+}
+
+.hero-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.hero-bullets li {
+  position: relative;
+  padding-left: 1.2rem;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.hero-bullets li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
+  background-image: none !important; /* override default link underline */
+}
+
+.btn.primary {
+  background: var(--accent);
+  color: #140b04 !important;
+  border: 1px solid var(--accent);
+}
+
+.btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--accent-glow);
+  background: var(--accent-ink);
+}
+
+.btn.secondary {
+  background: transparent;
+  color: var(--accent-2) !important;
+  border: 1px solid var(--accent-2);
+}
+
+.btn.secondary:hover {
+  background: color-mix(in srgb, var(--accent-2) 10%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--accent-2-glow);
+}
+
+/* ---------- skills matrix ---------- */
+
+.skills-matrix {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0 2.5rem;
+}
+
+.skill-category {
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.2rem;
+}
+
+.skill-category h3 {
+  margin-top: 0;
+  color: var(--accent-2);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.skill-category h3::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-2);
+}
+
+.skill-category ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.skill-category li {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- floating badge ---------- */
+
+.floating-badge {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 100;
+  background: var(--paper-raised);
+  border: 1px solid var(--accent);
+  padding: 0.6rem 1.2rem;
+  border-radius: 30px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink) !important;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  text-decoration: none;
+  background-image: none !important;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.floating-badge:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6), 0 0 15px var(--accent-glow);
+}
+
+.floating-badge .pulse {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 var(--accent-glow);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 var(--accent-glow); }
+  70% { box-shadow: 0 0 0 6px rgba(255, 122, 47, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 122, 47, 0); }
+}
+
+@media (max-width: 768px) {
+  .floating-badge {
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* ---------- easter egg ---------- */
+.easter-egg-btn {
+  background: none;
+  border: 1px dashed var(--muted);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  transition: all 150ms ease;
+  margin-left: 0.5rem;
+}
+.easter-egg-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
