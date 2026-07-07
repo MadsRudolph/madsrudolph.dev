@@ -11,13 +11,22 @@ repo: 'https://github.com/Skab101/REGBOT-Balance'
 featured: true
 order: 1.5
 status: working
-hero: '/media/regbot/square-run.png'
-heroAlt: 'Overhead X–Y plot of the REGBOT driving an 0.8 m/s square on the floor under closed-loop control'
+hero: '/media/regbot/robot-hero.jpg'
+heroAlt: 'The REGBOT two-wheeled self-balancing robot balancing upright on the lab floor'
 ---
 
 <figure>
-  <img src="/media/regbot/square-run.png" alt="Overhead X–Y plot of the REGBOT driving an 0.8 m/s square on the floor under closed-loop control" width="900" height="900" />
-  <figcaption>The finished controller driving the real robot: an 0.8 m/s square — four straights and three turns — while balancing, heading returning to within 0.2° of where it started.</figcaption>
+  <div class="video-frame">
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/yzdvBDtpQd8"
+      title="REGBOT self-balancing robot — balancing and driving demo"
+      loading="lazy"
+      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+  </div>
+  <figcaption>The controller running on the real REGBOT — balancing upright and driving under closed-loop control.</figcaption>
 </figure>
 
 ## What it is
@@ -27,6 +36,11 @@ The REGBOT is DTU's two-wheeled balancing robot — an inverted pendulum on whee
 ## Problem / motivation
 
 Balancing is the hard part: the plant is genuinely **unstable**. Linearised about upright, the balance transfer function has a right-half-plane pole at +9.13 rad/s — any tiny tilt grows like e^(9.13·t) until the robot hits the ground. It's also **non-minimum-phase** (a right-half-plane zero): to accelerate forward the wheels first have to roll *backward* to get the centre of mass over the pivot, exactly like leaning forward before you start running. That backward-first motion is a hard physical limit on how fast the outer loops can react. A textbook PI-Lead can't stabilise a plant like this — it needs a specific trick — and everything has to survive the jump from a clean linear model to a real robot with a real motor.
+
+<figure>
+  <img src="/media/regbot/pole-zero.png" alt="Pole-zero map of the balance plant with a highlighted pole in the right half-plane" width="1000" height="602" />
+  <figcaption>Pole-zero map of the balance plant — the ringed pole out in the right half-plane (+9.13 rad/s) is the falling mode that makes the robot inherently unstable.</figcaption>
+</figure>
 
 ## Approach
 
@@ -46,7 +60,12 @@ The balance loop needed more than the recipe. Because the plant is unstable, I u
   <figcaption>After the Method-2 sign flip and post-integrator, the balance loop's Nyquist curve makes one counter-clockwise encirclement of −1. With the plant's single unstable pole, that's exactly what's needed to pull the closed-loop poles into the left half plane.</figcaption>
 </figure>
 
-One nice shortcut: the REGBOT's gyro measures tilt *rate* directly, so the derivative (Lead) term is just `τ_d · gyro + θ` — an ideal Lead with no noise-filter pole to design around. The whole design was validated first on the non-linear Simscape Multibody model (a 10° tilt recovers in ~0.3 s, motor voltage well clear of saturation) before anything touched the hardware.
+One nice shortcut: the REGBOT's gyro measures tilt *rate* directly, so the derivative (Lead) term is just `τ_d · gyro + θ` — an ideal Lead with no noise-filter pole to design around. The whole design was validated first on the non-linear Simscape Multibody model before anything touched the hardware.
+
+<figure>
+  <img src="/media/regbot/recovery-10deg.png" alt="Simulated tilt-angle recovery from a 10 degree push, returning to upright" width="703" height="878" />
+  <figcaption>Simulated push recovery on the non-linear model — knocked to 10°, the robot returns to upright in ~0.3 s and fully settles within 2 s, motor voltage well clear of saturation.</figcaption>
+</figure>
 
 ## What went wrong and how it was diagnosed
 
@@ -70,6 +89,11 @@ Everything was validated on the physical robot (logs recorded, plots below), all
 - **2 m position move** — final position **1.964 m** (3.6 cm short), peak velocity 0.79 m/s, no overshoot and no late limit cycle.
 
 All four loops hit their design margins (phase margins 60–83°). On the design side, the balance loop's negative gain margin is not a bug — for an unstable plant that's exactly what `margin` should report.
+
+<figure>
+  <img src="/media/regbot/square-run.png" alt="Overhead X–Y plot of the REGBOT driving an 0.8 m/s square on the floor" width="900" height="900" />
+  <figcaption>The 0.8 m/s square on hardware — four straights and three turns while balancing, heading back to within 0.2° of where it started.</figcaption>
+</figure>
 
 <figure>
   <img src="/media/regbot/position-2m.png" alt="Measured 2 metre position-move response of the robot over time" width="1320" height="1320" />
