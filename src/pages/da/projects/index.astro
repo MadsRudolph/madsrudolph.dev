@@ -2,12 +2,14 @@
 import { getCollection } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
 import ProjectCard from '../../../components/ProjectCard.astro';
+import { categories, projectCategoryKeys } from '../../../projectCategories';
 
 const projects = (await getCollection('projects')).sort(
   (a, b) => a.data.order - b.data.order || b.data.date.valueOf() - a.data.date.valueOf()
 );
 
-const allTags = [...new Set(projects.flatMap((p) => p.data.tags))].sort();
+const used = new Set(projects.flatMap((p) => projectCategoryKeys(p.data.tags)));
+const shownCategories = categories.filter((c) => used.has(c.key));
 ---
 
 <Base
@@ -31,16 +33,20 @@ const allTags = [...new Set(projects.flatMap((p) => p.data.tags))].sort();
   <div class="filter-bar" id="filter-bar" hidden>
     <button type="button" data-tag="" aria-pressed="true">alle</button>
     {
-      allTags.map((tag) => (
-        <button type="button" data-tag={tag} aria-pressed="false">
-          {tag}
+      shownCategories.map((c) => (
+        <button type="button" data-tag={c.key} aria-pressed="false">
+          {c.da}
         </button>
       ))
     }
   </div>
 
   <ul class="project-list" id="project-list">
-    {projects.map((project, i) => <ProjectCard project={project} index={i} lang="da" />)}
+    {
+      projects.map((project, i) => (
+        <ProjectCard project={project} index={i} lang="da" filterTags={projectCategoryKeys(project.data.tags)} />
+      ))
+    }
   </ul>
 
   <script>
