@@ -1,0 +1,204 @@
+---
+import Base from '../layouts/Base.astro';
+
+// Completed coursework — from the official DTU transcript (110 ECTS, B.Eng. Electrical
+// Engineering). Grades intentionally omitted; full transcript available on request.
+const completed = [
+  {
+    term: 'Autumn 2024',
+    sem: '1st semester',
+    courses: [
+      { code: '30032', title: 'Electrical Engineering', ects: 10 },
+      { code: '10935', title: 'Physics 1', ects: 5 },
+      { code: '62712', title: 'Fundamental C Programming', ects: 5 },
+      { code: '01911', title: 'Mathematical Analysis and Modelling', ects: 5 },
+      { code: '62733', title: 'Project Work in Electrical Engineering', ects: 5 },
+    ],
+  },
+  {
+    term: 'Spring 2025',
+    sem: '2nd semester',
+    courses: [
+      { code: '34601', title: 'Electric Circuits 2', ects: 5 },
+      { code: '30081', title: 'Digital Electronics', ects: 5 },
+      { code: '30082', title: 'Project Work in Digital Design', ects: 5 },
+      { code: '62734', title: 'Computer Engineering and Programming', ects: 5 },
+      { code: '01922', title: 'Linear Algebra and Modelling', ects: 5 },
+      { code: '62735', title: 'Advanced Mathematics for Electrical Engineering', ects: 5 },
+    ],
+  },
+  {
+    term: 'Autumn 2025',
+    sem: '3rd semester',
+    courses: [
+      { code: '30035', title: 'Applied Electromagnetics', ects: 10 },
+      { code: '34636', title: 'Integrated Analog Electronics 1', ects: 5 },
+      { code: '34621', title: 'Electromagnetic Sensors and Digital Signal Processing', ects: 5 },
+    ],
+  },
+  {
+    term: 'Spring 2026',
+    sem: '4th semester',
+    courses: [
+      { code: '62743', title: 'Digital Signal Processing', ects: 10 },
+      { code: '34655', title: 'Integrated Analog Electronics 2', ects: 5 },
+      { code: '34620', title: 'Fundamental Power Electronics in Energy Systems', ects: 5 },
+      { code: '34315', title: 'Internet of Things — Application & Infrastructure Development', ects: 5 },
+      { code: '62711', title: 'Digital Systems Design', ects: 5 },
+    ],
+  },
+];
+
+const planned = [
+  {
+    term: 'Autumn 2026',
+    sem: '5th semester',
+    courses: [
+      { code: '62999', title: 'Innovation Pilot', ects: 10 },
+      { code: '34870', title: 'Electroacoustics', ects: 10 },
+      { code: '62755', title: 'Power Electronics', ects: 5 },
+      { code: '34654', title: 'Circuit Technology and EMC', ects: 5 },
+    ],
+  },
+  {
+    term: 'January 2027',
+    sem: '3-week intensive',
+    courses: [{ code: '34871', title: 'Nonlinear Transducers', ects: 5 }],
+  },
+  {
+    term: 'Spring 2027',
+    sem: '6th semester',
+    courses: [{ code: '—', title: 'Engineering internship (praktik)', ects: 30 }],
+  },
+  {
+    term: 'Autumn 2027',
+    sem: '7th semester',
+    courses: [
+      { code: '—', title: 'Bachelor thesis (Diplomingeniørprojekt)', ects: 20 },
+      { code: '34652', title: 'Power Electronics 1 (elective)', ects: 10 },
+    ],
+  },
+];
+
+const totalCompleted = completed.reduce((s, t) => s + t.courses.reduce((a, c) => a + c.ects, 0), 0);
+---
+
+<Base
+  title="Courses — Mads Rudolph"
+  description="DTU coursework — completed (110 ECTS toward a B.Eng. in Electrical Engineering) and planned, with an analog / power-electronics / audio-hardware direction."
+  lang="en"
+  altUrl="/da/courses"
+>
+  <div class="page-head">
+    <span class="label">Coursework</span>
+    <h1>Courses</h1>
+    <p class="lede">
+      My coursework toward the B.Eng. in Electrical Engineering (Elektroteknologi) at DTU —
+      completed and planned. Grades are omitted here; the full transcript is available on request.
+    </p>
+  </div>
+
+  <div class="section-rule"><span class="label">Completed · {totalCompleted} ECTS</span></div>
+  <div class="terms">
+    {
+      completed.map((t) => (
+        <section class="term">
+          <h2 class="term-head">
+            {t.term} <span>· {t.sem}</span>
+          </h2>
+          <ul class="course-list">
+            {t.courses.map((c) => (
+              <li>
+                <span class="code">{c.code}</span>
+                <span class="ctitle">{c.title}</span>
+                <span class="ects">{c.ects}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+
+  <div class="section-rule"><span class="label">Planned</span></div>
+  <p class="lede">
+    My elective track builds toward analog & mixed-signal electronics, power electronics
+    (switch-mode / class-D), and electroacoustics — an audio-hardware focus on top of the embedded
+    and IoT base. Internship (praktik) in spring 2027, bachelor thesis in autumn 2027.
+  </p>
+  <div class="terms">
+    {
+      planned.map((t) => (
+        <section class="term">
+          <h2 class="term-head">
+            {t.term} <span>· {t.sem}</span>
+          </h2>
+          <ul class="course-list">
+            {t.courses.map((c) => (
+              <li>
+                <span class="code">{c.code}</span>
+                <span class="ctitle">{c.title}</span>
+                <span class="ects">{c.ects}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+</Base>
+
+<style>
+  .terms {
+    display: grid;
+    gap: 1.6rem;
+    margin-top: 1.25rem;
+  }
+  .term-head {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .term-head span {
+    color: var(--muted);
+    font-weight: 400;
+    font-size: 0.8rem;
+  }
+  .course-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.15rem;
+  }
+  .course-list li {
+    display: grid;
+    grid-template-columns: 3.6rem 1fr auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    padding: 0.28rem 0;
+    border-bottom: 1px dotted color-mix(in srgb, var(--rule) 70%, transparent);
+  }
+  .code {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.01em;
+  }
+  .ctitle {
+    color: var(--ink);
+    font-size: 0.95rem;
+  }
+  .ects {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .ects::after {
+    content: ' ECTS';
+  }
+</style>

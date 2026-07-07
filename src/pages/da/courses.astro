@@ -1,0 +1,204 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// Gennemførte kurser — fra den officielle DTU-karakteroversigt (110 ECTS, diplomingeniør i
+// Elektroteknologi). Karakterer er bevidst udeladt; fuld karakteroversigt kan fremsendes.
+const completed = [
+  {
+    term: 'Efterår 2024',
+    sem: '1. semester',
+    courses: [
+      { code: '30032', title: 'Elektroteknik', ects: 10 },
+      { code: '10935', title: 'Fysik 1', ects: 5 },
+      { code: '62712', title: 'Grundlæggende C programmering', ects: 5 },
+      { code: '01911', title: 'Matematisk analyse og modellering', ects: 5 },
+      { code: '62733', title: 'Projektarbejde i elektroteknik', ects: 5 },
+    ],
+  },
+  {
+    term: 'Forår 2025',
+    sem: '2. semester',
+    courses: [
+      { code: '34601', title: 'Elektriske kredsløb 2', ects: 5 },
+      { code: '30081', title: 'Digitalteknik', ects: 5 },
+      { code: '30082', title: 'Projektarbejde i digitaldesign', ects: 5 },
+      { code: '62734', title: 'Datateknik og programmering', ects: 5 },
+      { code: '01922', title: 'Lineær algebra og modellering', ects: 5 },
+      { code: '62735', title: 'Videregående Matematik for Diplom Elektroteknologi', ects: 5 },
+    ],
+  },
+  {
+    term: 'Efterår 2025',
+    sem: '3. semester',
+    courses: [
+      { code: '30035', title: 'Anvendt elektromagnetisme', ects: 10 },
+      { code: '34636', title: 'Integreret analog elektronik 1', ects: 5 },
+      { code: '34621', title: 'Elektromagnetiske sensorer og digital signalbehandling', ects: 5 },
+    ],
+  },
+  {
+    term: 'Forår 2026',
+    sem: '4. semester',
+    courses: [
+      { code: '62743', title: 'Digital signalbehandling', ects: 10 },
+      { code: '34655', title: 'Integreret analog elektronik 2', ects: 5 },
+      { code: '34620', title: 'Grundlæggende effektelektronik i energisystemer', ects: 5 },
+      { code: '34315', title: 'Internet of things — applikation og infrastruktur udvikling', ects: 5 },
+      { code: '62711', title: 'Digitale systemer, design af', ects: 5 },
+    ],
+  },
+];
+
+const planned = [
+  {
+    term: 'Efterår 2026',
+    sem: '5. semester',
+    courses: [
+      { code: '62999', title: 'Innovation Pilot', ects: 10 },
+      { code: '34870', title: 'Elektroakustik', ects: 10 },
+      { code: '62755', title: 'Effektelektronik', ects: 5 },
+      { code: '34654', title: 'Kredsløbsteknik og EMC', ects: 5 },
+    ],
+  },
+  {
+    term: 'Januar 2027',
+    sem: '3-ugers intensivt',
+    courses: [{ code: '34871', title: 'Ulineære transducere', ects: 5 }],
+  },
+  {
+    term: 'Forår 2027',
+    sem: '6. semester',
+    courses: [{ code: '—', title: 'Ingeniørpraktik', ects: 30 }],
+  },
+  {
+    term: 'Efterår 2027',
+    sem: '7. semester',
+    courses: [
+      { code: '—', title: 'Diplomingeniørprojekt (bachelorprojekt)', ects: 20 },
+      { code: '34652', title: 'Effektelektronik 1 (valgfag)', ects: 10 },
+    ],
+  },
+];
+
+const totalCompleted = completed.reduce((s, t) => s + t.courses.reduce((a, c) => a + c.ects, 0), 0);
+---
+
+<Base
+  title="Kurser — Mads Rudolph"
+  description="DTU-kurser — gennemførte (110 ECTS mod diplomingeniør i Elektroteknologi) og planlagte, med en retning mod analog, effektelektronik og audio-hardware."
+  lang="da"
+  altUrl="/courses"
+>
+  <div class="page-head">
+    <span class="label">Kurser</span>
+    <h1>Kurser</h1>
+    <p class="lede">
+      Mine kurser på diplomingeniøruddannelsen i Elektroteknologi på DTU — gennemførte og
+      planlagte. Karakterer er udeladt her; fuld karakteroversigt kan fremsendes.
+    </p>
+  </div>
+
+  <div class="section-rule"><span class="label">Gennemført · {totalCompleted} ECTS</span></div>
+  <div class="terms">
+    {
+      completed.map((t) => (
+        <section class="term">
+          <h2 class="term-head">
+            {t.term} <span>· {t.sem}</span>
+          </h2>
+          <ul class="course-list">
+            {t.courses.map((c) => (
+              <li>
+                <span class="code">{c.code}</span>
+                <span class="ctitle">{c.title}</span>
+                <span class="ects">{c.ects}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+
+  <div class="section-rule"><span class="label">Planlagt</span></div>
+  <p class="lede">
+    Mine valgfag bygger mod analog & mixed-signal elektronik, effektelektronik (switch-mode /
+    klasse-D) og elektroakustik — et fokus på audio-hardware oven på det embedded- og IoT-fundament.
+    Praktik i foråret 2027, bachelorprojekt i efteråret 2027.
+  </p>
+  <div class="terms">
+    {
+      planned.map((t) => (
+        <section class="term">
+          <h2 class="term-head">
+            {t.term} <span>· {t.sem}</span>
+          </h2>
+          <ul class="course-list">
+            {t.courses.map((c) => (
+              <li>
+                <span class="code">{c.code}</span>
+                <span class="ctitle">{c.title}</span>
+                <span class="ects">{c.ects}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+</Base>
+
+<style>
+  .terms {
+    display: grid;
+    gap: 1.6rem;
+    margin-top: 1.25rem;
+  }
+  .term-head {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .term-head span {
+    color: var(--muted);
+    font-weight: 400;
+    font-size: 0.8rem;
+  }
+  .course-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.15rem;
+  }
+  .course-list li {
+    display: grid;
+    grid-template-columns: 3.6rem 1fr auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    padding: 0.28rem 0;
+    border-bottom: 1px dotted color-mix(in srgb, var(--rule) 70%, transparent);
+  }
+  .code {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.01em;
+  }
+  .ctitle {
+    color: var(--ink);
+    font-size: 0.95rem;
+  }
+  .ects {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .ects::after {
+    content: ' ECTS';
+  }
+</style>
