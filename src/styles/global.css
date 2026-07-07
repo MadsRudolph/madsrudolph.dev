@@ -850,6 +850,128 @@ article.writeup th {
   color: var(--accent-ink);
 }
 
+/* ---------- repo stats panel (top of project pages) ---------- */
+
+.repo-stats {
+  margin: 1.4rem 0 0.5rem;
+  padding: 1rem 1.15rem 1.1rem;
+}
+
+.repo-stats > * {
+  position: relative; /* above the glass sheen/bloom */
+}
+
+.repo-stats .rs-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.85rem;
+}
+
+.repo-stats .rs-tag {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.repo-stats .rs-tag::before {
+  content: '◇ ';
+  color: var(--accent-2);
+}
+
+.repo-stats .rs-link {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-2-ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.repo-stats .rs-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.repo-stats .rs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.repo-stats .rs-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.repo-stats .rs-num {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.05;
+  color: var(--accent-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.repo-stats .rs-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.repo-stats .rs-people {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0.85rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.repo-stats .rs-avatars {
+  display: flex;
+}
+
+.repo-stats .rs-avatars a {
+  display: block;
+  margin-left: -8px;
+  line-height: 0;
+}
+
+.repo-stats .rs-avatars a:first-child {
+  margin-left: 0;
+}
+
+.repo-stats .rs-avatars img {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+  background: var(--bg);
+}
+
+.repo-stats .rs-people-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 460px) {
+  .repo-stats .rs-num {
+    font-size: 1.25rem;
+  }
+}
+
 /* ---------- hero (front page) ---------- */
 
 .hero {

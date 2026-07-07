@@ -1,0 +1,116 @@
+{
+  "MadsRudolph/Componentbot": {
+    "repo": "MadsRudolph/Componentbot",
+    "url": "https://github.com/MadsRudolph/Componentbot",
+    "commits": 2,
+    "contributors": 1,
+    "contributorList": [
+      {
+        "login": "MadsRudolph",
+        "contributions": 2,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/68565302?v=4",
+        "htmlUrl": "https://github.com/MadsRudolph"
+      }
+    ],
+    "additions": 3636,
+    "deletions": 48,
+    "linesChanged": 3684,
+    "language": "Python",
+    "private": false
+  },
+  "MadsRudolph/esp32-reflow-hotplate": {
+    "repo": "MadsRudolph/esp32-reflow-hotplate",
+    "url": "https://github.com/MadsRudolph/esp32-reflow-hotplate",
+    "commits": 54,
+    "contributors": 1,
+    "contributorList": [
+      {
+        "login": "MadsRudolph",
+        "contributions": 54,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/68565302?v=4",
+        "htmlUrl": "https://github.com/MadsRudolph"
+      }
+    ],
+    "additions": 916911,
+    "deletions": 10701,
+    "linesChanged": 927612,
+    "language": "Python",
+    "private": false
+  },
+  "MadsRudolph/ir-remote-wizard": {
+    "repo": "MadsRudolph/ir-remote-wizard",
+    "url": "https://github.com/MadsRudolph/ir-remote-wizard",
+    "commits": 60,
+    "contributors": 1,
+    "contributorList": [
+      {
+        "login": "MadsRudolph",
+        "contributions": 60,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/68565302?v=4",
+        "htmlUrl": "https://github.com/MadsRudolph"
+      }
+    ],
+    "additions": 8967,
+    "deletions": 1785,
+    "linesChanged": 10752,
+    "language": "Python",
+    "private": false
+  },
+  "MadsRudolph/personal-projects": {
+    "repo": "MadsRudolph/personal-projects",
+    "url": "https://github.com/MadsRudolph/personal-projects",
+    "commits": 176,
+    "contributors": 1,
+    "contributorList": [
+      {
+        "login": "MadsRudolph",
+        "contributions": 176,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/68565302?v=4",
+        "htmlUrl": "https://github.com/MadsRudolph"
+      }
+    ],
+    "additions": 963572,
+    "deletions": 28240,
+    "linesChanged": 991812,
+    "language": "HTML",
+    "private": false
+  },
+  "MadsRudolph/regbot-studio": {
+    "repo": "MadsRudolph/regbot-studio",
+    "url": "https://github.com/MadsRudolph/regbot-studio",
+    "commits": 1,
+    "contributors": 1,
+    "contributorList": [
+      {
+        "login": "MadsRudolph",
+        "contributions": 1,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/68565302?v=4",
+        "htmlUrl": "https://github.com/MadsRudolph"
+      }
+    ],
+    "additions": 15443,
+    "deletions": 0,
+    "linesChanged": 15443,
+    "language": "TypeScript",
+    "private": false
+  },
+  "MadsRudolph/srm-cam": {
+    "repo": "MadsRudolph/srm-cam",
+    "url": "https://github.com/MadsRudolph/srm-cam",
+    "commits": 274,
+    "contributors": 1,
+    "contributorList": [
+      {
+        "login": "MadsRudolph",
+        "contributions": 274,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/68565302?v=4",
+        "htmlUrl": "https://github.com/MadsRudolph"
+      }
+    ],
+    "additions": 65974,
+    "deletions": 3235,
+    "linesChanged": 69209,
+    "language": "Python",
+    "private": false
+  }
+}

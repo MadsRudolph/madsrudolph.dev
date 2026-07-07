@@ -1,0 +1,68 @@
+---
+import stats from '../data/repo-stats.json';
+
+interface Props {
+  /** Full GitHub URL from project frontmatter, e.g. https://github.com/MadsRudolph/srm-cam */
+  repo?: string;
+}
+
+const { repo } = Astro.props;
+
+// Resolve "https://github.com/owner/name" (or "owner/name") to the stats key.
+const key = repo?.replace(/^https?:\/\/github\.com\//, '').replace(/\/$/, '');
+const data = key ? (stats as Record<string, any>)[key] : undefined;
+
+const fmt = (n: number) => {
+  if (n < 1000) return String(n);
+  if (n < 1_000_000) return n < 100_000 ? `${(n / 1000).toFixed(1)}k` : `${Math.round(n / 1000)}k`;
+  return `${(n / 1_000_000).toFixed(1)}M`;
+};
+
+const tiles = data
+  ? [
+      { num: fmt(data.commits), label: data.commits === 1 ? 'commit' : 'commits' },
+      { num: fmt(data.linesChanged), label: 'lines changed' },
+      {
+        num: fmt(data.contributors),
+        label: data.contributors === 1 ? 'contributor' : 'contributors',
+      },
+    ]
+  : [];
+
+const avatars = (data?.contributorList ?? []).slice(0, 6);
+---
+
+{
+  data && (
+    <aside class="glass-card repo-stats" aria-label="Repository statistics">
+      <div class="rs-head">
+        <span class="rs-tag">Repository{data.language ? ` · ${data.language}` : ''}</span>
+        <a class="rs-link" href={data.url} target="_blank" rel="noopener">
+          {key} ↗
+        </a>
+      </div>
+
+      <div class="rs-grid">
+        {tiles.map((t) => (
+          <div class="rs-stat">
+            <span class="rs-num">{t.num}</span>
+            <span class="rs-label">{t.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <div class="rs-people">
+        <div class="rs-avatars">
+          {avatars.map((c: any) => (
+            <a href={c.htmlUrl} target="_blank" rel="noopener" title={`${c.login} · ${c.contributions} commits`}>
+              <img src={c.avatarUrl} alt={c.login} width="26" height="26" loading="lazy" />
+            </a>
+          ))}
+        </div>
+        <span class="rs-people-label">
+          {avatars.map((c: any) => c.login).join(', ')}
+        </span>
+      </div>
+    </aside>
+  )
+}

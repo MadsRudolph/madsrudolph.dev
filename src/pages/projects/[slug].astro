@@ -2,6 +2,7 @@
 import type { GetStaticPaths } from 'astro';
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import RepoStats from '../../components/RepoStats.astro';
 
 export const getStaticPaths = (async () => {
   const projects = await getCollection('projects');
@@ -26,14 +27,9 @@ const dateLabel = date.toLocaleDateString('en-GB', { year: 'numeric', month: 'lo
     <div class="tags" style="display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.75rem;">
       {tags.map((tag) => <span class="tag">{tag}</span>)}
     </div>
-    {
-      repo && (
-        <p style="margin-top: 0.9rem;">
-          <a href={repo}>Repository ↗</a>
-        </p>
-      )
-    }
   </div>
+
+  <RepoStats repo={repo} />
 
   <article class="writeup">
     <Content />
