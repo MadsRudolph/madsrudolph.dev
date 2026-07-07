@@ -11,8 +11,10 @@ the exact tag vocabulary (§4).
 > (Componentbot) was added; the site was restyled to a dark "bench-instrument" theme with an
 > animated hero and a glass profile card; a **bilingual EN/DA toggle** was added (this was
 > explicitly out of scope in the original handoff — the user later requested it); AI competency is
-> now positioned prominently; SRM-CAM is marked **flagship**; and the **GitHub Actions CI deploy is
-> fully live** (both secrets set, deploys green). Details in §6.
+> now positioned prominently; SRM-CAM is marked **flagship** and now carries **five real images**;
+> a branded **social-preview `og:image`** was added; **LinkedIn is linked site-wide** and the live
+> LinkedIn profile was updated; and the **GitHub Actions CI deploy is fully live** (both secrets set,
+> deploys green). Details in §6.
 
 ---
 
@@ -31,6 +33,10 @@ the exact tag vocabulary (§4).
   `CLOUDFLARE_ACCOUNT_ID` — are set; latest run is green. No setup steps remain. Edge propagation to
   the custom domain lags a deploy by ~1 minute (normal).
 - **Languages:** English (default, at `/`) + Danish (at `/da/…`) via a header toggle. See §7.
+- **Social preview:** branded `og:image` at `/media/og.png` (1200×630) + Open Graph/Twitter meta on
+  every page, so shared links render a card.
+- **LinkedIn:** linked site-wide (footer + home/About/CV contact blocks, EN + DA). Profile URL:
+  `https://www.linkedin.com/in/mads-rudolph-65103a178/`.
 - **Commit hygiene:** no AI/co-author attribution in any commit (user requirement); contributor
   graph shows only `MadsRudolph`.
 
@@ -88,7 +94,7 @@ URL path pattern: `/projects/<slug>` (see §7). Index sort is by frontmatter `or
 
 | Slug | URL path | Tags (exact) | Blocking (media / verify) |
 |------|----------|--------------|---------------------------|
-| `srm-cam` | `/projects/srm-cam` | Python, PySide6, CNC / grbl, Arduino, SPI, Reverse engineering, Computational geometry, KiCad | Hero photo, finished-board photo, pipeline diagram; VERIFY: scrub local Windows paths from repo docs |
+| `srm-cam` | `/projects/srm-cam` | Python, PySide6, CNC / grbl, Arduino, SPI, Reverse engineering, Computational geometry, KiCad | **Has 5 real images** (GUI hero, 3D toolpath, bed-leveling, board front/back). Optional pipeline diagram. VERIFY: scrub local Windows paths from repo docs |
 | `esp32-reflow-hotplate` | `/projects/esp32-reflow-hotplate` | Embedded C, ESP32 / ESP-IDF, KiCad, PID control, Power electronics, Safety-critical, Firmware testing, 3D CAD | Hero photo, block diagram; VERIFY build status (`in-progress`) |
 | `korad-uart-reverse-engineering` | `/projects/korad-uart-reverse-engineering` | Reverse engineering, UART, Logic analyzer, Python, KiCad, PCB design, Power electronics, Safety | Hero + board photo, decoded-UART capture, diagram; VERIFY carrier bench-tested? |
 | `dtu-multimeter` | `/projects/dtu-multimeter` | ATmega2560, Bare-metal AVR, Embedded C, KiCad, Analog front-end, SPI, I2C, Measurement | Hero photo, front-end diagram; VERIFY firmware phase (`in-progress`) |
@@ -183,12 +189,15 @@ python-control
 ## 5. Outstanding items
 
 ### Media (full list in `MEDIA-SHOPPING-LIST.md`)
-- **Done:** portrait photo added to the About page (framed in the glass profile card).
-- **Photos to shoot:** one hero per project (SRM-CAM GUI+mill, reflow hotplate, Korad+AD3, carrier
-  board, multimeter prototype, IR blaster, RegBot screenshot, Cadence figure, Pi-Zero filter+plots,
-  Componentbot terminal session).
-- **Diagrams (offered as inline SVG, not yet drawn):** SRM-CAM pipeline, reflow power/control, Korad
-  signal chain, multimeter front-end, IR-blaster architecture, Componentbot grounding pipeline.
+- **Done:** portrait photo on the About page (in the glass profile card); **SRM-CAM has 5 real
+  images** pulled from its repo (GUI, 3D toolpath, bed-leveling, board front/back); branded
+  **`og:image`** social-preview card generated and wired up.
+- **Photos to shoot:** one hero per remaining project (reflow hotplate, Korad+AD3, carrier board,
+  multimeter prototype, IR blaster, RegBot screenshot, Cadence figure, Pi-Zero filter+plots,
+  Componentbot terminal session). SRM-CAM no longer needs photos.
+- **Diagrams (offered as inline SVG, not yet drawn):** SRM-CAM pipeline (optional now), reflow
+  power/control, Korad signal chain, multimeter front-end, IR-blaster architecture, Componentbot
+  grounding pipeline.
 
 ### Unresolved `<!-- VERIFY -->` flags
 - `pi-zero-pwm-filter` — confirm the **−40.6 dB @ 31.25 kHz** attenuation and **~75% / −22.6 dB**
@@ -202,7 +211,9 @@ python-control
 - Contact block — phone/street address intentionally omitted; email is `mads28122001@hotmail.dk`.
 
 ### Open questions for Mads
-- **LinkedIn** — still not added; awaiting a URL. (Email decided: hotmail.dk to match his CVs.)
+- **LinkedIn** — RESOLVED. Linked site-wide, and the live profile was updated (headline, About,
+  5 skills, Featured link → `madsrudolph.dev`, banner image). Note: LinkedIn caches link previews —
+  the Featured card's thumbnail may need a re-scrape (Post Inspector) to pick up the new `og:image`.
 - **Cadence publishability** — still open (page is live, described-only, no repo).
 - **RFID cryptanalysis as a 10th writeup** — still open.
 - **DDR3 SPD reader** — does not exist in any repo (handoff inventory was stale); dropped.
@@ -245,6 +256,13 @@ python-control
     already-live project + custom domain.
 11. **Inventory mismatches** (handoff "repo wins") — the DDR3 SPD reader and AD3 repair story from the
     handoff don't exist in the repos; neither was written.
+12. **LinkedIn (beyond site scope, user-requested)** — linked site-wide, and the live LinkedIn
+    profile was updated via browser automation: headline, About summary, 5 skills, a Featured link to
+    the portfolio, and a custom banner image (banner set manually by the user).
+13. **Social preview** — generated a branded 1200×630 `og:image` (bench-instrument style) and added
+    Open Graph + Twitter Card meta so shared links render a proper card.
+14. **SRM-CAM images** — five real images pulled from the `srm-cam` repo into its writeup (was media
+    placeholders).
 
 Everything else follows the handoff: Astro + content collections, Cloudflare Pages, no
 backend/framework bloat, `/projects/<slug>` URLs, filterable index, front page, About, house template,
@@ -281,6 +299,9 @@ backend/framework bloat, `/projects/<slug>` URLs, filterable index, front page, 
   Self-hosted fonts `@fontsource/ibm-plex-mono` + `-sans `^5.2.5``. Code blocks: Shiki `github-dark`.
 - No client framework, no backend. Minimal JS: the `/projects` tag filter is ~20 lines of vanilla
   progressive-enhancement JS (works without it). The About glass card uses CSS `backdrop-filter`.
+- **Social preview:** `og:image` at `/media/og.png` (1200×630) referenced by Open Graph + Twitter
+  meta in `Base.astro`. Generated offline from an SVG via `@resvg/resvg-js` (generator script kept in
+  the session scratchpad, not in the repo); re-render if the tagline/branding changes.
 - Known cosmetic CI notice: actions emit a "Node 20 deprecation" warning (non-blocking).
 
 ### Content model (adding/editing evidence pages programmatically)
