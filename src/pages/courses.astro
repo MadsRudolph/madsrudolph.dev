@@ -109,7 +109,13 @@ const totalCompleted = completed.reduce((s, t) => s + t.courses.reduce((a, c) =>
           <ul class="course-list">
             {t.courses.map((c) => (
               <li>
-                <span class="code">{c.code}</span>
+                {c.code === '—' ? (
+                  <span class="code">{c.code}</span>
+                ) : (
+                  <a class="code" href={`https://kurser.dtu.dk/course/${c.code}`} target="_blank" rel="noopener">
+                    {c.code}
+                  </a>
+                )}
                 <span class="ctitle">{c.title}</span>
                 <span class="ects">{c.ects}</span>
               </li>
@@ -126,7 +132,7 @@ const totalCompleted = completed.reduce((s, t) => s + t.courses.reduce((a, c) =>
       <h2 class="term-head">Now <span>· exam August 2026</span></h2>
       <ul class="course-list">
         <li>
-          <span class="code">34722</span>
+          <a class="code" href="https://kurser.dtu.dk/course/34722" target="_blank" rel="noopener">34722</a>
           <span class="ctitle">Linear Control Design 1</span>
           <span class="ects">5</span>
         </li>
@@ -150,7 +156,13 @@ const totalCompleted = completed.reduce((s, t) => s + t.courses.reduce((a, c) =>
           <ul class="course-list">
             {t.courses.map((c) => (
               <li>
-                <span class="code">{c.code}</span>
+                {c.code === '—' ? (
+                  <span class="code">{c.code}</span>
+                ) : (
+                  <a class="code" href={`https://kurser.dtu.dk/course/${c.code}`} target="_blank" rel="noopener">
+                    {c.code}
+                  </a>
+                )}
                 <span class="ctitle">{c.title}</span>
                 <span class="ects">{c.ects}</span>
               </li>
@@ -201,6 +213,15 @@ const totalCompleted = completed.reduce((s, t) => s + t.courses.reduce((a, c) =>
     font-size: 0.8rem;
     color: var(--accent);
     letter-spacing: 0.01em;
+  }
+  a.code {
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+  a.code:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    opacity: 0.85;
   }
   .ctitle {
     color: var(--ink);
