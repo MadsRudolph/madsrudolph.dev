@@ -8,8 +8,8 @@ summary: >-
 date: 2026-04-15
 tags: ['DSP', 'C / firmware', 'ATmega328P', 'KiCad', 'Analog electronics', 'Coursework']
 repo: 'https://github.com/Skab101/34621-Metal-Detector'
-featured: false
-order: 10
+featured: true
+order: 1.75
 status: working
 hero: '/media/metal-detector/assembly-3d.png'
 heroAlt: '3D CAD render of the assembled metal detector — control housing with PCB, shaft, and concentric coil head'

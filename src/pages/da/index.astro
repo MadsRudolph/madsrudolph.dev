@@ -7,7 +7,7 @@ const projects = await getCollection('projects');
 const featured = projects
   .filter((p) => p.data.featured)
   .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 3);
+  .slice(0, 4);
 ---
 
 <Base
