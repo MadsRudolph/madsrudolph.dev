@@ -1,4 +1,23 @@
 {
+  "DTU-EKB/KiCad-Autoplace": {
+    "repo": "DTU-EKB/KiCad-Autoplace",
+    "url": "https://github.com/DTU-EKB/KiCad-Autoplace",
+    "commits": 129,
+    "contributors": 1,
+    "contributorList": [
+      {
+        "login": "MadsRudolph",
+        "contributions": 118,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/68565302?v=4",
+        "htmlUrl": "https://github.com/MadsRudolph"
+      }
+    ],
+    "additions": 26879,
+    "deletions": 2503,
+    "linesChanged": 29382,
+    "language": "Python",
+    "private": false
+  },
   "MadsRudolph/Componentbot": {
     "repo": "MadsRudolph/Componentbot",
     "url": "https://github.com/MadsRudolph/Componentbot",
