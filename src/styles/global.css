@@ -668,6 +668,22 @@ article.writeup figure.diagram svg {
   border: 0;
 }
 
+/* scrollable embed of an external interactive page (e.g. the GitHub Pages dashboard) */
+article.writeup .embed-frame {
+  position: relative;
+  height: 560px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  background: #0d1014;
+}
+
+article.writeup .embed-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 /* responsive video embed (e.g. a YouTube demo) */
 article.writeup .video-frame {
   position: relative;
