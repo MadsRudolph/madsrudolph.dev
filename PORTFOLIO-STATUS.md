@@ -13,8 +13,9 @@ the exact tag vocabulary (§4).
 > explicitly out of scope in the original handoff — the user later requested it); AI competency is
 > now positioned prominently; SRM-CAM is marked **flagship** and now carries **five real images**;
 > a branded **social-preview `og:image`** was added; **LinkedIn is linked site-wide** and the live
-> LinkedIn profile was updated; and the **GitHub Actions CI deploy is fully live** (both secrets set,
-> deploys green). Details in §6.
+> LinkedIn profile was updated; the **Cadence analog-IC project was removed entirely** (the fab work
+> is under NDA — it cannot be published); and the **GitHub Actions CI deploy is fully live** (both
+> secrets set, deploys green). Details in §6.
 
 ---
 
@@ -44,8 +45,9 @@ the exact tag vocabulary (§4).
 
 ## 2. Project selection
 
-**Nine** project writeups (was eight; Componentbot added to anchor the AI-competency positioning).
-Chosen for distinct skill coverage and strong "what went wrong / how I diagnosed it" narratives.
+**Eight** project writeups (Componentbot added to anchor AI positioning; the Cadence analog-IC
+project was **removed entirely** — the fab work is under NDA and cannot be published). Chosen for
+distinct skill coverage and strong "what went wrong / how I diagnosed it" narratives.
 
 | Slug | One-line description | Flag |
 |------|----------------------|------|
@@ -55,7 +57,6 @@ Chosen for distinct skill coverage and strong "what went wrong / how I diagnosed
 | `dtu-multimeter` | 22-mode digital multimeter on bare-metal AVR (ATmega2560), full analog front-end, MCP3208 ADC, written calibration procedure. | |
 | `ir-blaster` | ESP32 IR blaster as an ESPHome component + a Home Assistant add-on that discovers IR codes from Flipper-IRDB; protocol-encoding debugging. | |
 | `regbot-studio` | Full-stack (FastAPI + React/TS) web GUI for the DTU REGBOT balance robot with live Bode/step/Nyquist simulation; layered backend enforced in CI. | |
-| `cadence-opamp` | Analog IC design (180 nm CMOS, Cadence) with a Git-synced two-user workflow. **Described-only — no repo link** (NDA PDK). | |
 | `pi-zero-pwm-filter` | Early project: Pi Zero Spotify streamer with a Sallen-Key PWM-to-audio filter, characterized with measurements. | |
 | `componentbot` | Grounded local-LLM (Ollama/Llama 3.2) CLI that answers "is this part in stock?" from the real DTU shop inventory. Demonstrates practical LLM engineering. | |
 
@@ -75,6 +76,10 @@ troubleshooting especially highly for this candidate.
 - **`SPICEPilot`** — LLM-for-SPICE research; currently only *mentioned* on the About page, not a
   writeup. Possible next AI page.
 - **`DTU-PCB-prototyping`** — the fiber-laser/CNC PCB-fab guide; linked from `/about`, not a writeup.
+- **`cadence-opamp` (analog IC design)** — **removed entirely and cannot be republished.** The work
+  depends on an NDA-protected foundry PDK; the whole project is under NDA. The old URL
+  `/projects/cadence-opamp` now 301-redirects to `/projects`. Do **not** re-add it. (This removes the
+  site's only analog-IC-design evidence — relevant if the radar sees analog/mixed-signal postings.)
 - **Software dashboards** (`budget-dashboard`, `health-dashboard`, `spotify-addon`,
   `ha-addon-budget-dashboard`) — off-audience + secret-history issues; excluded, not linked.
 - **Excluded outright** — coursework/report repos, `mosen`, `Componentbot`'s sibling utilities, etc.
@@ -85,7 +90,7 @@ Full rationale in `SELECTION-NOTES.md`.
 
 ## 3. Per-project page inventory
 
-All nine pages have **complete written content** (house template: What it is → Problem/motivation →
+All eight pages have **complete written content** (house template: What it is → Problem/motivation →
 Architecture → What went wrong and how it was diagnosed → Results → Tools & skills). None are
 drafts. All are **English-only** and live. Each is blocked only on **media** (photos/diagrams are
 placeholders) and, where noted, a `VERIFY` confirmation.
@@ -100,28 +105,26 @@ URL path pattern: `/projects/<slug>` (see §7). Index sort is by frontmatter `or
 | `dtu-multimeter` | `/projects/dtu-multimeter` | ATmega2560, Bare-metal AVR, Embedded C, KiCad, Analog front-end, SPI, I2C, Measurement | Hero photo, front-end diagram; VERIFY firmware phase (`in-progress`) |
 | `ir-blaster` | `/projects/ir-blaster` | Embedded C++, ESPHome component, ESP32, Python / FastAPI, IR protocols, State machine, SPIFFS, Home Assistant | Hero photo, architecture diagram. Links only the public `ir-remote-wizard`; `ir-blaster-standalone` private w/ secrets (see §5) |
 | `regbot-studio` | `/projects/regbot-studio` | Python / FastAPI, React / TypeScript, Control theory, WebSocket, Async serial, Full-stack, python-control | Hero screenshot/GIF |
-| `cadence-opamp` | `/projects/cadence-opamp` | Cadence Virtuoso, Analog IC design, SKILL, Spectre, Python, Git workflow, 180 nm CMOS | Confidentiality-checked figure; **no repo link by design** (NDA); open question: OK to publish under DTU policy? |
 | `pi-zero-pwm-filter` | `/projects/pi-zero-pwm-filter` | Analog electronics, Filter design, PWM DAC, Op-amp (TL072), Raspberry Pi, Measurement | Hero photo + plots; VERIFY 2 measured numbers |
 | `componentbot` | `/projects/componentbot` | Python, LLM, Ollama, Prompt engineering, RAG / grounding, CLI tool | Terminal-session hero screenshot, optional grounding-pipeline diagram |
 
 **Featured (front page):** `srm-cam` (also **flagship**, shows a `★ flagship` badge), `esp32-reflow-hotplate`,
 `korad-uart-reverse-engineering`. **`status` values:** `working` (srm-cam, korad, ir-blaster,
-regbot-studio, pi-zero, componentbot), `in-progress` (esp32-reflow-hotplate, dtu-multimeter),
-`archived` (cadence-opamp).
+regbot-studio, pi-zero, componentbot), `in-progress` (esp32-reflow-hotplate, dtu-multimeter). (No
+`archived` projects now that Cadence is removed.)
 
 ---
 
 ## 4. Tag vocabulary (exact strings — radar must match verbatim)
 
-The `/projects` filter matches by **exact string** (case/punctuation-sensitive). 55 distinct tags in
-use (5 new since the first report: `CLI tool`, `LLM`, `Ollama`, `Prompt engineering`,
-`RAG / grounding`):
+The `/projects` filter matches by **exact string** (case/punctuation-sensitive). **48 distinct tags**
+in use (the 6 Cadence-only tags — `Cadence Virtuoso`, `Analog IC design`, `SKILL`, `Spectre`,
+`Git workflow`, `180 nm CMOS` — were removed with the Cadence project; no analog-IC-design tags
+remain):
 
 ```
-180 nm CMOS
 3D CAD
 ATmega2560
-Analog IC design
 Analog electronics
 Analog front-end
 Arduino
@@ -129,7 +132,6 @@ Async serial
 Bare-metal AVR
 CLI tool
 CNC / grbl
-Cadence Virtuoso
 Computational geometry
 Control theory
 ESP32
@@ -140,7 +142,6 @@ Embedded C++
 Filter design
 Firmware testing
 Full-stack
-Git workflow
 Home Assistant
 I2C
 IR protocols
@@ -162,12 +163,10 @@ RAG / grounding
 Raspberry Pi
 React / TypeScript
 Reverse engineering
-SKILL
 SPI
 SPIFFS
 Safety
 Safety-critical
-Spectre
 State machine
 UART
 WebSocket
@@ -177,7 +176,7 @@ python-control
 **Radar caveats:**
 - Tags are free-form, not a controlled taxonomy. Treat near-duplicates as synonyms: `ESP32` /
   `ESP32 / ESP-IDF`; `Embedded C` / `Embedded C++`; `Python` / `Python / FastAPI` / `python-control`;
-  `Safety` / `Safety-critical`; `Analog electronics` / `Analog IC design` / `Analog front-end`;
+  `Safety` / `Safety-critical`; `Analog electronics` / `Analog front-end`;
   `LLM` / `Prompt engineering` / `RAG / grounding`.
 - Some evidenced skills are **not** tags (Freerouting, FlatCAM, MAX31855, IPC-2221, MQTT, Docker,
   Git/CI, **hardware debugging/troubleshooting**). The debugging strength in particular lives in the
@@ -193,8 +192,8 @@ python-control
   images** pulled from its repo (GUI, 3D toolpath, bed-leveling, board front/back); branded
   **`og:image`** social-preview card generated and wired up.
 - **Photos to shoot:** one hero per remaining project (reflow hotplate, Korad+AD3, carrier board,
-  multimeter prototype, IR blaster, RegBot screenshot, Cadence figure, Pi-Zero filter+plots,
-  Componentbot terminal session). SRM-CAM no longer needs photos.
+  multimeter prototype, IR blaster, RegBot screenshot, Pi-Zero filter+plots, Componentbot terminal
+  session). SRM-CAM no longer needs photos.
 - **Diagrams (offered as inline SVG, not yet drawn):** SRM-CAM pipeline (optional now), reflow
   power/control, Korad signal chain, multimeter front-end, IR-blaster architecture, Componentbot
   grounding pipeline.
@@ -205,7 +204,6 @@ python-control
 - `esp32-reflow-hotplate` / `dtu-multimeter` — confirm build/firmware status; update `status`.
 - `korad-uart-reverse-engineering` — is the carrier board bench-tested end-to-end?
 - `srm-cam` — scrub local Windows paths from the repo's docs.
-- `cadence-opamp` — confirm publishability under DTU/course policy.
 - **Portrait** — the source JPG has a small "AI-generated content" watermark; it's CSS-cropped out
   (object-position top), but Mads may want to swap in a clean image.
 - Contact block — phone/street address intentionally omitted; email is `mads28122001@hotmail.dk`.
@@ -214,8 +212,9 @@ python-control
 - **LinkedIn** — RESOLVED. Linked site-wide, and the live profile was updated (headline, About,
   5 skills, Featured link → `madsrudolph.dev`, banner image). Note: LinkedIn caches link previews —
   the Featured card's thumbnail may need a re-scrape (Post Inspector) to pick up the new `og:image`.
-- **Cadence publishability** — still open (page is live, described-only, no repo).
-- **RFID cryptanalysis as a 10th writeup** — still open.
+- **Cadence** — RESOLVED: **cannot be published (NDA on the foundry work); the page was removed
+  entirely** and its URL redirects to `/projects`. Do not re-add.
+- **RFID cryptanalysis as an extra writeup** — still open (would be the 9th page).
 - **DDR3 SPD reader** — does not exist in any repo (handoff inventory was stale); dropped.
 - **AD3 overvoltage/golden-board repair story** — not documented in any repo; not written.
 
@@ -263,6 +262,9 @@ python-control
     Open Graph + Twitter Card meta so shared links render a proper card.
 14. **SRM-CAM images** — five real images pulled from the `srm-cam` repo into its writeup (was media
     placeholders).
+15. **Cadence removed (NDA)** — the analog-IC writeup was deleted entirely; the fab work is under NDA
+    and cannot be published. `/projects/cadence-opamp` 301-redirects to `/projects`
+    (`public/_redirects`). This drops the project count to eight and removes all analog-IC-design tags.
 
 Everything else follows the handoff: Astro + content collections, Cloudflare Pages, no
 backend/framework bloat, `/projects/<slug>` URLs, filterable index, front page, About, house template,
@@ -277,8 +279,8 @@ backend/framework bloat, `/projects/<slug>` URLs, filterable index, front page, 
   (`trailingSlash: 'never'`, build `format: 'file'`; Cloudflare serves the clean URL, and
   `.html`/trailing-slash variants redirect/resolve). Link the canonical form.
 - **Slugs (stable):** `srm-cam`, `esp32-reflow-hotplate`, `korad-uart-reverse-engineering`,
-  `dtu-multimeter`, `ir-blaster`, `regbot-studio`, `cadence-opamp`, `pi-zero-pwm-filter`,
-  `componentbot`.
+  `dtu-multimeter`, `ir-blaster`, `regbot-studio`, `pi-zero-pwm-filter`, `componentbot`.
+  (`cadence-opamp` was removed — its URL 301-redirects to `/projects` via `public/_redirects`.)
 - **Other routes:** `/` (home), `/projects` (filterable index), `/about`, `/cv`, `/404`.
 - **Danish routes:** `/da` (home), `/da/about`, `/da/cv`, `/da/projects`. There are **no Danish
   writeup pages** — Danish project cards link to the English `/projects/<slug>`. (Note: with build
@@ -308,7 +310,7 @@ backend/framework bloat, `/projects/<slug>` URLs, filterable index, front page, 
 - Collection in `src/content.config.ts`; one markdown file per project at
   `src/content/projects/<slug>.md` (filename = slug = URL).
 - **Frontmatter schema (build-enforced):** `title`, `summary`, `date`, `tags` (string[] — the radar's
-  match surface), `repo?` (omit for described-only pages like Cadence), `featured` (bool),
+  match surface), `repo?` (optional — omit for a described-only page), `featured` (bool),
   `flagship` (bool — badge), `order` (number, index sort), `status` (`working` | `in-progress` |
   `archived`), optional `hero` / `heroAlt`. `npm run build` validates and fails on schema violations.
 - **i18n:** `src/i18n.ts` holds the chrome string table; `Base.astro` takes `lang` (`'en'|'da'`) and

@@ -20,7 +20,7 @@ handoff's inventory disagreed with what's actually in the repos, the repos decid
 | 4 | `dtu-multimeter` | Bare-metal AVR (no Arduino framework), a real analog front-end, and a written calibration procedure. Honest "in progress" status (≈12/16 firmware phases). Shows measurement-instrument depth. In `personal-projects`. |
 | 5 | `ir-blaster` (standalone + wizard) | Proves firmware architecture beyond sketch level (a real ESPHome component, SPIFFS, async HTTP) plus a stateful Python discovery service. Debugging is all protocol-encoding detail (Samsung32 bit-order + frame format, Sony SIRC repeats, NEC repeat frame). See security note below. |
 | 6 | `regbot-studio` | Full-stack breadth + control-theory depth (live Bode/Nyquist via `python-control`), a strictly layered backend enforced in CI, and disciplined legacy-protocol porting. Public, MIT, clean. |
-| 7 | `cadence-opamp` (described-only, **no repo link**) | Analog IC design exposure (180 nm CMOS, Cadence, SKILL/Spectre) with a genuinely collaborative Git-synced two-user workflow. Valuable for analog/mixed-signal employers (Oticon/Demant, etc.). Repo stays private — see confidentiality note. |
+| ~~7~~ | ~~`cadence-opamp`~~ | **REMOVED — cannot be published.** The analog-IC / Cadence work is under an NDA covering the foundry fabrication. The page was deleted entirely and `/projects/cadence-opamp` now redirects to `/projects`. Do not re-add. |
 | 8 | `pi-zero-pwm-filter` | Deliberately included as an *early* project to show trajectory: analog Sallen-Key filter design where the point is that he measured it (PWM attenuation, ALSA operating point) rather than trusting his ears. In `personal-projects`. |
 
 ### Skill coverage across the eight
@@ -45,8 +45,8 @@ pure app work. More importantly, two have **secret-exposure history** (see below
 **Coursework / reports / exam tools — excluded** (`DTU`, `PWA`/`PWB`/`PWF`, `Measurement-report`,
 `Metaldetektor-Projekt`, `lcd1-solver`, `lcd1-exam-suite`, `block-diagram-reducer`, `REGBOT-Balance-assignment`,
 `Design-af-opamp-analog-ic-2`, `Basic_C_Programming`, `Microcontroller`): LaTeX reports, exam-cram utilities, or
-course dumps without a standalone engineering narrative. `regbot-studio` and `cadence-opamp` already represent
-the control and analog-IC coursework at their strongest.
+course dumps without a standalone engineering narrative. `regbot-studio` represents the control
+coursework at its strongest. (The analog-IC coursework can't be shown — see the NDA note below.)
 
 **`mosen`** — a working Python/Dash bar-inventory app, but it's business software (out of scope) with
 acknowledged open bugs and no hardware. Excluded.
@@ -77,9 +77,10 @@ shipped, but two items need action before the corresponding repos could ever be 
    those banking credentials.** Not linked from this site regardless. (`budget-dashboard` and `health-dashboard`
    are private and currently clean in-tree.)
 
-3. **`cds` (Cadence) must stay private.** It transitively depends on the X-FAB XT018 PDK, which is NDA-protected
-   and licensed to Mads only through DTU, and the Cadence design DB is binary and can't be redacted. The
-   `cadence-opamp` page is **described-only with no repo link** for this reason.
+3. **`cds` (Cadence) — NDA, cannot be published at all.** The work is under an NDA covering the foundry
+   fabrication process, and depends on an NDA-protected foundry PDK licensed only through DTU. The
+   `cadence-opamp` writeup has been **removed entirely** from the site (was previously described-only);
+   its URL 301-redirects to `/projects`. Do not re-publish it in any form.
 
 4. **`srm-cam` — minor:** a few `docs/` and packaging files contain local Windows paths (`C:\Users\Mads2\...`).
    Harmless, but worth a find-and-replace before recruiters read the repo. Flagged with a `VERIFY` comment on
@@ -98,8 +99,8 @@ No secrets were found in `srm-cam`, `esp32-reflow-hotplate`, `regbot-studio`, `i
 1. **Contact details.** The site currently publishes `mads28122001@gmail.com` and the GitHub profile
    (recommended: no phone number). Do you want a **LinkedIn** link added, and is a **dedicated email** (e.g.
    `mads@madsrudolph.dev`) preferred over the Gmail? Placeholders are flagged with `VERIFY` on `/` and `/about`.
-2. **Cadence page.** Are you comfortable publishing even the described-only version given DTU/course policy? If
-   there's any doubt, we can unlist `/projects/cadence-opamp` or cut it.
+2. **Cadence page.** RESOLVED — it's under an NDA covering the foundry work and **cannot be published**;
+   the page has been removed entirely and its URL redirects to `/projects`.
 3. **A DDR3 SPD reader** was in the handoff inventory but **does not exist** in any repo (searched all repos +
    Obsidian notes). Dropped. If it's on a different account or local-only, point me at it.
 4. **The AD3 repair story** (12 V overvoltage + golden-board comparison) mentioned in the handoff **isn't

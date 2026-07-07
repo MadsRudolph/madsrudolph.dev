@@ -39,9 +39,6 @@ Once a photo is shot, drop it in `public/media/<slug>/` and replace the matching
 ### regbot-studio
 - [ ] **HERO** — a screenshot of the UI: the Control tab with a live Bode plot, or the drag-and-drop mission builder. A short screen-recording GIF would be even better.
 
-### cadence-opamp
-- [ ] **FIGURE** — an op-amp schematic or a DC-sweep characterization plot from Virtuoso. **Confidentiality check first:** must contain no X-FAB PDK-confidential detail. If in doubt, a hand-drawn block diagram is safer.
-
 ### pi-zero-pwm-filter
 - [ ] **HERO** — the protoboard filter next to the Pi Zero, plus one measured frequency-response capture.
 - [ ] The saved **left/right channel** and **filter-response** plots you referenced.
@@ -71,7 +68,6 @@ docs/commits and should be confirmed against reality before you send the link to
 - [ ] **dtu-multimeter** — confirm the firmware phase count (~12/16) and what's actually measured/working on hardware vs. designed-only, so Results doesn't overstate. Update `status:` if needed.
 - [ ] **korad-uart-reverse-engineering** — has the carrier board been fabricated and tested end-to-end (ESP ↔ PSU ↔ Home Assistant), or is it still at the production-files stage? Adjust wording + `status:`.
 - [ ] **srm-cam** — scrub local Windows paths (`C:\Users\Mads2\...`) from the repo's `docs/` and packaging files before recruiters read it. Then this writeup's VERIFY note can be removed.
-- [ ] **cadence-opamp** — confirm you're comfortable publishing the described-only version under DTU/course policy. If not, unlist or cut the page.
 - [ ] **Contact details** (front page + `/about`) — confirm the email to publish and whether to add LinkedIn. See open questions in `SELECTION-NOTES.md`.
 
 ## Security actions (from the audit — do these before the related links go public)
