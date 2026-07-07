@@ -11,6 +11,7 @@ repo: 'https://github.com/Skab101/REGBOT-Balance'
 featured: true
 order: 1.5
 status: working
+kind: coursework
 hero: '/media/regbot/robot-hero.jpg'
 heroAlt: 'The REGBOT two-wheeled self-balancing robot balancing upright on the lab floor'
 ---

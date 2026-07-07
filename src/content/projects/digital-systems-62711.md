@@ -11,6 +11,7 @@ repo: 'https://github.com/Skab101/Design-of-digital-systems-62711'
 featured: false
 order: 11
 status: working
+kind: coursework
 ---
 
 ## What it is

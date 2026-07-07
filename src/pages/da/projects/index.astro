@@ -39,12 +39,20 @@ const shownCategories = categories.filter((c) => used.has(c.key));
         </button>
       ))
     }
+    <span class="filter-sep" aria-hidden="true"></span>
+    <button type="button" data-tag="personal" aria-pressed="false">Personlige</button>
+    <button type="button" data-tag="coursework" aria-pressed="false">Kursusprojekter</button>
   </div>
 
   <ul class="project-list" id="project-list">
     {
       projects.map((project, i) => (
-        <ProjectCard project={project} index={i} lang="da" filterTags={projectCategoryKeys(project.data.tags)} />
+        <ProjectCard
+          project={project}
+          index={i}
+          lang="da"
+          filterTags={[...projectCategoryKeys(project.data.tags), project.data.kind]}
+        />
       ))
     }
   </ul>

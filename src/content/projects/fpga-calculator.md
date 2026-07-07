@@ -11,6 +11,7 @@ repo: 'https://github.com/Skab101/FPGA_Calculator'
 featured: false
 order: 13
 status: working
+kind: coursework
 ---
 
 ## What it is

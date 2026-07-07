@@ -11,6 +11,7 @@ repo: 'https://github.com/Skab101/34621-Metal-Detector'
 featured: true
 order: 1.75
 status: working
+kind: coursework
 hero: '/media/metal-detector/hero-photo.jpg'
 heroAlt: 'The finished metal detector held outdoors — yellow 3D-printed control housing with visible electronics, wooden shaft, and concentric coil head on frosty grass'
 ---

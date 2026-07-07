@@ -637,6 +637,14 @@ pre code {
   font-weight: 600;
 }
 
+/* divider between the skill filters and the project-type filters */
+.filter-bar .filter-sep {
+  width: 1px;
+  align-self: stretch;
+  background: var(--rule);
+  margin: 0.1rem 0.3rem;
+}
+
 /* ---------- article (writeups) ---------- */
 
 article.writeup {

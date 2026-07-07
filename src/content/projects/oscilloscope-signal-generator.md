@@ -11,6 +11,7 @@ repo: 'https://github.com/Skab101/Oscilloscope_Project'
 featured: false
 order: 12
 status: working
+kind: coursework
 hero: '/media/oscilloscope/combined.png'
 heroAlt: 'LabVIEW oscilloscope display showing a captured sine wave with the generator signal overlaid'
 ---

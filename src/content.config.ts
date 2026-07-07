@@ -16,6 +16,8 @@ const projects = defineCollection({
     /** Sort key on the index page; lower comes first. */
     order: z.number().default(99),
     status: z.enum(['working', 'in-progress', 'archived']).default('working'),
+    /** Whether it's a DTU course/group project or a personal one — used by the index filter. */
+    kind: z.enum(['personal', 'coursework']).default('personal'),
     hero: z.string().optional(),
     heroAlt: z.string().optional(),
   }),
