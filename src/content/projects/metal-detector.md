@@ -45,11 +45,6 @@ This was a group project — the four of us built it together, across the DSP fi
 <figcaption>The signal chain: the MCU drives the TX coil through an H-bridge; the target re-radiates the field into the RX coil, which is amplified, sampled, and reduced to a phase by a single-bin DFT before filtering and the OLED/buzzer.</figcaption>
 </figure>
 
-<figure>
-  <img src="/media/metal-detector/dft-phasor.png" alt="Phasor plot of the single-bin DFT output showing amplitude and phase of the received signal" width="782" height="782" />
-  <figcaption>The single-bin DFT gives the received signal as a phasor — amplitude and phase. The phase angle is what separates ferrous from non-ferrous metal.</figcaption>
-</figure>
-
 ## The hard parts
 
 The whole detector lives or dies on two things, and neither is in the textbook:
@@ -80,6 +75,13 @@ A functioning detector that responds to metal and separates ferrous from non-fer
 <figure>
   <img src="/media/metal-detector/pcb.png" alt="One of the project's custom KiCad PCBs" width="978" height="848" />
   <figcaption>One of the custom KiCad boards for the detector's analog front end.</figcaption>
+</figure>
+
+Because a detector is only useful if it runs in the field, we designed the power path for endurance rather than raw drive. The MCU sleeps between DFT windows instead of busy-waiting, and the coil is driven by an efficient MOSFET H-bridge (IRF5305 / IRL530) rather than a lossy linear stage — so most of the battery's energy goes into the transmit field, not into heat. A bench discharge test confirmed it: **~164 minutes (2 h 44 m) of continuous operation** on a single charge, the pack sagging only from 8.88 V to 7.76 V and never nearing the 6.0 V cut-off.
+
+<figure>
+  <img src="/media/metal-detector/battery-discharge.jpg" alt="Battery discharge test plot showing pack voltage falling gently from 8.88 V to 7.76 V over 164 minutes, well above the 6.0 V threshold" width="1400" height="871" />
+  <figcaption>Battery discharge test — 164 min of runtime with the pack sagging just 1.1 V (6.8 mV/min) and staying comfortably above the 6.0 V cut-off. MCU sleep between DFT windows plus an efficient H-bridge coil driver are what buy the endurance.</figcaption>
 </figure>
 
 Full write-up in the [project report](https://github.com/Skab101/34621-Metal-Detector) (repo), with the KiCad hardware, LTspice/QSPICE validation, and MATLAB/Python analysis alongside the firmware.
