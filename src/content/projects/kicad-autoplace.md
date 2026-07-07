@@ -8,7 +8,7 @@ summary: >-
 date: 2026-07-03
 tags: ['Python', 'Electron', 'KiCad', 'PCB automation', 'FreeRouting', 'Simulated annealing', 'Desktop app']
 repo: 'https://github.com/DTU-EKB/KiCad-Autoplace'
-featured: false
+featured: true
 order: 1.9
 status: working
 hero: '/media/kicad-autoplace/gui.jpg'
@@ -69,9 +69,9 @@ The point of all this is a board you can actually make. Here's the same design i
 </figure>
 
 <figure>
-  <div class="img-pair">
-    <img src="/media/kicad-autoplace/board-front.jpg" alt="The bare CNC-milled board, front copper" width="417" height="598" />
-    <img src="/media/kicad-autoplace/board-back.jpg" alt="The bare CNC-milled board, back copper" width="426" height="586" />
+  <div class="board-photos">
+    <img src="/media/kicad-autoplace/board-front.png" alt="The bare CNC-milled board, front copper" width="417" height="598" />
+    <img src="/media/kicad-autoplace/board-back.png" alt="The bare CNC-milled board, back copper" width="426" height="586" />
   </div>
   <figcaption>The real CNC-milled board straight off the pipeline — front and back copper, not yet populated.</figcaption>
 </figure>

@@ -640,6 +640,30 @@ article.writeup .img-pair img {
   }
 }
 
+/* transparent product photos (no border/box) side by side */
+article.writeup .board-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: center;
+  justify-items: center;
+}
+
+article.writeup .board-photos img {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  width: auto;
+  max-width: 100%;
+  max-height: 420px;
+}
+
+@media (max-width: 480px) {
+  article.writeup .board-photos {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* two landscape figures side by side (no forced crop) */
 article.writeup .fig-row {
   display: grid;
