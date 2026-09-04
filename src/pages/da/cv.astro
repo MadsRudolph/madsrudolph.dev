@@ -29,6 +29,16 @@ const projects = [
     ],
   },
   {
+    name: 'Sub-crossover — målt line-level lavpas til et Bose basmodul',
+    href: '/projects/bose-sub-crossover',
+    kind: 'Solo · bring-up i gang',
+    bullets: [
+      'Karakteriserede modulet før design: 8,9 kΩ aux-indgang, 0 ms latenstid og et 63–203 Hz båndpas, som skrottede det planlagte 50 Hz Linkwitz-Riley og flyttede delefrekvensen til 85–190 Hz.',
+      'Designede et monosummerende Sallen-Key-lavpas på én TL074 med tre omskiftelige knækfrekvenser, alle dele fra DTU’s lager; fangede en manglende DC-biasvej og et 6 V udgangsoffset i review.',
+      'Scriptet, gate-baseret bring-up på en Analog Discovery 3: tre knækfrekvenser inden for 0,2 dB af modellen, 58 µV rms støj (begrænset af instrumentet), 3,52 V rms ind før 1 % THD; en fittet kondensatormodel forudsagde ikke-målte indstillinger til 0,7 %.',
+    ],
+  },
+  {
     name: 'Korad KD3005D — skjult UART reverse-engineeret',
     href: '/projects/korad-uart-reverse-engineering',
     kind: 'Solo',

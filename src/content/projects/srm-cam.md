@@ -13,8 +13,8 @@ featured: true
 flagship: true
 order: 1
 status: working
-hero: '/media/srm-cam/gui2-traces.png'
-heroAlt: 'SRM-CAM v0.5 — the run plan down the left rail, the machine bed with a board and its isolation toolpaths in the middle, and the selected step’s parameters on the right'
+hero: '/media/srm-cam/board-front.jpg'
+heroAlt: 'A double-sided PCB milled on the SRM-20, held to the light'
 ---
 
 <figure>

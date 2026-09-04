@@ -89,6 +89,8 @@ for (const repo of [...repos].sort()) {
   const NON_CODE = new Set([
     'HTML', 'CSS', 'SCSS', 'Less', 'TeX', 'Makefile', 'CMake', 'Batchfile',
     'Dockerfile', 'Roff', 'Shell', 'PowerShell', 'Jupyter Notebook',
+    // Linguist reads .nc G-code files as nesC; those are mill outputs, not code.
+    'nesC',
   ]);
   let language = meta.language ?? null;
   try {

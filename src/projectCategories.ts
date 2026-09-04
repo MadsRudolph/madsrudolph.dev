@@ -18,8 +18,16 @@ export const categories: Category[] = [
     da: 'PCB & fremstilling',
     tags: [
       'KiCad', 'PCB design', 'PCB automation', 'CNC / grbl', 'FreeRouting',
-      'Power electronics', 'Analog electronics', 'Analog front-end', 'Op-amp (TL072)',
-      'PWM DAC', 'Filter design', '3D CAD', 'Delta-sigma ADC', 'SPICE', 'Audio',
+      'Power electronics', '3D CAD',
+    ],
+  },
+  {
+    key: 'audio',
+    en: 'Audio & analog',
+    da: 'Audio & analog',
+    tags: [
+      'Audio', 'Analog electronics', 'Analog front-end', 'Op-amp (TL072)', 'Filter design',
+      'Delta-sigma ADC', 'SPICE', 'PWM DAC', 'Measurement',
     ],
   },
   {

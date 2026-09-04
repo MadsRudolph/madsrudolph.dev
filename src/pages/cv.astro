@@ -30,6 +30,16 @@ const projects = [
     ],
   },
   {
+    name: 'Sub crossover — measured line-level low-pass for a Bose bass module',
+    href: '/projects/bose-sub-crossover',
+    kind: 'Solo · bring-up in progress',
+    bullets: [
+      'Characterised the module before designing: 8.9 kΩ aux input, 0 ms latency, and a 63–203 Hz bandpass that killed the planned 50 Hz Linkwitz-Riley and moved the crossover to 85–190 Hz.',
+      'Designed a mono-summing Sallen-Key low-pass on one TL074 with three switched corners, every part from the DTU shop; caught a missing DC bias path and a 6 V output offset in review.',
+      'Scripted, gated bring-up on an Analog Discovery 3: three corners within 0.2 dB of the as-built model, 58 µV rms noise (instrument-limited), 3.52 V rms in before 1% THD; a fitted capacitor model predicted held-out settings to 0.7%.',
+    ],
+  },
+  {
     name: 'Korad KD3005D — hidden UART reverse-engineered',
     href: '/projects/korad-uart-reverse-engineering',
     kind: 'Solo',
