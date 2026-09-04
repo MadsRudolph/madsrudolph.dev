@@ -12,6 +12,7 @@ export const ui = {
     navCourses: 'Courses',
     footerLoc: 'Kgs. Lyngby, Denmark',
     footerTag: 'static site, no trackers',
+    available: 'Available Jan 2027',
   },
   da: {
     navProjects: 'Projekter',
@@ -20,5 +21,6 @@ export const ui = {
     navCourses: 'Kurser',
     footerLoc: 'Kgs. Lyngby, Danmark',
     footerTag: 'statisk side, ingen sporing',
+    available: 'Ledig jan. 2027',
   },
 } as const;

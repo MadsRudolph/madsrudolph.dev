@@ -24,7 +24,7 @@ const dateLabel = date.toLocaleDateString('en-GB', { year: 'numeric', month: 'lo
     <span class="label">Project · {dateLabel} · {status.replace('-', ' ')}</span>
     <h1>{title}</h1>
     <p class="lede">{summary}</p>
-    <div class="tags" style="display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.75rem;">
+    <div class="tags">
       {tags.map((tag) => <span class="tag">{tag}</span>)}
     </div>
   </div>
@@ -35,6 +35,5 @@ const dateLabel = date.toLocaleDateString('en-GB', { year: 'numeric', month: 'lo
     <Content />
   </article>
 
-  <hr />
-  <p><a href="/projects">← All projects</a></p>
+  <p><a class="back-link" href="/projects">← All projects</a></p>
 </Base>

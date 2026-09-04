@@ -41,7 +41,7 @@ const idx = typeof index === 'number' ? String(index + 1).padStart(2, '0') : nul
   }
   <div class="meta">
     {idx && <span class="idx">{idx}</span>}
-    {flagship && <span class="flag">★ {flagshipLabel}</span>}
+    {flagship && <span class="flag">{flagshipLabel}</span>}
     <span class="label">{dateLabel}</span>
     <span class="spacer"></span>
     <span class="status" data-status={status}>

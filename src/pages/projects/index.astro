@@ -42,7 +42,7 @@ const shownCategories = categories.filter((c) => used.has(c.key));
     <button type="button" data-tag="coursework" aria-pressed="false">Coursework</button>
   </div>
 
-  <ul class="project-list" id="project-list">
+  <ul class="project-list rows" id="project-list">
     {
       projects.map((project, i) => (
         <ProjectCard

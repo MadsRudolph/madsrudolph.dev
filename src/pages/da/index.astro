@@ -15,63 +15,96 @@ const featured = projects
   description="Portfolio for Mads Rudolph: PCB-design, embedded firmware og fejlfinding på elektronik. Søger ingeniørpraktik fra januar 2027."
   lang="da"
   altUrl="/"
+  wide
 >
   <section class="hero">
-    <h1>Mads Rudolph<span class="accent">.</span><span class="caret" aria-hidden="true"></span></h1>
-
-    <div class="signal" aria-hidden="true">
-      <svg viewBox="0 0 2400 80" preserveAspectRatio="none" role="presentation">
-        <path
-          class="signal-line"
-          d="M0,40 Q75,16 150,40 Q225,64 300,40 Q375,16 450,40 Q525,64 600,40 Q675,16 750,40 Q825,64 900,40 Q975,16 1050,40 Q1125,64 1200,40 Q1275,16 1350,40 Q1425,64 1500,40 Q1575,16 1650,40 Q1725,64 1800,40 Q1875,16 1950,40 Q2025,64 2100,40 Q2175,16 2250,40 Q2325,64 2400,40"
-        />
-      </svg>
+    <p class="label eyebrow">Elektroteknologi · DTU · København</p>
+    <h1>Jeg bygger og fejlfinder rigtig hardware<span class="accent">.</span></h1>
+    <p class="lede">
+      PCB-design og -fremstilling, embedded firmware og fejlfinding på bænken. Hvert projekt er
+      beskrevet på samme måde: hvad det er, hvordan det er bygget, hvad der gik galt, og hvordan
+      jeg fandt fejlen.
+    </p>
+    <div class="hero-actions">
+      <a href="/da/projects" class="btn primary">Se projekterne</a>
+      <a href="mailto:mads28122001@hotmail.dk" class="btn secondary">Skriv til mig</a>
+      <a href="/da/cv" class="btn text">Læs CV'et →</a>
     </div>
 
-    <p class="status-line">
-      <span class="dot" aria-hidden="true"></span>
-      søger praktik fra jan. 2027 · åben for studiejob
-    </p>
+    <dl class="facts">
+      <div>
+        <dt>Søger</dt>
+        <dd>Praktik fra jan. 2027<small>og studiejob ved siden af</small></dd>
+      </div>
+      <div>
+        <dt>Studerer</dt>
+        <dd>Diplomingeniør, Elektroteknologi<small>DTU · 5. semester · 110 ECTS</small></dd>
+      </div>
+      <div>
+        <dt>Bedst til</dt>
+        <dd>Fejlfinding på hardware<small>at finde ud af, hvorfor det ikke virker</small></dd>
+      </div>
+      <div>
+        <dt>Retning</dt>
+        <dd>Audio- og analog hardware<small>DSP, elektroakustik, mixed-signal</small></dd>
+      </div>
+    </dl>
 
-    <ul class="specs">
-      <li><b>DTU</b> · Elektroteknologi (diploming.)</li>
-      <li>PCB · Embedded · Fejlfinding</li>
-      <li><b>AI</b> i loopet</li>
-      <li>Kgs. Lyngby, DK</li>
-    </ul>
-
-    <p>
-      Jeg er diplomingeniørstuderende i Elektroteknologi på DTU, og jeg bygger og fejlfinder rigtig
-      hardware: printplader designet i KiCad og fremstillet på mit eget fiberlaser- og CNC-workflow,
-      ESP32-firmware der kører i månedsvis, og laboratorieværktøj bygget, når det rette instrument
-      ikke fandtes. Jeg arbejder hurtigt — ofte med AI i loopet som ingeniørværktøj — og verificerer
-      alt med tests og på bænken. Denne side er beviset: hvert projekt linker til sit repository, og
-      hver beskrivelse fortæller, hvad der gik galt, og hvordan jeg fandt fejlen.
+    <p class="dansk" lang="en">
+      Project write-ups are in English. The rest of the site is available in both languages.
     </p>
   </section>
 
-  <div class="home-stats">
-    <div class="stat"><span class="n">{projects.length}</span><span class="l">projekter</span></div>
-    <div class="stat"><span class="n">110</span><span class="l">ECTS gennemført</span></div>
-    <div class="stat"><span class="n">5.</span><span class="l">semester · DTU</span></div>
-    <div class="stat"><span class="n">jan. 2027</span><span class="l">praktik ledig</span></div>
+  <div class="section-head">
+    <h2>Udvalgte projekter<span class="count">{String(featured.length).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</span></h2>
+    <a href="/da/projects">Alle {projects.length} projekter →</a>
   </div>
-
-  <div class="section-rule"><span class="label">Udvalgte projekter</span></div>
-  <ul class="project-list">
+  <ul class="project-list grid">
     {featured.map((project, i) => <ProjectCard project={project} index={i} lang="da" image />)}
   </ul>
-  <p style="margin-top: 1.25rem;">
-    <a href="/da/projects">Alle projekter →</a>
-  </p>
-  <p style="color: var(--muted); font-size: 0.9rem;">
-    De uddybende projektbeskrivelser er på engelsk.
-  </p>
 
-  <div class="section-rule"><span class="label">Kontakt</span></div>
-  <p>
-    E-mail: <a href="mailto:mads28122001@hotmail.dk">mads28122001@hotmail.dk</a> ·
-    GitHub: <a href="https://github.com/MadsRudolph">MadsRudolph</a> ·
-    <a href="https://www.linkedin.com/in/mads-rudolph-65103a178/">LinkedIn</a>
-  </p>
+  <div class="section-head">
+    <h2>Det jeg laver</h2>
+  </div>
+  <div class="skills-matrix">
+    <div class="skill-category">
+      <h3>Hardware &amp; print</h3>
+      <ul>
+        <li>KiCad skema og layout</li>
+        <li>Fiberlaser- og CNC-fremstilling</li>
+        <li>Analoge og digitale kredsløb</li>
+        <li>Effektelektronik</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <h3>Firmware &amp; software</h3>
+      <ul>
+        <li>C / C++ på ESP32 og AVR</li>
+        <li>Python-værktøj og desktop-apps</li>
+        <li>Digital signalbehandling</li>
+        <li>Testdrevet, AI-assisteret udvikling</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <h3>Bænk &amp; fejlfinding</h3>
+      <ul>
+        <li>Oscilloskop og logikanalysator</li>
+        <li>Reverse engineering af protokoller</li>
+        <li>Hardware/firmware-integration</li>
+        <li>Fejldiagnose, skrevet ned</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-head">
+    <h2>Kontakt</h2>
+  </div>
+  <div class="contact-block">
+    <a class="big" href="mailto:mads28122001@hotmail.dk">mads28122001@hotmail.dk</a>
+    <div class="links">
+      <a href="https://github.com/MadsRudolph">GitHub</a>
+      <a href="https://www.linkedin.com/in/mads-rudolph-65103a178/">LinkedIn</a>
+      <span class="label">Kgs. Lyngby, Danmark</span>
+    </div>
+  </div>
 </Base>

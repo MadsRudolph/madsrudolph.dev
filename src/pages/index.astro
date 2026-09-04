@@ -15,101 +15,97 @@ const featured = projects
   description="Portfolio of Mads Rudolph: PCB design, embedded firmware, and electronics debugging. Seeking an engineering internship (praktik) from January 2027."
   lang="en"
   altUrl="/da"
+  wide
 >
   <section class="hero">
-    <h1>Mads Rudolph<span class="accent">.</span><span class="caret" aria-hidden="true"></span></h1>
-
-    <div class="signal" aria-hidden="true">
-      <svg viewBox="0 0 2400 80" preserveAspectRatio="none" role="presentation">
-        <path
-          class="signal-line"
-          d="M0,40 Q75,16 150,40 Q225,64 300,40 Q375,16 450,40 Q525,64 600,40 Q675,16 750,40 Q825,64 900,40 Q975,16 1050,40 Q1125,64 1200,40 Q1275,16 1350,40 Q1425,64 1500,40 Q1575,16 1650,40 Q1725,64 1800,40 Q1875,16 1950,40 Q2025,64 2100,40 Q2175,16 2250,40 Q2325,64 2400,40"
-        />
-      </svg>
-    </div>
-
-    <p class="status-line">
-      <span class="dot" aria-hidden="true"></span>
-      seeking praktik from Jan 2027 · open to student jobs
+    <p class="label eyebrow">Electrical engineering · DTU · Copenhagen</p>
+    <h1>I build and debug real hardware<span class="accent">.</span></h1>
+    <p class="lede">
+      PCB design and fabrication, embedded firmware, and bench debugging. Every project here is
+      written up the same way: what it is, how it's built, what went wrong, and how I found out.
     </p>
-
-    <ul class="specs">
-      <li><b>DTU</b> · Elektroteknologi (B.Eng.)</li>
-      <li>PCB · Embedded · Debugging</li>
-      <li><b>AI</b> in the loop</li>
-      <li>Kgs. Lyngby, DK</li>
-    </ul>
-
-    <div class="hero-summary">
-      <p>I build and debug real hardware. This site is the evidence:</p>
-      <ul class="hero-bullets">
-        <li><strong>PCB Design & Fabrication:</strong> From KiCad to my own CNC/fiber-laser workflow.</li>
-        <li><strong>Embedded Firmware:</strong> C/C++ on ESP32 that runs for months.</li>
-        <li><strong>Bench Verification:</strong> Every project details the bugs, the tools, and the fix.</li>
-      </ul>
-      <div class="hero-actions">
-        <a href="/cv" class="btn primary">View Full CV</a>
-        <a href="mailto:mads28122001@hotmail.dk" class="btn secondary">Email Me</a>
-      </div>
+    <div class="hero-actions">
+      <a href="/projects" class="btn primary">See the work</a>
+      <a href="mailto:mads28122001@hotmail.dk" class="btn secondary">Email me</a>
+      <a href="/cv" class="btn text">Read the CV →</a>
     </div>
 
-    <p class="dansk" lang="da" style="margin-top: 1.5rem;">
+    <dl class="facts">
+      <div>
+        <dt>Looking for</dt>
+        <dd>Praktik from Jan 2027<small>and student jobs alongside</small></dd>
+      </div>
+      <div>
+        <dt>Studying</dt>
+        <dd>B.Eng. Elektroteknologi<small>DTU · 5th semester · 110 ECTS</small></dd>
+      </div>
+      <div>
+        <dt>Best at</dt>
+        <dd>Hardware troubleshooting<small>finding out why it doesn't work</small></dd>
+      </div>
+      <div>
+        <dt>Direction</dt>
+        <dd>Audio &amp; analog hardware<small>DSP, electroacoustics, mixed-signal</small></dd>
+      </div>
+    </dl>
+
+    <p class="dansk" lang="da">
       Jeg er diplomingeniørstuderende i Elektroteknologi på DTU og søger praktikplads fra januar
-      2027 samt studiejob inden for elektronik og embedded udvikling. Skriv gerne på engelsk
-      eller dansk.
+      2027 samt studiejob inden for elektronik og embedded udvikling. Skriv gerne på engelsk eller
+      dansk.
     </p>
   </section>
 
-  <div class="home-stats">
-    <div class="stat"><span class="n">{projects.length}</span><span class="l">projects</span></div>
-    <div class="stat"><span class="n">110</span><span class="l">ECTS completed</span></div>
-    <div class="stat"><span class="n">5th</span><span class="l">semester · DTU</span></div>
-    <div class="stat"><span class="n">Jan 2027</span><span class="l">praktik available</span></div>
+  <div class="section-head">
+    <h2>Selected work<span class="count">{String(featured.length).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</span></h2>
+    <a href="/projects">All {projects.length} projects →</a>
   </div>
-
-  <div class="section-rule"><span class="label">Hardware Toolbox</span></div>
-  <div class="skills-matrix">
-    <div class="skill-category">
-      <h3>Hardware & PCBs</h3>
-      <ul>
-        <li>KiCad (Schematic & Layout)</li>
-        <li>Fiber Laser & CNC Fab</li>
-        <li>Analog & Digital Circuits</li>
-        <li>Power Electronics</li>
-      </ul>
-    </div>
-    <div class="skill-category">
-      <h3>Firmware & Software</h3>
-      <ul>
-        <li>C / C++ (Embedded)</li>
-        <li>ESP32 / ESP-IDF</li>
-        <li>Python</li>
-        <li>Digital Signal Processing</li>
-      </ul>
-    </div>
-    <div class="skill-category">
-      <h3>Bench & Debugging</h3>
-      <ul>
-        <li>Oscilloscopes & Logic Analyzers</li>
-        <li>Protocol Reverse Engineering</li>
-        <li>Hardware/Firmware Integration</li>
-        <li>Failure Diagnosis</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="section-rule"><span class="label">Featured projects</span></div>
-  <ul class="project-list">
+  <ul class="project-list grid">
     {featured.map((project, i) => <ProjectCard project={project} index={i} image />)}
   </ul>
-  <p style="margin-top: 1.25rem;">
-    <a href="/projects">All projects →</a>
-  </p>
 
-  <div class="section-rule"><span class="label">Contact</span></div>
-  <p>
-    Email: <a href="mailto:mads28122001@hotmail.dk">mads28122001@hotmail.dk</a> ·
-    GitHub: <a href="https://github.com/MadsRudolph">MadsRudolph</a> ·
-    <a href="https://www.linkedin.com/in/mads-rudolph-65103a178/">LinkedIn</a>
-  </p>
+  <div class="section-head">
+    <h2>What I do</h2>
+  </div>
+  <div class="skills-matrix">
+    <div class="skill-category">
+      <h3>Hardware &amp; PCBs</h3>
+      <ul>
+        <li>KiCad schematic and layout</li>
+        <li>Fiber-laser and CNC fabrication</li>
+        <li>Analog and digital circuits</li>
+        <li>Power electronics</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <h3>Firmware &amp; software</h3>
+      <ul>
+        <li>C / C++ on ESP32 and AVR</li>
+        <li>Python tooling and desktop apps</li>
+        <li>Digital signal processing</li>
+        <li>Test-driven, AI-assisted development</li>
+      </ul>
+    </div>
+    <div class="skill-category">
+      <h3>Bench &amp; debugging</h3>
+      <ul>
+        <li>Oscilloscope and logic analyzer</li>
+        <li>Protocol reverse engineering</li>
+        <li>Hardware / firmware integration</li>
+        <li>Failure diagnosis, written down</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-head">
+    <h2>Contact</h2>
+  </div>
+  <div class="contact-block">
+    <a class="big" href="mailto:mads28122001@hotmail.dk">mads28122001@hotmail.dk</a>
+    <div class="links">
+      <a href="https://github.com/MadsRudolph">GitHub</a>
+      <a href="https://www.linkedin.com/in/mads-rudolph-65103a178/">LinkedIn</a>
+      <span class="label">Kgs. Lyngby, Denmark</span>
+    </div>
+  </div>
 </Base>

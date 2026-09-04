@@ -1,9 +1,8 @@
 ---
-import '@fontsource/ibm-plex-sans/400.css';
-import '@fontsource/ibm-plex-sans/600.css';
+import '@fontsource-variable/archivo/index.css';
+import '@fontsource-variable/space-grotesk/index.css';
 import '@fontsource/ibm-plex-mono/400.css';
 import '@fontsource/ibm-plex-mono/500.css';
-import '@fontsource/ibm-plex-mono/600.css';
 import '../styles/global.css';
 import { ui, type Lang } from '../i18n';
 
@@ -48,7 +47,7 @@ const year = new Date().getFullYear();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0d1014" />
+    <meta name="theme-color" content="#0f1012" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -83,6 +82,10 @@ const year = new Date().getFullYear();
               ))
             }
           </nav>
+          <a class="header-cta" href="mailto:mads28122001@hotmail.dk">
+            <span class="marker" aria-hidden="true"></span>
+            {t.available}
+          </a>
           <div class="lang-toggle" aria-label="Language">
             {
               lang === 'en' ? (
@@ -115,9 +118,5 @@ const year = new Date().getFullYear();
         </span>
       </div>
     </footer>
-    <a href="mailto:mads28122001@hotmail.dk" class="floating-badge">
-      <span class="pulse"></span>
-      Available for Jan 2027 Praktik
-    </a>
   </body>
 </html>
