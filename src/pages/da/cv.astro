@@ -1,129 +1,224 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { coursework, ectsOf } from '../../data/courses';
 
-const experience = [
+const projectCount = (await getCollection('projects')).length;
+const ects = ectsOf(coursework.da.completed);
+
+// Projekter som erfaring. Alle tal er taget fra den linkede projektside.
+const projects = [
   {
-    role: 'Tjener',
-    org: "Hotel D'Angleterre",
-    place: 'København',
-    period: 'Dec. 2024 — nu',
-    notes:
-      'Service i højt tempo på højt niveau. Fuldt fleksible vagter, bevidst holdt på deltid, så studie og teknisk arbejde er førsteprioritet.',
+    name: 'SRM-CAM — CAM-værktøj til en Roland SRM-20 printfræser',
+    href: '/projects/srm-cam',
+    kind: 'Solo · i daglig brug på DTU Ballerups fab lab',
+    bullets: [
+      'Fandt årsagen til at fræsede baner sprang kobber over på et print med 130 µm bue: en 3-punkts rutine kunne kun fitte et plan. Erstattet med et målt gitter og bilineær nivellering, så hvert Z følger den rigtige overflade.',
+      'Reverse-engineerede fræserens SPI-fjernstik med en Arduino: gennemgik Rolands bibliotek (5 af 17 kommandoer i brug, 1 af 64 statusbits læst), afkodede hele statusordet og tilføjede et STOP, der afbryder en bevægelse undervejs.',
+      'Dobbeltsidet registrering under 0,1 mm efter vending via en fit-test-coupon til kompensation af styrehuller; 374 commits, ~1.000 tests, Windows-installer og Linux-AppImage bygget i CI.',
+    ],
   },
-  { role: 'Bartender / tjener', org: 'Visselulles Vinbar', place: 'Sønderborg', period: 'Maj 2023 — aug. 2024' },
-  { role: 'Kok', org: 'Mommark Marina', place: 'Mommark', period: 'Juni 2021 — juni 2024' },
-  { role: 'Skiinstruktør', org: 'Sun Peaks Resort', place: 'British Columbia, Canada', period: 'Dec. 2022 — apr. 2023' },
-  { role: 'Produktionsmedarbejder', org: 'JKS (hos Danfoss)', place: 'Nordborg', period: 'Aug. 2022 — nov. 2023' },
+  {
+    name: 'Vinyl ADC — diskret 3.-ordens delta-sigma audio-ADC',
+    href: '/projects/vinyl-adc',
+    kind: 'Solo · i gang, printene fræses',
+    bullets: [
+      'Designede en stereo 48 kHz-konverter af TL07x-operationsforstærkere, en LM311 og 74HC-logik, dimensioneret efter DTU’s komponentlager: 1,536 MHz clock, OSR 32, ~68 dB SNR i simulering.',
+      'SPICE fangede en ladningspumpe tegnet omvendt (−5 V-skinnen simulerede til +3,4 V), som alle forbindelsestjek havde godkendt; viste at komparatorens forsinkelse, ikke op-amp-båndbredden, begrænser clocken.',
+      'Delte ét uroutbart enkeltsidet print (45 trådbroer) op i fire fræsede print med et script, der beviser at opdelingen matcher reference-netlisten.',
+    ],
+  },
+  {
+    name: 'Korad KD3005D — skjult UART reverse-engineeret',
+    href: '/projects/korad-uart-reverse-engineering',
+    kind: 'Solo',
+    bullets: [
+      'Fandt det ubestykkede fjernstik på en laboratorieforsyning og afkodede protokollen med en logikanalysator: 9600 8N1, poll-only ASCII, 100–200 ms mellem kommandoer.',
+      'Fangede en flydende stel med et multimeter, før den ødelagde hardware, og designede et isolationssikkert ESP32-bæreprint (ERC-rent, Gerber-filer eksporteret til fiberlaser-ætsning).',
+    ],
+  },
+  {
+    name: 'VLF-metaldetektor — DFT-fasedetektion på ATmega328P',
+    href: '/projects/metal-detector',
+    kind: 'Gruppe på 4 · DTU 34621',
+    bullets: [
+      'Enkelt-bin DFT på 8 kHz kohærente samples læser amplitude og fase på modtagerspolen og skelner jern fra ikke-jern; MOSFET H-bro-sender og bucking-spolehoved.',
+      'Designede strømforsyningen til udholdenhed: MCU’en sover mellem DFT-vinduer. Afladningstest på bænken: 164 min kontinuerlig drift på én opladning, pakken faldt fra 8,88 V til 7,76 V.',
+    ],
+  },
+  {
+    name: 'REGBOT Balance — kaskaderegulering af en selvbalancerende robot',
+    href: '/projects/regbot-balance',
+    kind: 'Gruppe · DTU 34722',
+    bullets: [
+      'Sporede en træg inderste sløjfe til systemidentifikation lavet med hjulene i luften (motorpol ~6× for hurtig). Re-identificerede på gulvet og redesignede alle fire sløjfer: stigetid 27× hurtigere, fejl på 2 m-kørsel fra 10,7 cm til 3,6 cm.',
+    ],
+  },
+  {
+    name: 'KiCad-Autoplace — placering og routing af enkeltsidede fræsede print',
+    href: '/projects/kicad-autoplace',
+    kind: 'Solo, til DTU Ballerups værksted',
+    bullets: [
+      'Electron + Python desktop-app, der scorer flere placeringskandidater (trådlængde, krydsninger, overlap) og router vinderen med FreeRouting; brugt til at fræse rigtige print.',
+    ],
+  },
+];
+
+const jobs = [
+  { role: 'Tjener', org: "Hotel D'Angleterre, København", period: 'Dec. 2024 — nu' },
+  { role: 'Bartender / tjener', org: 'Visselulles Vinbar, Sønderborg', period: 'Maj 2023 — aug. 2024' },
+  { role: 'Kok', org: 'Mommark Marina', period: 'Juni 2021 — juni 2024' },
+  { role: 'Produktionsmedarbejder', org: 'JKS hos Danfoss, Nordborg', period: 'Aug. 2022 — nov. 2023' },
+  { role: 'Skiinstruktør (CSIA niveau 1)', org: 'Sun Peaks Resort, Canada', period: 'Dec. 2022 — apr. 2023' },
 ];
 
 const education = [
   {
     title: 'Diplomingeniør (B.Eng.) i Elektroteknologi',
-    org: 'DTU — Danmarks Tekniske Universitet, Kongens Lyngby',
-    period: 'Sep. 2024 — nu',
-    notes: 'Forventet færdig sommer 2027. Obligatorisk praktikperiode fra sidst i januar 2027.',
+    org: 'DTU — Danmarks Tekniske Universitet, Kgs. Lyngby',
+    period: 'Sep. 2024 — forventet sommer 2027',
+    note: `${ects} ECTS gennemført. Valgfag i analog IC-design, effektelektronik, elektroakustik, akustik og EMC. Obligatorisk praktik forår 2027, bachelorprojekt efterår 2027.`,
   },
-  { title: 'Skiinstruktør niveau 1 (certificering)', org: 'CSIA, Sun Peaks', period: 'Nov. 2022 — dec. 2023' },
-  { title: 'STX, Matematik A / Fysik A', org: 'Sønderborg Statsskole', period: 'Aug. 2019 — juni 2022' },
+  {
+    title: 'STX, Matematik A / Fysik A',
+    org: 'Sønderborg Statsskole',
+    period: '2019 — 2022',
+  },
 ];
 
-const skillGroups = [
+const skills = [
   {
-    label: 'Hardware',
-    items: ['KiCad (diagram, footprints, PCB-layout)', 'PCB-fabrikation (fiberlaser, CNC, reflow)', 'Analog & digital elektronik', 'Fusion 360 CAD'],
+    label: 'Bænk & fejlfinding',
+    items: ['Oscilloskop, logikanalysator, laboratorieforsyning', 'Fejldiagnose og dokumentation af rodårsag', 'Reverse engineering af protokoller (UART, SPI, I2C, IR)', 'Kalibrering og måling'],
   },
   {
-    label: 'Firmware & software',
-    items: ['C / Embedded C', 'ESP32 (ESP-IDF, ESPHome)', 'Python', 'Git'],
+    label: 'PCB-design & fremstilling',
+    items: ['KiCad: skema, footprints, layout, ERC/DRC', 'Enkeltsidet fræsning (Roland SRM-20), fiberlaser-ætsning, reflow', 'Gerber/Excellon, DFM til egne processer', 'IPC-2221 kobberdimensionering'],
   },
   {
-    label: 'Bænk',
-    items: ['Oscilloskop & logikanalysator', 'Reverse engineering af protokoller', 'Fejlfinding & hardware/firmware-integration'],
+    label: 'Embedded firmware',
+    items: ['C på ESP32 (ESP-IDF) og AVR (bare-metal ATmega)', 'PID-regulering, sikkerheds-watchdogs, tilstandsmaskiner', 'Unit-testede firmware-kerner', 'ESPHome-komponenter, Home Assistant'],
   },
   {
-    label: 'AI-orkestreret udvikling',
-    items: ['Styre AI til at bygge software efter spec (web, tung Python)', 'Testdrevet verifikation i hvert trin', 'Bygge LLM-integrerede værktøjer (Componentbot, SPICEPilot)'],
+    label: 'Analog, effekt & signal',
+    items: ['Op-amp- og komparatorkredsløb, delta-sigma-modulatorer', 'Switch-mode-grundlag, MOSFET-drivning, ladningspumper', 'DSP: DFT/Goertzel, oversampling, decimering', 'SPICE (ngspice, LTspice) og Python-modellering'],
+  },
+  {
+    label: 'Værktøj & AI-assisteret udvikling',
+    items: ['Python desktop- og CLI-værktøj (PySide6, Electron)', 'Git, GitHub Actions CI, reproducerbare builds', 'Styring af AI til at bygge software efter spec, verificeret med tests', 'MATLAB/Simulink, Fusion 360, Blender'],
   },
 ];
 ---
 
-<Base
-  title="CV — Mads Rudolph"
-  description="CV for Mads Rudolph — diplomingeniørstuderende i Elektroteknologi på DTU. PCB-design, embedded firmware og fejlfinding."
-  lang="da"
-  altUrl="/cv"
->
+<Base title="CV — Mads Rudolph" description="CV for Mads Rudolph — diplomingeniørstuderende i Elektroteknologi på DTU, søger ingeniørpraktik fra januar 2027. Fejlfinding på hardware, embedded firmware i C, PCB-design og egen fremstilling." lang="da" altUrl="/cv">
   <div class="page-head">
-    <span class="label">CV</span>
-    <h1>Curriculum vitae</h1>
+    <h1>CV</h1>
     <p class="lede">
-      Den korte version står nedenfor. <a href="/da/projects">Projektbeskrivelserne</a> er den lange
-      version — beviset bag hver kompetence her. Vil du have et formateret PDF eller referencer, så
-      <a href="mailto:mads28122001@hotmail.dk">skriv til mig</a>.
+      Ingeniørpraktik fra slutningen af januar 2027, og studiejob inden da. Hvert projekt herunder
+      linker til sin beskrivelse (på engelsk). En PDF kan fås på forespørgsel.
     </p>
+    <div class="cv-actions">
+      <a href="mailto:mads28122001@hotmail.dk" class="btn primary">Skriv til mig</a>
+      <a href="https://www.linkedin.com/in/mads-rudolph-65103a178/" class="btn secondary">LinkedIn</a>
+    </div>
   </div>
 
-  <h2>Profil</h2>
-  <p>
-    Elektroteknologistuderende på DTU med stærkt fokus på elektronik og embedded systemer. Jeg
-    designer og fremstiller print i KiCad, skriver firmware til mikrocontroller-baseret hardware og
-    fejlfinder på bænken — fra en enkelt footprint til en færdig enhed. Jeg bygger i stigende grad
-    mod audio-hardware — digital signalbehandling, elektroakustik og den præcise måle- og
-    instrumenteringsside. Nysgerrig og selvkørende; jeg
-    bygger værktøjet, når det rigtige ikke findes. Søger ingeniørpraktik fra januar 2027 og studiejob
-    ved siden af studiet.
-  </p>
+  <section class="cv-block">
+    <h2>Profil</h2>
+    <p>
+      Elektroteknologistuderende på 5. semester på DTU, der finder fejl på bænken og retter dem: en
+      130 µm printbue, der brød printfræsningen, en flydende stel, der ville have ødelagt en
+      forsyning, en reguleringssløjfe identificeret mod det forkerte system. Jeg designer og
+      fremstiller print i KiCad på min egen fræser og laser, skriver firmware i C til ESP32 og AVR
+      og verificerer med skop og tests. Ledig til praktik fra slutningen af januar 2027, med valgfag
+      rettet mod analog, effektelektronik og elektroakustik.
+    </p>
+  </section>
 
-  <h2>Kompetencer</h2>
-  {
-    skillGroups.map((group) => (
-      <p>
-        <span class="label">{group.label}</span><br />
-        {group.items.join(' · ')}
-      </p>
-    ))
-  }
+  <section class="cv-block">
+    <h2>Projekter som erfaring</h2>
+    <ul class="cv-projects">
+      {
+        projects.map((p) => (
+          <li>
+            <div class="cv-head">
+              <h3><a href={p.href}>{p.name}</a></h3>
+              <span class="cv-kind">{p.kind}</span>
+            </div>
+            <ul>
+              {p.bullets.map((b) => <li>{b}</li>)}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="cv-more"><a href="/da/projects">Alle {projectCount} projekter →</a></p>
+  </section>
 
-  <h2>Uddannelse</h2>
-  {
-    education.map((item) => (
-      <div style="margin-bottom: 1.1rem;">
-        <span class="label">{item.period}</span>
-        <div><strong>{item.title}</strong></div>
-        <div style="color: var(--ink-soft);">{item.org}</div>
-        {item.notes && <div style="color: var(--muted); font-size: 0.92rem;">{item.notes}</div>}
-      </div>
-    ))
-  }
+  <section class="cv-block">
+    <h2>Kompetencer</h2>
+    <div class="cv-skills">
+      {
+        skills.map((g) => (
+          <div>
+            <h3>{g.label}</h3>
+            <ul>
+              {g.items.map((i) => <li>{i}</li>)}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
 
-  <h2>Erhvervserfaring</h2>
-  <p style="color: var(--muted); font-size: 0.92rem; margin-top: -0.25rem;">
-    Service- og sæsonarbejde gennem studiet — fleksibelt nok til at holde ingeniørarbejdet først, og
-    hvert job lærte mig at holde overblik og kommunikere under pres.
-  </p>
-  {
-    experience.map((item) => (
-      <div style="margin-bottom: 1.1rem;">
-        <span class="label">{item.period}</span>
-        <div>
-          <strong>{item.role}</strong>, {item.org} — {item.place}
-        </div>
-        {item.notes && <div style="color: var(--ink-soft); font-size: 0.92rem;">{item.notes}</div>}
-      </div>
-    ))
-  }
+  <section class="cv-block">
+    <h2>Uddannelse</h2>
+    <ul class="cv-list">
+      {
+        education.map((e) => (
+          <li>
+            <div class="cv-head">
+              <strong>{e.title}</strong>
+              <span class="cv-when">{e.period}</span>
+            </div>
+            <div class="cv-org">{e.org}</div>
+            {e.note && <p class="cv-note">{e.note}</p>}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 
-  <h2>Sprog & interesser</h2>
-  <p>
-    Dansk (modersmål), engelsk (flydende). Uden for ingeniørarbejdet: hi-fi og vinyl, CAD-modellering,
-    FPV-drone-racing og madlavning.
-  </p>
+  <section class="cv-block">
+    <h2>Erhvervserfaring</h2>
+    <p class="cv-note">
+      Service- og sæsonarbejde ved siden af studiet. Det viser: jeg møder op, holder hovedet koldt i
+      en travl vagt og kommunikerer klart med gæster og kolleger på dansk og engelsk.
+    </p>
+    <ul class="cv-list compact">
+      {
+        jobs.map((j) => (
+          <li>
+            <div class="cv-head">
+              <span><strong>{j.role}</strong>, {j.org}</span>
+              <span class="cv-when">{j.period}</span>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 
-  <hr />
-  <p>
-    <span class="label">Kontakt</span><br />
-    <a href="mailto:mads28122001@hotmail.dk">mads28122001@hotmail.dk</a> ·
-    <a href="https://github.com/MadsRudolph">GitHub</a> ·
-    <a href="https://www.linkedin.com/in/mads-rudolph-65103a178/">LinkedIn</a> · Kgs. Lyngby, Danmark
-  </p>
+  <section class="cv-block">
+    <h2>Sprog</h2>
+    <p>Dansk (modersmål), engelsk (flydende).</p>
+  </section>
+
+  <section class="cv-block contact">
+    <p>
+      <a href="mailto:mads28122001@hotmail.dk">mads28122001@hotmail.dk</a> ·
+      <a href="https://github.com/MadsRudolph">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/mads-rudolph-65103a178/">LinkedIn</a> · Kgs. Lyngby, Danmark
+    </p>
+  </section>
 </Base>

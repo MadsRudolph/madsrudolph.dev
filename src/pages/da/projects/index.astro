@@ -19,8 +19,7 @@ const shownCategories = categories.filter((c) => used.has(c.key));
   altUrl="/projects"
 >
   <div class="page-head">
-    <span class="label">Oversigt</span>
-    <h1>Projekter</h1>
+    <h1>Alle<br />projekter</h1>
     <p class="lede">
       Filtrér efter værktøj eller kompetence. Hver beskrivelse følger samme struktur: hvad det er,
       hvordan det er bygget, hvad der gik galt, og hvad der kom ud af det.
@@ -44,7 +43,7 @@ const shownCategories = categories.filter((c) => used.has(c.key));
     <button type="button" data-tag="coursework" aria-pressed="false">Kursusprojekter</button>
   </div>
 
-  <ul class="project-list rows" id="project-list">
+  <ul class="project-list" id="project-list">
     {
       projects.map((project, i) => (
         <ProjectCard
@@ -74,5 +73,10 @@ const shownCategories = categories.filter((c) => used.has(c.key));
         card.style.display = !tag || tags.includes(tag) ? '' : 'none';
       }
     });
+
+    // Deep link: /projects#pcb opens with that filter pressed.
+    const wanted = location.hash.slice(1);
+    const preset = wanted && bar.querySelector<HTMLButtonElement>(`button[data-tag="${wanted}"]`);
+    if (preset) preset.click();
   </script>
 </Base>

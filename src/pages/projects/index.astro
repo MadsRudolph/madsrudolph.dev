@@ -20,8 +20,7 @@ const shownCategories = categories.filter((c) => used.has(c.key));
   altUrl="/da/projects"
 >
   <div class="page-head">
-    <span class="label">Index</span>
-    <h1>Projects</h1>
+    <h1>All<br />projects</h1>
     <p class="lede">
       Filter by tool or skill. Every writeup follows the same structure: what it is, how it's
       built, what went wrong, and what came out of it.
@@ -42,7 +41,7 @@ const shownCategories = categories.filter((c) => used.has(c.key));
     <button type="button" data-tag="coursework" aria-pressed="false">Coursework</button>
   </div>
 
-  <ul class="project-list rows" id="project-list">
+  <ul class="project-list" id="project-list">
     {
       projects.map((project, i) => (
         <ProjectCard
@@ -72,5 +71,10 @@ const shownCategories = categories.filter((c) => used.has(c.key));
         card.style.display = !tag || tags.includes(tag) ? '' : 'none';
       }
     });
+
+    // Deep link: /projects#pcb opens with that filter pressed.
+    const wanted = location.hash.slice(1);
+    const preset = wanted && bar.querySelector<HTMLButtonElement>(`button[data-tag="${wanted}"]`);
+    if (preset) preset.click();
   </script>
 </Base>

@@ -37,25 +37,6 @@
     "language": "Python",
     "private": false
   },
-  "MadsRudolph/esp32-reflow-hotplate": {
-    "repo": "MadsRudolph/esp32-reflow-hotplate",
-    "url": "https://github.com/MadsRudolph/esp32-reflow-hotplate",
-    "commits": 54,
-    "contributors": 1,
-    "contributorList": [
-      {
-        "login": "MadsRudolph",
-        "contributions": 54,
-        "avatarUrl": "https://avatars.githubusercontent.com/u/68565302?v=4",
-        "htmlUrl": "https://github.com/MadsRudolph"
-      }
-    ],
-    "additions": 916911,
-    "deletions": 10701,
-    "linesChanged": 927612,
-    "language": "Python",
-    "private": false
-  },
   "MadsRudolph/ir-remote-wizard": {
     "repo": "MadsRudolph/ir-remote-wizard",
     "url": "https://github.com/MadsRudolph/ir-remote-wizard",

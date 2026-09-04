@@ -1,155 +1,225 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { coursework, ectsOf } from '../data/courses';
 
-const experience = [
+const projectCount = (await getCollection('projects')).length;
+const ects = ectsOf(coursework.en.completed);
+
+// Projects as experience. Every number below is taken from the linked write-up;
+// nothing here is claimed that the project page does not document.
+const projects = [
   {
-    role: 'Waiter',
-    org: "Hotel D'Angleterre",
-    place: 'Copenhagen',
-    period: 'Dec 2024 — present',
-    notes:
-      'High-end, fast-paced service. Fully flexible hours, kept deliberately part-time (a few shifts a month) so studies and technical work stay the priority.',
+    name: 'SRM-CAM — CAM tool for a Roland SRM-20 PCB mill',
+    href: '/projects/srm-cam',
+    kind: 'Solo · in daily use at the DTU Ballerup fab lab',
+    bullets: [
+      'Diagnosed why milled isolation traces skipped copper on a 130 µm bowed board: a 3-point routine could only fit a plane. Replaced it with a probed grid and bilinear leveling so every Z follows the real surface.',
+      'Reverse-engineered the mill’s SPI remote header with an Arduino: audited Roland’s library (5 of 17 commands in use, 1 of 64 status bits read), decoded the full status word, and added a STOP that interrupts a move in flight.',
+      'Brought double-sided registration to under 0.1 mm after the flip with a swept fit-test coupon for dowel-hole compensation; 374 commits, ~1,000 tests, Windows installer and Linux AppImage built in CI.',
+    ],
   },
   {
-    role: 'Bartender / Waiter',
-    org: 'Visselulles Vinbar',
-    place: 'Sønderborg',
-    period: 'May 2023 — Aug 2024',
+    name: 'Vinyl ADC — discrete 3rd-order delta-sigma audio ADC',
+    href: '/projects/vinyl-adc',
+    kind: 'Solo · in progress, boards being milled',
+    bullets: [
+      'Designed a stereo 48 kHz converter from TL07x op-amps, an LM311 and 74HC logic, sized to the DTU parts shop: 1.536 MHz clock, OSR 32, ~68 dB SNR in simulation.',
+      'SPICE caught a charge pump drawn backwards (the −5 V rail simulated at +3.4 V) that every connectivity check had passed; found that comparator delay, not op-amp bandwidth, limits the clock.',
+      'Split one unroutable single-sided board (45 wire bridges) into four milled boards with a script that proves the split matches the reference netlist.',
+    ],
   },
   {
-    role: 'Line cook',
-    org: 'Mommark Marina',
-    place: 'Mommark',
-    period: 'Jun 2021 — Jun 2024',
+    name: 'Korad KD3005D — hidden UART reverse-engineered',
+    href: '/projects/korad-uart-reverse-engineering',
+    kind: 'Solo',
+    bullets: [
+      'Found the unpopulated remote header on a bench supply and decoded its protocol with a logic analyzer: 9600 8N1, poll-only ASCII, 100–200 ms command pacing.',
+      'Caught a floating-ground hazard with a multimeter before it destroyed hardware, and designed an isolation-safe ESP32 carrier PCB (ERC-clean, Gerbers exported for fiber-laser etching).',
+    ],
   },
   {
-    role: 'Ski instructor',
-    org: 'Sun Peaks Resort',
-    place: 'British Columbia, Canada',
-    period: 'Dec 2022 — Apr 2023',
+    name: 'VLF metal detector — DFT phase detection on ATmega328P',
+    href: '/projects/metal-detector',
+    kind: 'Group of 4 · DTU 34621',
+    bullets: [
+      'Single-bin DFT on 8 kHz coherent samples reads amplitude and phase of the receive coil to separate ferrous from non-ferrous targets; MOSFET H-bridge transmitter and a bucking-coil head.',
+      'Designed the power path for endurance: MCU sleeps between DFT windows. Bench discharge test: 164 min continuous on one charge, pack sagging 8.88 V to 7.76 V.',
+    ],
   },
   {
-    role: 'Production worker',
-    org: 'JKS (at Danfoss)',
-    place: 'Nordborg',
-    period: 'Aug 2022 — Nov 2023',
+    name: 'REGBOT Balance — cascaded control for a self-balancing robot',
+    href: '/projects/regbot-balance',
+    kind: 'Group · DTU 34722',
+    bullets: [
+      'Traced a sluggish inner loop to system identification done wheels-up (motor pole ~6× too fast). Re-identified on the floor and re-designed all four loops: rise time 27× faster, 2 m move error from 10.7 cm to 3.6 cm.',
+    ],
   },
+  {
+    name: 'KiCad-Autoplace — placement and routing for single-sided milled boards',
+    href: '/projects/kicad-autoplace',
+    kind: 'Solo, for the DTU Ballerup workshop',
+    bullets: [
+      'Electron + Python desktop app that scores several placement candidates (wirelength, crossings, overlaps) and routes the winner with FreeRouting; used to mill real boards.',
+    ],
+  },
+];
+
+const jobs = [
+  { role: 'Waiter', org: "Hotel D'Angleterre, Copenhagen", period: 'Dec 2024 — present' },
+  { role: 'Bartender / waiter', org: 'Visselulles Vinbar, Sønderborg', period: 'May 2023 — Aug 2024' },
+  { role: 'Line cook', org: 'Mommark Marina', period: 'Jun 2021 — Jun 2024' },
+  { role: 'Production worker', org: 'JKS at Danfoss, Nordborg', period: 'Aug 2022 — Nov 2023' },
+  { role: 'Ski instructor (CSIA Level 1)', org: 'Sun Peaks Resort, Canada', period: 'Dec 2022 — Apr 2023' },
 ];
 
 const education = [
   {
     title: 'B.Eng. in Electrical Engineering (Elektroteknologi)',
-    org: 'DTU — Technical University of Denmark, Kongens Lyngby',
-    period: 'Sep 2024 — present',
-    notes:
-      'Expected completion summer 2027. Mandatory internship (praktik) period from late January 2027.',
-  },
-  {
-    title: 'Level 1 Ski Instructor certification',
-    org: 'CSIA, Sun Peaks',
-    period: 'Nov 2022 — Dec 2023',
+    org: 'DTU — Technical University of Denmark, Kgs. Lyngby',
+    period: 'Sep 2024 — expected summer 2027',
+    note: `${ects} ECTS completed. Electives in analog IC design, power electronics, electroacoustics, acoustics and EMC. Mandatory internship spring 2027, bachelor thesis autumn 2027.`,
   },
   {
     title: 'STX (upper secondary), Mathematics A / Physics A',
     org: 'Sønderborg Statsskole',
-    period: 'Aug 2019 — Jun 2022',
+    period: '2019 — 2022',
   },
 ];
 
-const skillGroups = [
+const skills = [
   {
-    label: 'Hardware',
-    items: ['KiCad (schematic, footprint creation, PCB layout)', 'PCB fabrication (fiber laser, CNC mill, reflow)', 'Analog & digital electronics', 'Fusion 360 CAD'],
+    label: 'Bench & troubleshooting',
+    items: ['Oscilloscope, logic analyzer, bench PSU', 'Fault diagnosis and root-cause write-ups', 'Protocol reverse engineering (UART, SPI, I2C, IR)', 'Calibration and measurement'],
   },
   {
-    label: 'Firmware & software',
-    items: ['C / Embedded C', 'ESP32 (ESP-IDF, ESPHome)', 'Python', 'Git', 'Digital Signal Processing'],
+    label: 'PCB design & fabrication',
+    items: ['KiCad: schematic, footprints, layout, ERC/DRC', 'Single-sided milling (Roland SRM-20), fiber-laser etching, reflow', 'Gerber/Excellon, DFM for in-house processes', 'IPC-2221 copper sizing'],
   },
   {
-    label: 'Bench',
-    items: ['Oscilloscope & logic analyzer', 'Protocol reverse engineering', 'Debugging & hardware/firmware integration'],
+    label: 'Embedded firmware',
+    items: ['C on ESP32 (ESP-IDF) and AVR (bare-metal ATmega)', 'PID control, safety watchdogs, state machines', 'Unit-tested firmware cores', 'ESPHome components, Home Assistant'],
   },
   {
-    label: 'AI-orchestrated engineering',
-    items: ['Directing AI to build software to spec (web, heavy Python)', 'Test-driven verification at every step', 'Building LLM-integrated tools (Componentbot, SPICEPilot)'],
+    label: 'Analog, power & signal',
+    items: ['Op-amp and comparator circuits, delta-sigma modulators', 'Switch-mode basics, MOSFET drive, charge pumps', 'DSP: DFT/Goertzel, oversampling, decimation', 'SPICE (ngspice, LTspice) and Python modelling'],
+  },
+  {
+    label: 'Tooling & AI-assisted development',
+    items: ['Python desktop and CLI tools (PySide6, Electron)', 'Git, GitHub Actions CI, reproducible builds', 'Directing AI to build software to spec, verified by tests', 'MATLAB/Simulink, Fusion 360, Blender'],
   },
 ];
 ---
 
-<Base title="CV — Mads Rudolph" description="CV of Mads Rudolph — Elektroteknologi (B.Eng.) student at DTU. PCB design, embedded firmware, and electronics debugging." lang="en" altUrl="/da/cv">
+<Base title="CV — Mads Rudolph" description="CV of Mads Rudolph — Elektroteknologi (B.Eng.) student at DTU seeking an engineering internship from January 2027. Hardware troubleshooting, embedded firmware in C, PCB design and in-house fabrication." lang="en" altUrl="/da/cv">
   <div class="page-head">
-    <span class="label">CV</span>
-    <h1>Curriculum vitae</h1>
+    <h1>CV</h1>
     <p class="lede">
-      The short version is below. The <a href="/projects">project writeups</a> are the long
-      version — the evidence behind every skill listed here. For a formatted PDF or references,
-      <a href="mailto:mads28122001@hotmail.dk">get in touch</a>.
+      Engineering internship (praktik) from late January 2027, and student jobs before then.
+      Every project below links to its write-up. A PDF is available on request.
     </p>
+    <div class="cv-actions">
+      <a href="mailto:mads28122001@hotmail.dk" class="btn primary">Email me</a>
+      <a href="https://www.linkedin.com/in/mads-rudolph-65103a178/" class="btn secondary">LinkedIn</a>
+    </div>
   </div>
 
-  <h2>Profile</h2>
-  <p>
-    5th-semester Electrical Engineering student (BEng) at DTU with a strong passion for electronics,
-    embedded systems, and high-fidelity audio. I design and fabricate PCBs in KiCad, write firmware
-    for microcontroller-based hardware, and debug at the bench — from a single footprint to a fully
-    working device. I am actively expanding my knowledge in digital signal processing to bridge
-    theoretical concepts with practical applications in audio and electroacoustics — including the
-    measurement and instrumentation side. Curious and self-driven; I
-    build the tool when the right one doesn't exist. Seeking an engineering internship (praktik)
-    from January 2027 and a student job alongside my studies.
-  </p>
+  <section class="cv-block">
+    <h2>Profile</h2>
+    <p>
+      5th-semester electrical engineering student at DTU who finds faults at the bench and fixes
+      them: a 130 µm board bow that broke PCB milling, a floating ground that would have killed a
+      supply, a control loop identified against the wrong plant. I design and fabricate PCBs in
+      KiCad on my own mill and laser, write firmware in C for ESP32 and AVR, and verify with a
+      scope and tests. Available for an internship from late January 2027, with electives aimed
+      at analog, power electronics and electroacoustics.
+    </p>
+  </section>
 
-  <h2>Skills</h2>
-  {
-    skillGroups.map((group) => (
-      <p>
-        <span class="label">{group.label}</span><br />
-        {group.items.join(' · ')}
-      </p>
-    ))
-  }
+  <section class="cv-block">
+    <h2>Projects as experience</h2>
+    <ul class="cv-projects">
+      {
+        projects.map((p) => (
+          <li>
+            <div class="cv-head">
+              <h3><a href={p.href}>{p.name}</a></h3>
+              <span class="cv-kind">{p.kind}</span>
+            </div>
+            <ul>
+              {p.bullets.map((b) => <li>{b}</li>)}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="cv-more"><a href="/projects">All {projectCount} projects →</a></p>
+  </section>
 
-  <h2>Education</h2>
-  {
-    education.map((item) => (
-      <div style="margin-bottom: 1.1rem;">
-        <span class="label">{item.period}</span>
-        <div><strong>{item.title}</strong></div>
-        <div style="color: var(--ink-soft);">{item.org}</div>
-        {item.notes && <div style="color: var(--muted); font-size: 0.92rem;">{item.notes}</div>}
-      </div>
-    ))
-  }
+  <section class="cv-block">
+    <h2>Skills</h2>
+    <div class="cv-skills">
+      {
+        skills.map((g) => (
+          <div>
+            <h3>{g.label}</h3>
+            <ul>
+              {g.items.map((i) => <li>{i}</li>)}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
 
-  <h2>Employment history</h2>
-  <p style="color: var(--muted); font-size: 0.92rem; margin-top: -0.25rem;">
-    Service and seasonal work through my studies — flexible enough to keep engineering first, and
-    each one taught me to stay organised and communicate under pressure.
-  </p>
-  {
-    experience.map((item) => (
-      <div style="margin-bottom: 1.1rem;">
-        <span class="label">{item.period}</span>
-        <div>
-          <strong>{item.role}</strong>, {item.org} — {item.place}
-        </div>
-        {item.notes && <div style="color: var(--ink-soft); font-size: 0.92rem;">{item.notes}</div>}
-      </div>
-    ))
-  }
+  <section class="cv-block">
+    <h2>Education</h2>
+    <ul class="cv-list">
+      {
+        education.map((e) => (
+          <li>
+            <div class="cv-head">
+              <strong>{e.title}</strong>
+              <span class="cv-when">{e.period}</span>
+            </div>
+            <div class="cv-org">{e.org}</div>
+            {e.note && <p class="cv-note">{e.note}</p>}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 
-  <h2>Languages & interests</h2>
-  <p>
-    Danish (native), English (fluent). Outside engineering: hi-fi and vinyl, CAD modelling,
-    FPV drone racing, and cooking.
-  </p>
+  <section class="cv-block">
+    <h2>Employment</h2>
+    <p class="cv-note">
+      Service and seasonal work alongside my studies. What it shows: I turn up, keep my head in a
+      busy shift, and communicate clearly with guests and colleagues in Danish and English.
+    </p>
+    <ul class="cv-list compact">
+      {
+        jobs.map((j) => (
+          <li>
+            <div class="cv-head">
+              <span><strong>{j.role}</strong>, {j.org}</span>
+              <span class="cv-when">{j.period}</span>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 
-  <hr />
-  <p>
-    <span class="label">Contact</span><br />
-    <a href="mailto:mads28122001@hotmail.dk">mads28122001@hotmail.dk</a> ·
-    <a href="https://github.com/MadsRudolph">GitHub</a> ·
-    <a href="https://www.linkedin.com/in/mads-rudolph-65103a178/">LinkedIn</a> · Kongens Lyngby, Denmark
-    <!-- VERIFY: phone (+45 20 65 27 14) and street address are intentionally kept off the public page; they're on the PDF you send directly. Say the word to add them. -->
-  </p>
+  <section class="cv-block">
+    <h2>Languages</h2>
+    <p>Danish (native), English (fluent).</p>
+  </section>
+
+  <section class="cv-block contact">
+    <p>
+      <a href="mailto:mads28122001@hotmail.dk">mads28122001@hotmail.dk</a> ·
+      <a href="https://github.com/MadsRudolph">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/mads-rudolph-65103a178/">LinkedIn</a> · Kgs. Lyngby, Denmark
+    </p>
+  </section>
 </Base>

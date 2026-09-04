@@ -1,6 +1,8 @@
 ---
-import '@fontsource-variable/archivo/index.css';
-import '@fontsource-variable/space-grotesk/index.css';
+import '@fontsource/poppins/500.css';
+import '@fontsource/poppins/600.css';
+import '@fontsource/poppins/700.css';
+import '@fontsource-variable/inter/index.css';
 import '@fontsource/ibm-plex-mono/400.css';
 import '@fontsource/ibm-plex-mono/500.css';
 import '../styles/global.css';
@@ -24,19 +26,29 @@ const path = Astro.url.pathname;
 const norm = (p: string) => p.replace(/\.html$/, '').replace(/\/+$/, '') || '/';
 const cur = norm(path);
 
+// Icons: Lucide outlines, 24px grid, drawn inline so nothing external loads.
+const icons = {
+  home: 'M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z',
+  folder: 'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z',
+  user: 'M20 21a8 8 0 0 0-16 0M12 13a5 5 0 1 0 0-10 5 5 0 0 0 0 10z',
+  file: 'M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h6',
+  cap: 'M22 10 12 5 2 10l10 5zM6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5',
+};
+
 const nav = [
-  { href: `${base}/projects`, label: t.navProjects },
-  { href: `${base}/about`, label: t.navAbout },
-  { href: `${base}/cv`, label: t.navCv },
-  { href: `${base}/courses`, label: t.navCourses },
+  { href: homeHref, label: t.navHome, icon: icons.home },
+  { href: `${base}/projects`, label: t.navProjects, icon: icons.folder },
+  { href: `${base}/about`, label: t.navAbout, icon: icons.user },
+  { href: `${base}/cv`, label: t.navCv, icon: icons.file },
+  { href: `${base}/courses`, label: t.navCourses, icon: icons.cap },
 ];
 
 const isCurrent = (href: string) => {
   const h = norm(href);
-  return cur === h || (h !== homeHref && cur.startsWith(h + '/'));
+  if (h === norm(homeHref)) return cur === h;
+  return cur === h || cur.startsWith(h + '/');
 };
 
-// hreflang alternates
 const enUrl = lang === 'en' ? path : altUrl;
 const daUrl = lang === 'da' ? path : altUrl;
 const year = new Date().getFullYear();
@@ -47,7 +59,7 @@ const year = new Date().getFullYear();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0f1012" />
+    <meta name="theme-color" content="#151312" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -70,41 +82,33 @@ const year = new Date().getFullYear();
   </head>
   <body>
     <header class="site-header">
-      <div class="inner">
-        <a class="name" href={homeHref}>madsrudolph<span class="tld">.dev</span></a>
-        <div class="nav-group">
-          <nav>
-            {
-              nav.map((item) => (
-                <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
-                  {item.label}
-                </a>
-              ))
-            }
-          </nav>
-          <a class="header-cta" href="mailto:mads28122001@hotmail.dk">
-            <span class="marker" aria-hidden="true"></span>
-            {t.available}
-          </a>
-          <div class="lang-toggle" aria-label="Language">
-            {
-              lang === 'en' ? (
-                <span class="on">EN</span>
-              ) : (
-                <a href={altUrl ?? '/'}>EN</a>
-              )
-            }
-            <span class="sep">/</span>
-            {
-              lang === 'da' ? (
-                <span class="on">DA</span>
-              ) : (
-                <a href={altUrl ?? '/da'}>DA</a>
-              )
-            }
-          </div>
-        </div>
-      </div>
+      <nav class="pill" aria-label={t.navLabel}>
+        {
+          nav.map((item) => (
+            <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined} aria-label={item.label} title={item.label}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d={item.icon} />
+              </svg>
+              <span class="txt">{item.label}</span>
+            </a>
+          ))
+        }
+        <span class="sep" aria-hidden="true"></span>
+        {
+          lang === 'en' ? (
+            <span class="lang on" aria-current="true">EN</span>
+          ) : (
+            <a class="lang" href={altUrl ?? '/'} aria-label="English">EN</a>
+          )
+        }
+        {
+          lang === 'da' ? (
+            <span class="lang on" aria-current="true">DA</span>
+          ) : (
+            <a class="lang" href={altUrl ?? '/da'} aria-label="Dansk">DA</a>
+          )
+        }
+      </nav>
     </header>
     <main class:list={[{ wide }]}>
       <slot />
@@ -114,7 +118,8 @@ const year = new Date().getFullYear();
         <span>© {year} Mads Rudolph · {t.footerLoc}</span>
         <span>
           <a href="https://github.com/MadsRudolph">GitHub</a> ·
-          <a href="https://www.linkedin.com/in/mads-rudolph-65103a178/">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/mads-rudolph-65103a178/">LinkedIn</a> ·
+          <a href="mailto:mads28122001@hotmail.dk">Email</a>
         </span>
       </div>
     </footer>

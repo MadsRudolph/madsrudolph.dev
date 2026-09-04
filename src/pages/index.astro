@@ -2,12 +2,28 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import { coursework, courseUrl, ectsOf } from '../data/courses';
 
 const projects = await getCollection('projects');
 const featured = projects
   .filter((p) => p.data.featured)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 4);
+
+const cw = coursework.en;
+const ectsDone = ectsOf(cw.completed);
+
+const tools = [
+  { name: 'KiCad', use: 'Schematic and PCB layout', icon: 'M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3M6 6h12v12H6zM9 9h6v6H9z' },
+  { name: 'Roland SRM-20 + SRM-CAM', use: 'PCB milling, my own CAM', icon: 'M12 3v4M8 7h8l-1 4H9zM12 11v10M7 21h10' },
+  { name: 'xTool F1 Ultra', use: 'Fiber-laser etching', icon: 'M13 2 4 14h6l-1 8 9-12h-6z' },
+  { name: 'ESP-IDF / AVR', use: 'Firmware in C and C++', icon: 'm16 18 6-6-6-6M8 6l-6 6 6 6' },
+  { name: 'Python', use: 'Tooling and desktop apps', icon: 'M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM8 9l3 3-3 3M13 15h4' },
+  { name: 'Scope & logic analyzer', use: 'Bench verification', icon: 'M2 12h4l3-8 4 16 3-8h6' },
+  { name: 'KiCad ngspice / LTspice', use: 'Circuit simulation', icon: 'M3 20h18M5 16l4-6 3 4 4-8 3 5' },
+  { name: 'Fusion 360 / Blender', use: 'Enclosures and CAD', icon: 'M12 2 3 7v10l9 5 9-5V7zM12 12 3 7M12 12l9-5M12 12v10' },
+  { name: 'Claude Code', use: 'AI-assisted, test-driven builds', icon: 'M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z' },
+];
 ---
 
 <Base
@@ -15,97 +31,107 @@ const featured = projects
   description="Portfolio of Mads Rudolph: PCB design, embedded firmware, and electronics debugging. Seeking an engineering internship (praktik) from January 2027."
   lang="en"
   altUrl="/da"
-  wide
 >
   <section class="hero">
-    <p class="label eyebrow">Electrical engineering · DTU · Copenhagen</p>
-    <h1>I build and debug real hardware<span class="accent">.</span></h1>
-    <p class="lede">
-      PCB design and fabrication, embedded firmware, and bench debugging. Every project here is
-      written up the same way: what it is, how it's built, what went wrong, and how I found out.
+    <img class="portrait" src="/media/mads-rudolph.jpg" alt="Portrait of Mads Rudolph" width="260" height="325" />
+    <h1>Mads Rudolph</h1>
+    <p class="tagline">Builds and debugs real hardware. DTU, 5th semester.</p>
+    <p class="role">Electronics<br />engineer</p>
+    <p class="intro">
+      PCB design, embedded firmware, bench debugging. Available for praktik from January 2027.
     </p>
-    <div class="hero-actions">
-      <a href="/projects" class="btn primary">See the work</a>
-      <a href="mailto:mads28122001@hotmail.dk" class="btn secondary">Email me</a>
-      <a href="/cv" class="btn text">Read the CV →</a>
+    <div class="actions">
+      <a href="mailto:mads28122001@hotmail.dk" class="btn primary">Email me</a>
+      <a href="/projects" class="btn secondary">See the projects</a>
     </div>
-
-    <dl class="facts">
-      <div>
-        <dt>Looking for</dt>
-        <dd>Praktik from Jan 2027<small>and student jobs alongside</small></dd>
-      </div>
-      <div>
-        <dt>Studying</dt>
-        <dd>B.Eng. Elektroteknologi<small>DTU · 5th semester · 110 ECTS</small></dd>
-      </div>
-      <div>
-        <dt>Best at</dt>
-        <dd>Hardware troubleshooting<small>finding out why it doesn't work</small></dd>
-      </div>
-      <div>
-        <dt>Direction</dt>
-        <dd>Audio &amp; analog hardware<small>DSP, electroacoustics, mixed-signal</small></dd>
-      </div>
-    </dl>
-
-    <p class="dansk" lang="da">
-      Jeg er diplomingeniørstuderende i Elektroteknologi på DTU og søger praktikplads fra januar
-      2027 samt studiejob inden for elektronik og embedded udvikling. Skriv gerne på engelsk eller
-      dansk.
-    </p>
   </section>
 
-  <div class="section-head">
-    <h2>Selected work<span class="count">{String(featured.length).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</span></h2>
-    <a href="/projects">All {projects.length} projects →</a>
-  </div>
-  <ul class="project-list grid">
-    {featured.map((project, i) => <ProjectCard project={project} index={i} image />)}
+  <ul class="stats">
+    <li><span class="n">{projects.length}</span><span class="l">projects, each with a write-up</span></li>
+    <li><span class="n">{ectsDone}</span><span class="l">ECTS completed at DTU</span></li>
+    <li><span class="n">Jan '27</span><span class="l">available for praktik</span></li>
   </ul>
 
-  <div class="section-head">
-    <h2>What I do</h2>
-  </div>
-  <div class="skills-matrix">
-    <div class="skill-category">
-      <h3>Hardware &amp; PCBs</h3>
-      <ul>
-        <li>KiCad schematic and layout</li>
-        <li>Fiber-laser and CNC fabrication</li>
-        <li>Analog and digital circuits</li>
-        <li>Power electronics</li>
-      </ul>
-    </div>
-    <div class="skill-category">
-      <h3>Firmware &amp; software</h3>
-      <ul>
-        <li>C / C++ on ESP32 and AVR</li>
-        <li>Python tooling and desktop apps</li>
-        <li>Digital signal processing</li>
-        <li>Test-driven, AI-assisted development</li>
-      </ul>
-    </div>
-    <div class="skill-category">
-      <h3>Bench &amp; debugging</h3>
-      <ul>
-        <li>Oscilloscope and logic analyzer</li>
-        <li>Protocol reverse engineering</li>
-        <li>Hardware / firmware integration</li>
-        <li>Failure diagnosis, written down</li>
-      </ul>
-    </div>
+  <div class="focus">
+    <a class="focus-card orange" href="/projects#pcb">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 2 2 7l10 5 10-5zM2 12l10 5 10-5M2 17l10 5 10-5" />
+      </svg>
+      <h3>PCB design & fabrication</h3>
+      <p>KiCad to milled board, on my own bench.</p>
+      <span class="arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9" /></svg>
+      </span>
+    </a>
+    <a class="focus-card lime" href="/projects#firmware">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3M6 6h12v12H6zM9 9h6v6H9z" />
+      </svg>
+      <h3>Embedded firmware & debugging</h3>
+      <p>C on ESP32 and AVR, verified with a scope.</p>
+      <span class="arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9" /></svg>
+      </span>
+    </a>
   </div>
 
-  <div class="section-head">
-    <h2>Contact</h2>
-  </div>
-  <div class="contact-block">
-    <a class="big" href="mailto:mads28122001@hotmail.dk">mads28122001@hotmail.dk</a>
+  <section class="home-section" id="work">
+    <h2 class="display"><span>Recent</span><span class="dim">projects</span></h2>
+    <ul class="project-list">
+      {featured.map((project, i) => <ProjectCard project={project} index={i} />)}
+    </ul>
+    <p class="more"><a class="btn secondary" href="/projects">All {projects.length} projects</a></p>
+  </section>
+
+  <section class="home-section" id="tools">
+    <h2 class="display"><span>Bench &amp;</span><span class="dim">toolchain</span></h2>
+    <ul class="tools">
+      {
+        tools.map((t) => (
+          <li>
+            <span class="glyph" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d={t.icon} /></svg>
+            </span>
+            <span>
+              <span class="name">{t.name}</span>
+              <span class="use">{t.use}</span>
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="home-section" id="semester">
+    <h2 class="display"><span>This</span><span class="dim">semester</span></h2>
+    <div class="terms">
+      <section class="term current">
+        <h3 class="term-head">{cw.current.term} <span class="sem">{cw.current.sem} · {ectsOf([cw.current])} ECTS</span></h3>
+        <ul class="course-list">
+          {
+            cw.current.courses.map((c) => (
+              <li>
+                <a class="code" href={courseUrl(c.code)} target="_blank" rel="noopener">{c.code}</a>
+                <span class="ctitle">{c.title}</span>
+                <span class="ects">{c.ects}</span>
+              </li>
+            ))
+          }
+        </ul>
+        {cw.current.note && <p class="note">{cw.current.note}</p>}
+      </section>
+    </div>
+    <p class="more"><a class="btn secondary" href="/courses">All coursework</a></p>
+  </section>
+
+  <section class="home-section contact" id="contact">
+    <h2 class="display"><span>Let's work</span><span class="dim">together</span></h2>
+    <p>Praktik from January 2027, student jobs before then. Danish or English.</p>
+    <a href="mailto:mads28122001@hotmail.dk" class="btn primary">mads28122001@hotmail.dk</a>
     <div class="links">
       <a href="https://github.com/MadsRudolph">GitHub</a>
       <a href="https://www.linkedin.com/in/mads-rudolph-65103a178/">LinkedIn</a>
-      <span class="label">Kgs. Lyngby, Denmark</span>
+      <a href="/cv">CV</a>
     </div>
-  </div>
+  </section>
 </Base>

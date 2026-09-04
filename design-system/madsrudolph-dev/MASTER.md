@@ -14,41 +14,48 @@
 
 ## Global Rules
 
-> **Decision (2026-09-04):** the generated system proposed a light Swiss palette. The site
-> keeps its dark ground by the owner's choice, so the palette below is the **dark variant**
-> of the same monochrome-plus-one-accent system. Everything else from the generated
-> system — Swiss/minimal layout, Archivo + Space Grotesk, hairline rules, no glass, no
-> glow, one accent — stands. Tokens live in `src/styles/global.css`.
+> **Decision (2026-09-04, second pass):** after seeing the Swiss-dark version live, Mads asked
+> for a total redesign after https://sawad.framer.website/ (a Framer portfolio template).
+> The system below is that reference translated to this site. It supersedes the
+> generated light palette and the earlier Swiss-dark variant. Tokens live in
+> `src/styles/global.css`.
 
-### Color Palette (dark variant, as implemented)
+### Color Palette (as implemented)
 
-| Role | Hex | CSS Variable | Contrast on background |
-|------|-----|--------------|------------------------|
-| Background | `#0F1012` | `--color-background` | — |
-| Surface (code, thumbs) | `#151618` | `--color-surface` | — |
-| Foreground | `#F4F4F2` | `--color-foreground` | 18:1 |
-| Foreground 2 (secondary text) | `#B9BAC0` | `--color-foreground-2` | 9:1 |
-| Muted foreground (labels, captions) | `#8E9096` | `--color-muted-foreground` | 5.7:1 |
-| Border (hairlines) | `#26272B` | `--color-border` | — |
-| Border strong (chips, buttons) | `#3B3C42` | `--color-border-strong` | 3:1 vs bg |
-| Accent (the one colour) | `#5B9DFF` | `--color-accent` | 7:1 |
-| On accent | `#0B1220` | `--color-on-accent` | 7:1 on accent |
-| Ring (focus) | `#F4F4F2` | `--color-ring` | — |
-| Status ok / in progress | `#6FCF97` / `#E6B23C` | `--color-status-*` | always paired with a text label |
+| Role | Value | CSS Variable | Note |
+|------|-------|--------------|------|
+| Background | `#151312` | `--color-background` | the reference's warm near-black |
+| Surface | `rgba(255,255,255,.05)` | `--color-surface` | every card; hover `.09` |
+| Surface solid | `#1F1D1C` | `--color-surface-solid` | code, thumbnails |
+| Foreground | `#FFFFFF` | `--color-foreground` | |
+| Foreground 2 | `#B3ABAB` | `--color-foreground-2` | body copy in cards, 8:1 |
+| Muted foreground | `#8F8888` | `--color-muted-foreground` | captions, meta, 5.2:1 |
+| Dim | `#3A3636` | `--color-dim` | second line of stacked display headings only |
+| Orange | `#F46C38` | `--color-orange` | primary action, one focus card, course codes |
+| Lime | `#C5FF41` | `--color-lime` | second focus card, pressed filter, current term |
+| On bright | `#151312` | `--color-on-bright` | text on orange/lime buttons |
 
-**Color Notes:** Monochrome + blue accent. Accent is used for: the full stop in the hero
-headline, the current-nav underline, the primary button, hover on links and card titles,
-and section numbers in write-ups. Nothing else. Status dots never carry meaning alone.
+Orange and lime only appear on things you can act on or that are "now". White text sits on the
+orange card only at display size (3:1 large-text AA); buttons use dark text on both colours.
 
 ### Typography
 
-- **Heading Font:** Archivo (variable, self-hosted via `@fontsource-variable/archivo`) — weight 600, tracking −0.02 to −0.035em
-- **Body Font:** Space Grotesk (variable, self-hosted via `@fontsource-variable/space-grotesk`) — 17px/1.6 desktop, 16px mobile
-- **Data Font:** IBM Plex Mono — only for code, repo figures, index numbers and tabular data
-- **Scale:** 12 · 14 · 16 · 17 · 18 · 22 · 28 · 36 · display clamp(2.75rem, 7.5vw, 5.25rem)
-- **Mood:** minimal, portfolio, clean, engineering
+- **Display:** Poppins 700 (self-hosted, `@fontsource/poppins`), upper-case, stacked two-line
+  section titles with the second line dimmed — the reference's signature
+- **Body:** Inter (variable, `@fontsource-variable/inter`), 16px / 1.65
+- **Data:** IBM Plex Mono for code, course codes and repo figures
+- **Scale:** 12 · 14 · 16 · 18 · 22 · 28 · 36 · display clamp(2.25rem, 6vw, 3.25rem) · hero clamp(2.5rem, 7vw, 3.75rem)
 
-Fonts are bundled, not loaded from Google Fonts, so the site stays first-party and works offline.
+### Layout
+
+- One centred column, 47rem (~750px), like the reference; write-ups use the same column
+- Floating pill navigation, fixed at the top, icon + label (icon-only under 640px, labels stay
+  in the accessibility tree), current page filled white
+- Cards: 24px radius for sections/rows, 16px for media, 8px for thumbnails, 999px for buttons
+- Home page is one scroller: hero (portrait, name, tagline, upper-case role) → three stats →
+  two coloured focus cards → recent projects → study & work → bench & toolchain → this
+  semester → contact
+- Motion: hover/press only; no scroll-reveal; `prefers-reduced-motion` disables transitions
 
 ### Spacing Variables
 

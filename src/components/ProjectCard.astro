@@ -6,13 +6,13 @@ interface Props {
   project: CollectionEntry<'projects'>;
   index?: number;
   lang?: Lang;
-  /** Show the project's hero image as a thumbnail (used on the home featured grid). */
+  /** Kept for callers; every card now shows its thumbnail when there is one. */
   image?: boolean;
   /** Values put in data-tags for the index filter (broad categories). Defaults to the raw tags. */
   filterTags?: string[];
 }
 
-const { project, index, lang = 'en', image = false, filterTags } = Astro.props;
+const { project, index, lang = 'en', filterTags } = Astro.props;
 const { title, summary, date, tags, status, flagship, hero, heroAlt } = project.data;
 const dataTags = (filterTags ?? tags).join(',');
 
@@ -27,31 +27,38 @@ const statusLabels = {
 };
 const statusLabel = statusLabels[lang][status];
 
-// Writeups are English-only, so cards always link to the English page.
-const idx = typeof index === 'number' ? String(index + 1).padStart(2, '0') : null;
+// Write-ups are English-only, so cards always link to the English page.
+const href = `/projects/${project.id}`;
+const initial = title.replace(/^[^A-Za-z0-9]+/, '').charAt(0).toUpperCase();
+void index;
 ---
 
-<li class:list={['project-card', { flagship, 'has-thumb': image && hero }]} data-tags={dataTags}>
+<li class:list={['project-card', { flagship }]} data-tags={dataTags}>
   {
-    image && hero && (
-      <a class="card-thumb" href={`/projects/${project.id}`} tabindex="-1" aria-hidden="true">
-        <img src={hero} alt={heroAlt ?? ''} loading="lazy" />
+    hero ? (
+      <a class="card-thumb" href={href} tabindex="-1" aria-hidden="true">
+        <img src={hero} alt={heroAlt ?? ''} loading="lazy" width="96" height="96" />
       </a>
+    ) : (
+      <span class="card-thumb placeholder" aria-hidden="true">{initial}</span>
     )
   }
-  <div class="meta">
-    {idx && <span class="idx">{idx}</span>}
-    {flagship && <span class="flag">{flagshipLabel}</span>}
-    <span class="label">{dateLabel}</span>
-    <span class="spacer"></span>
-    <span class="status" data-status={status}>
-      <span class="led" aria-hidden="true"></span>
-      {statusLabel}
-    </span>
+  <div class="body">
+    <div class="meta">
+      {flagship && <span class="flag">{flagshipLabel}</span>}
+      <span>{dateLabel}</span>
+      <span class="status" data-status={status}>
+        <span class="led" aria-hidden="true"></span>
+        {statusLabel}
+      </span>
+    </div>
+    <h3><a href={href}>{title}</a></h3>
+    <p>{summary}</p>
+    <div class="tags">
+      {tags.slice(0, 5).map((tag) => <span class="tag">{tag}</span>)}
+    </div>
   </div>
-  <h3><a href={`/projects/${project.id}`}>{title}</a></h3>
-  <p>{summary}</p>
-  <div class="tags">
-    {tags.map((tag) => <span class="tag">{tag}</span>)}
-  </div>
+  <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M7 17 17 7M8 7h9v9" />
+  </svg>
 </li>
