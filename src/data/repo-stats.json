@@ -2,19 +2,19 @@
   "DTU-EKB/KiCad-Autoplace": {
     "repo": "DTU-EKB/KiCad-Autoplace",
     "url": "https://github.com/DTU-EKB/KiCad-Autoplace",
-    "commits": 129,
+    "commits": 165,
     "contributors": 1,
     "contributorList": [
       {
         "login": "MadsRudolph",
-        "contributions": 118,
+        "contributions": 154,
         "avatarUrl": "https://avatars.githubusercontent.com/u/68565302?v=4",
         "htmlUrl": "https://github.com/MadsRudolph"
       }
     ],
-    "additions": 26879,
-    "deletions": 2503,
-    "linesChanged": 29382,
+    "additions": 35139,
+    "deletions": 2160,
+    "linesChanged": 37299,
     "language": "Python",
     "private": false
   },
@@ -78,50 +78,69 @@
   "MadsRudolph/personal-projects": {
     "repo": "MadsRudolph/personal-projects",
     "url": "https://github.com/MadsRudolph/personal-projects",
-    "commits": 176,
+    "commits": 262,
     "contributors": 1,
     "contributorList": [
       {
         "login": "MadsRudolph",
-        "contributions": 176,
+        "contributions": 261,
         "avatarUrl": "https://avatars.githubusercontent.com/u/68565302?v=4",
         "htmlUrl": "https://github.com/MadsRudolph"
       }
     ],
-    "additions": 963572,
-    "deletions": 28240,
-    "linesChanged": 991812,
-    "language": "Python",
+    "additions": 2524900,
+    "deletions": 893172,
+    "linesChanged": 3418072,
+    "language": "nesC",
     "private": false
   },
   "MadsRudolph/srm-cam": {
     "repo": "MadsRudolph/srm-cam",
     "url": "https://github.com/MadsRudolph/srm-cam",
-    "commits": 274,
+    "commits": 374,
     "contributors": 1,
     "contributorList": [
       {
         "login": "MadsRudolph",
-        "contributions": 274,
+        "contributions": 374,
         "avatarUrl": "https://avatars.githubusercontent.com/u/68565302?v=4",
         "htmlUrl": "https://github.com/MadsRudolph"
       }
     ],
-    "additions": 65974,
-    "deletions": 3235,
-    "linesChanged": 69209,
+    "additions": 125157,
+    "deletions": 5936,
+    "linesChanged": 131093,
+    "language": "Python",
+    "private": false
+  },
+  "MadsRudolph/vinyl-adc": {
+    "repo": "MadsRudolph/vinyl-adc",
+    "url": "https://github.com/MadsRudolph/vinyl-adc",
+    "commits": 16,
+    "contributors": 1,
+    "contributorList": [
+      {
+        "login": "MadsRudolph",
+        "contributions": 16,
+        "avatarUrl": "https://avatars.githubusercontent.com/u/68565302?v=4",
+        "htmlUrl": "https://github.com/MadsRudolph"
+      }
+    ],
+    "additions": 703171,
+    "deletions": 117903,
+    "linesChanged": 821074,
     "language": "Python",
     "private": false
   },
   "Skab101/34621-Metal-Detector": {
     "repo": "Skab101/34621-Metal-Detector",
     "url": "https://github.com/Skab101/34621-Metal-Detector",
-    "commits": 121,
+    "commits": 122,
     "contributors": 4,
     "contributorList": [
       {
         "login": "MadsRudolph",
-        "contributions": 78,
+        "contributions": 79,
         "avatarUrl": "https://avatars.githubusercontent.com/u/68565302?v=4",
         "htmlUrl": "https://github.com/MadsRudolph"
       },
@@ -144,9 +163,9 @@
         "htmlUrl": "https://github.com/AndreasSJacobsen"
       }
     ],
-    "additions": 482204,
-    "deletions": 153042,
-    "linesChanged": 635246,
+    "additions": 482205,
+    "deletions": 153043,
+    "linesChanged": 635248,
     "language": "C",
     "private": false
   },

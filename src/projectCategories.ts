@@ -19,7 +19,7 @@ export const categories: Category[] = [
     tags: [
       'KiCad', 'PCB design', 'PCB automation', 'CNC / grbl', 'FreeRouting',
       'Power electronics', 'Analog electronics', 'Analog front-end', 'Op-amp (TL072)',
-      'PWM DAC', 'Filter design', '3D CAD',
+      'PWM DAC', 'Filter design', '3D CAD', 'Delta-sigma ADC', 'SPICE', 'Audio',
     ],
   },
   {

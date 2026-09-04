@@ -679,9 +679,17 @@ article.writeup figure {
   margin: 1.5rem 0;
 }
 
-article.writeup figure img {
+article.writeup figure img,
+article.writeup figure video {
   display: block;
   width: 100%;
+}
+
+article.writeup figure video {
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: #000;
 }
 
 article.writeup figure figcaption {
