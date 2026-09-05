@@ -98,11 +98,6 @@ The modulator loop now crosses a ribbon — the comparator output leaves the cha
   <figcaption>The PCB stack and acrylic lid lift apart to show the enclosure, boards, and M3 hardware. This is an illustrative exploded view of the CAD design. The <a href="https://madsrudolph.github.io/vinyl-adc/">interactive 3D viewer</a> lets you explore the assembly yourself.</figcaption>
 </figure>
 
-<figure>
-  <img src="/media/vinyl-adc/laser-engraved-lid.png" alt="Artwork for the laser-engraved acrylic lid: the block diagram of the converter — input, three integrators, comparator, clock, interleave, Pi — drawn so each block sits above the IC that implements it" width="530" height="530" />
-  <figcaption>The engraving for the clear acrylic top. Seen through the lid, each block of the diagram sits directly above the chip that does the job.</figcaption>
-</figure>
-
 ## Status
 
 The design is complete and verified in simulation: 51 SPICE assertions and 34 model-vs-datasheet checks passing, a 120-build Monte Carlo showing SNR robust to 10% capacitors, and E96 resistor snapping costing nothing. The channel board's production Gerbers and drill files are exported for the mill, and the power and digital boards are laid out as fabricated. The stack is being milled, stuffed and brought up now. The honest expectation — recorded in the design notes before any measurement — is that the built board lands nearer 65 dB than 70, because the classic limiter of a continuous-time 1-bit DAC is rise/fall asymmetry in the gate, which the model doesn't include. That measurement is the next thing on this page.
