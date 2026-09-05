@@ -47,6 +47,7 @@ const shownCategories = categories.filter((c) => used.has(c.key));
         <ProjectCard
           project={project}
           index={i}
+          image={i < 3}
           filterTags={[...projectCategoryKeys(project.data.tags), project.data.kind]}
         />
       ))

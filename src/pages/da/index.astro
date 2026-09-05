@@ -8,10 +8,9 @@ const projects = await getCollection('projects');
 const featured = projects
   .filter((p) => p.data.featured)
   .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 4);
+  .slice(0, 3);
 
 const cw = coursework.da;
-const ectsDone = ectsOf(cw.completed);
 
 const tools = [
   { name: 'KiCad', use: 'Skema og PCB-layout', icon: 'M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3M6 6h12v12H6zM9 9h6v6H9z' },
@@ -32,25 +31,26 @@ const tools = [
   lang="da"
   altUrl="/"
 >
-  <section class="hero">
-    <img class="portrait" src="/media/mads-rudolph.jpg" alt="Portræt af Mads Rudolph" width="260" height="325" />
-    <h1>Mads Rudolph</h1>
-    <p class="tagline">Bygger og fejlfinder rigtig hardware. DTU, 5. semester.</p>
-    <p class="role">Elektronik-<br />ingeniør</p>
-    <p class="intro">
-      PCB-design, embedded firmware, fejlfinding på bænken. Ledig til praktik fra januar 2027.
-    </p>
-    <div class="actions">
-      <a href="mailto:mads28122001@hotmail.dk" class="btn primary">Skriv til mig</a>
-      <a href="/da/projects" class="btn secondary">Se projekterne</a>
+  <section class="hero hero-compact">
+    <img class="portrait" src="/media/mads-rudolph.jpg" alt="Mads Rudolph" width="260" height="325" />
+    <div class="hero-copy">
+      <h1>Mads Rudolph</h1>
+      <p class="intro">Elektroteknologistuderende på DTU. Jeg bygger og fejlfinder audiohardware, print og embedded-systemer.</p>
+      <p class="availability">Ledig til praktik fra januar 2027.</p>
+      <div class="actions">
+        <a href="#work" class="btn primary">Se mit arbejde</a>
+        <a href="mailto:mads28122001@hotmail.dk" class="btn secondary">Skriv til mig</a>
+      </div>
     </div>
   </section>
 
-  <ul class="stats">
-    <li><span class="n">{projects.length}</span><span class="l">projekter, hver med en beskrivelse</span></li>
-    <li><span class="n">{ectsDone}</span><span class="l">ECTS gennemført på DTU</span></li>
-    <li><span class="n">Jan. '27</span><span class="l">ledig til praktik</span></li>
-  </ul>
+  <section class="home-section" id="work">
+    <h2 class="display"><span>Udvalgte</span><span class="dim">projekter</span></h2>
+    <ul class="project-list">
+      {featured.map((project, i) => <ProjectCard project={project} index={i} image lang="da" />)}
+    </ul>
+    <p class="more"><a class="btn secondary" href="/da/projects">Alle {projects.length} projekter</a></p>
+  </section>
 
   <div class="focus">
     <a class="focus-card orange" href="/da/projects#pcb">
@@ -75,13 +75,7 @@ const tools = [
     </a>
   </div>
 
-  <section class="home-section" id="work">
-    <h2 class="display"><span>Seneste</span><span class="dim">projekter</span></h2>
-    <ul class="project-list">
-      {featured.map((project, i) => <ProjectCard project={project} index={i} lang="da" />)}
-    </ul>
-    <p class="more"><a class="btn secondary" href="/da/projects">Alle {projects.length} projekter</a></p>
-  </section>
+
 
   <section class="home-section" id="tools">
     <h2 class="display"><span>Bænk &amp;</span><span class="dim">værktøj</span></h2>

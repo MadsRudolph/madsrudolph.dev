@@ -128,3 +128,17 @@ security actions required before certain repos are made public.
 ## License
 
 Content (writeups, images) © Mads Rudolph. Site code is free to reuse.
+
+### Downloadable CVs
+
+The English and Danish CV pages link to PDFs in `public/media/cv/`. Their print layout
+uses four selected projects and a compact skills list. After editing either CV, run:
+
+```sh
+npm run build
+python scripts/export-cv.py
+```
+
+The exporter needs Chromium or Google Chrome installed. It serves the build locally,
+prints both CV pages, and updates the PDFs in both `public/` and `dist/`.
+Commit the updated PDFs with the CV source changes.
