@@ -12,13 +12,13 @@ repo: 'https://github.com/MadsRudolph/vinyl-adc'
 featured: true
 order: 1.2
 status: in-progress
-hero: '/media/vinyl-adc/pcb-channel-3d.jpg'
-heroAlt: 'Raytraced KiCad render of the Vinyl ADC channel board — TL072 integrators, LM311 comparator, 74HC74 and 74HC04, a multi-turn trimmer, and the 16-way ribbon header'
+hero: '/media/vinyl-adc/showcase/orbit-poster.png'
+heroAlt: 'Blender render of the assembled Vinyl ADC enclosure, with a clear acrylic lid, front gain control, and side RCA connectors'
 ---
 
 <figure>
-  <video src="/media/vinyl-adc/assembly.mp4" poster="/media/vinyl-adc/assembly-poster.jpg" width="800" height="450" autoplay loop muted playsinline></video>
-  <figcaption>The four-board stack, exploded — power at the bottom, the two identical channel boards, and the digital board with the crystal can and Pi header on top. Each 100 × 100 mm board is isolation-milled on the SRM-20 and joined by ribbon cable and M3 standoffs. An <a href="https://madsrudolph.github.io/vinyl-adc/">interactive 3D viewer</a> lets you scrub the explosion yourself.</figcaption>
+  <video data-showcase src="/media/vinyl-adc/showcase/orbit.mp4" poster="/media/vinyl-adc/showcase/orbit-poster.png" width="960" height="720" controls loop muted playsinline preload="metadata" aria-label="Full orbit around the assembled Vinyl ADC enclosure"></video>
+  <figcaption>The enclosure design in a full turn: a PETG base, clear acrylic lid, front gain control, and side RCA connectors and ground post. Rendered from the project’s Blender model.</figcaption>
 </figure>
 
 ## What it is
@@ -57,6 +57,11 @@ line in ──► Σ ──► ∫ ──► Σ ──► ∫ ──► Σ ─�
   <figcaption>The power board (left): charge pump, ±2.5 V reference, and the bulk reservoirs. The digital board (right): the oscillator can, the divider, the stereo interleave mux and the level shift to the Pi. Every IC is socketed; everything is through-hole so it can be milled single-sided.</figcaption>
 </figure>
 
+<figure>
+  <video data-showcase src="/media/vinyl-adc/showcase/electronics.mp4" poster="/media/vinyl-adc/showcase/electronics-poster.png" width="960" height="720" controls loop muted playsinline preload="metadata" aria-label="A close-up of the four populated Vinyl ADC circuit boards"></video>
+  <figcaption>The four-board architecture, with the enclosure and wiring hidden for a closer look. From bottom to top: power, right-channel modulator, left-channel modulator, and digital interface. The two channel boards share the same artwork.</figcaption>
+</figure>
+
 ## What the simulations found
 
 The circuit was designed in a numerical model first (`sim/`), then drawn in KiCad, then re-checked in eight ngspice testbenches generated from the same layout script as the board — so every bench is literally the same drawing. That order mattered, because each stage caught something the previous one couldn't.
@@ -87,6 +92,11 @@ The first layout was one board, 203 × 152 mm — the mill's whole envelope. Rou
 The reason is one number: **0.84 mm**. That is what a 2.54 mm DIP pitch leaves between two pads, and a track with milling clearance either side needs 2.7 mm. Nothing passes between adjacent DIP pins on this process, so every connection and the ground pour have to go round the outside of every package, and routability becomes a function of space per part. Splitting the digital section off routed cleanly at once. The analogue half stayed at 39–43 bridges however it was arranged, until the two channels went onto their own board — one artwork, milled twice, checked to be identical by a script that welds each ribbon's pin *n* to its partner's and requires the resulting netlist partition to match the single-sheet reference exactly. Move a block to the wrong board and every other check still passes; that one doesn't.
 
 The modulator loop now crosses a ribbon — the comparator output leaves the channel board and the DAC drive comes back. That sounds alarming until you put a number on it: the delay `k0` compensates is the LM311's 200 ns, and 10 cm of ribbon adds 0.5 ns, a quarter of one percent.
+
+<figure>
+  <video data-showcase src="/media/vinyl-adc/showcase/assembly.mp4" poster="/media/vinyl-adc/showcase/assembly-poster.png" width="960" height="720" controls loop muted playsinline preload="metadata" aria-label="The Vinyl ADC PCB stack and lid lift out of the enclosure and reassemble"></video>
+  <figcaption>The PCB stack and acrylic lid lift apart to show the enclosure, boards, and M3 hardware. This is an illustrative exploded view of the CAD design. The <a href="https://madsrudolph.github.io/vinyl-adc/">interactive 3D viewer</a> lets you explore the assembly yourself.</figcaption>
+</figure>
 
 <figure>
   <img src="/media/vinyl-adc/laser-engraved-lid.png" alt="Artwork for the laser-engraved acrylic lid: the block diagram of the converter — input, three integrators, comparator, clock, interleave, Pi — drawn so each block sits above the IC that implements it" width="530" height="530" />

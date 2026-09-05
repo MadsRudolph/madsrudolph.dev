@@ -123,5 +123,22 @@ const year = new Date().getFullYear();
         </span>
       </div>
     </footer>
+    <script>
+      const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const videos = document.querySelectorAll<HTMLVideoElement>('video[data-showcase]');
+      // Start each showcase once when visible; native controls retain user control.
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const video = entry.target as HTMLVideoElement;
+          observer.unobserve(video);
+          if (!motion.matches) video.play().catch(() => {});
+        }
+      }, { threshold: 0.25 });
+      videos.forEach((video) => observer.observe(video));
+      motion.addEventListener('change', () => {
+        if (motion.matches) videos.forEach((video) => video.pause());
+      });
+    </script>
   </body>
 </html>
