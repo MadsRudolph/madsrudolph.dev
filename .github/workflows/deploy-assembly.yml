@@ -1,0 +1,59 @@
+name: Deploy Vinyl ADC assembly guide
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_sha:
+        description: 'Full pushed commit SHA from MadsRudolph/vinyl-adc'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vinyl-adc-assembly-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: portfolio
+      - name: Validate source revision
+        env:
+          SOURCE_SHA: ${{ inputs.source_sha }}
+        run: |
+          python - <<'PY'
+          import os, re
+          assert re.fullmatch(r'[0-9a-f]{40}', os.environ['SOURCE_SHA']), 'A full commit SHA is required'
+          PY
+      - uses: actions/checkout@v4
+        with:
+          repository: MadsRudolph/vinyl-adc
+          ref: ${{ inputs.source_sha }}
+          path: source
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build the static guide
+        run: python source/assembly/build_site.py
+      - name: Ensure the dedicated Pages project exists
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: python portfolio/scripts/assembly-cloudflare.py prepare
+      - name: Deploy the assembly site
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy source/assembly/site-dist --project-name=vinyl-adc-assembly --branch=main --commit-hash=${{ inputs.source_sha }}
+      - name: Attach the custom subdomain
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: python portfolio/scripts/assembly-cloudflare.py domain

@@ -28,7 +28,7 @@ Comparator delay limited the sampling rate. A third-order loop and delay compens
 - **1.536 MHz** modulation; interleaved data sent to a Raspberry Pi over I2S.
 - Simulation and netlist checks cover the four-board design.
 
-**Current status:** Boards are being milled and brought up. Audio performance has not yet been measured on the finished hardware.
+**Current status:** Power and digital boards are in initial bench testing. The two channel boards still need decoupling capacitors; audio performance has not yet been measured on the finished hardware. The [assembly guide and bench log](https://vinyl-adc.madsrudolph.dev/) include graphical probe connections, actual readings and the remaining checks.
 
 <figure>
   <video data-showcase src="/media/vinyl-adc/showcase/electronics.mp4" poster="/media/vinyl-adc/showcase/electronics-poster.png" width="960" height="720" controls loop muted playsinline preload="metadata" aria-label="A close-up of the four populated Vinyl ADC circuit boards"></video>
