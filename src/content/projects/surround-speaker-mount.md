@@ -1,7 +1,7 @@
 ---
 title: 'Surround speaker mount: compact pan and tilt'
 summary: >-
-  A three-part printable speaker wall mount with adjustable pan and tilt, parametric FreeCAD models, and an interactive Blender assembly.
+  A three-part printable speaker wall mount with continuous pan and tilt indexed in 5° steps, parametric FreeCAD models, and an interactive Blender assembly.
 date: 2026-09-09
 tags: ['3D CAD', 'FreeCAD', 'Blender', '3D printing', 'Python', 'Audio']
 repo: 'https://github.com/MadsRudolph/surround-speaker-mount'
@@ -17,7 +17,7 @@ Personal project. I designed a compact wall mount for surround speakers, with se
 
 <figure>
   <img src="/media/surround-speaker-mount/assembly.webp" alt="Rendered speaker mount showing its wall plate, two pivot joints and four cradle clamp screws" width="1200" height="1000" />
-  <figcaption>The compact second revision. This is a design render; printing and physical load testing are still pending.</figcaption>
+  <figcaption>The compact mount with the third revision’s indexed tilt interface. This is a design render; printing and physical load testing are still pending.</figcaption>
 </figure>
 
 ## How this will look
@@ -31,7 +31,15 @@ A living-room surround setup with the TV and front speakers ahead of the couch, 
 
 <figure>
   <a href="/media/surround-speaker-mount/mount-in-use.webp"><img loading="lazy" src="/media/surround-speaker-mount/mount-in-use.webp" alt="Close-up Blender render of a walnut speaker held in the wall-mounted cradle, showing the pan and tilt joints, clamp screws and cable loop" width="1800" height="1500" /></a>
-  <figcaption>The mount in use, with 28° pan and 12° downward tilt. The speakers and interior are illustrative; physical fit and load testing remain pending.</figcaption>
+  <figcaption>The mount in use, with 28° pan and 10° downward tilt. The speakers and interior are illustrative; physical fit and load testing remain pending.</figcaption>
+</figure>
+
+<figure>
+  <picture>
+    <source media="(prefers-reduced-motion: reduce)" srcset="/media/surround-speaker-mount/mount-motion-poster.webp" />
+    <img loading="lazy" src="/media/surround-speaker-mount/mount-motion.gif" alt="Looping Blender animation showing the mounted speaker and cradle panning smoothly while the tilt joint disengages, moves in 5-degree steps and re-engages with the wall plate fixed" width="720" height="600" />
+  </picture>
+  <figcaption>The speaker pans smoothly through ±60°. The tilt joint disengages, moves to the next 5° setting and re-seats, from level to 30° downward. A six-second mechanism preview; physical adjustment requires supporting the speaker and loosening the bolt. <a href="/media/surround-speaker-mount/mount-motion.gif" download>Download GIF</a>.</figcaption>
 </figure>
 
 [Explore the Blender scene and render script →](https://github.com/MadsRudolph/surround-speaker-mount/tree/main/showcase)
@@ -41,6 +49,19 @@ A living-room surround setup with the TV and front speakers ahead of the couch, 
 The default cabinet is **150 × 150 × 180 mm**, with a designed range of **±60° pan and 30° downward tilt**. A wall plate carries the vertical pan joint; a short connecting arm supports the horizontal tilt joint and cradle. Both use M5 bolts, while four M4 swivel-pressure screws retain the cabinet against padding.
 
 FreeCAD generates the solid models from spreadsheet-linked parameters. Python scripts build the geometry, export STEP and print-oriented STL files, and check clearances. A separate Blender assembly provides renders and interactive posing. FreeCAD also has live mouse controls for aiming the assembly.
+
+## Positive engagement for the tilt joint
+
+The up/down pivot now has **72 mating radial teeth for 5° increments**. The pan pivot stays smooth and continuously adjustable. A recessed ring in the arm mates with a raised ring on the cradle, so tilt position is held by tooth engagement as well as the bolt keeping the faces together.
+
+<figure>
+  <a href="/media/surround-speaker-mount/tilt-teeth.webp"><img loading="lazy" src="/media/surround-speaker-mount/tilt-teeth.webp" alt="Blender render of two fit-test discs showing the recessed arm tooth profile and the matching raised cradle tooth profile" width="1400" height="900" /></a>
+  <figcaption>The printable fit-test discs carry the same 72-tooth profiles used on the tilt pivot. Pan retains its smooth faces.</figcaption>
+</figure>
+
+Only one tilt face is toothed. With the bolt loosened, the cradle can slide toward the opposite smooth cheek to disengage, turn to the next setting and seat again. The nominal release travel from seated is **0.6 mm**, with **0.15 mm tooth-tip clearance** when released.
+
+CAD checks cover all seven tilt settings, confirm that half-step positions interfere when seated, and check 61 released positions. Small [printable fit coupons](https://github.com/MadsRudolph/surround-speaker-mount/tree/main/print/fit-coupons) use the same tooth profiles. Printed fit, tooth strength, wear and any improvement in rigidity still need physical testing.
 
 ## What needed redesigning
 
