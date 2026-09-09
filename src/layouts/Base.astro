@@ -126,6 +126,34 @@ const year = new Date().getFullYear();
     <script>
       const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
       const videos = document.querySelectorAll<HTMLVideoElement>('video[data-showcase]');
+      // GIF showcases use a still poster when paused or reduced motion is requested.
+      document.querySelectorAll<HTMLElement>('[data-gif-showcase]').forEach((figure) => {
+        const image = figure.querySelector<HTMLImageElement>('img[data-gif-src]');
+        const button = figure.querySelector<HTMLButtonElement>('[data-gif-toggle]');
+        if (!image || !button) return;
+        let playing = false;
+        let userInteracted = false;
+        const setPlaying = (value: boolean) => {
+          playing = value;
+          image.src = (value ? image.dataset.gifSrc : image.dataset.posterSrc)!;
+          button.textContent = value ? 'Show still image' : 'Play GIF';
+          button.setAttribute('aria-pressed', String(value));
+        };
+        const gifObserver = new IntersectionObserver((entries) => {
+          if (!entries.some(entry => entry.isIntersecting)) return;
+          gifObserver.disconnect();
+          if (!motion.matches && !userInteracted) setPlaying(true);
+        }, { threshold: 0.25 });
+        gifObserver.observe(figure);
+        button.addEventListener('click', () => {
+          userInteracted = true;
+          setPlaying(!playing);
+        });
+        motion.addEventListener('change', () => {
+          if (motion.matches) setPlaying(false);
+        });
+      });
+
       // Start each showcase once when visible; native controls retain user control.
       const observer = new IntersectionObserver((entries) => {
         for (const entry of entries) {
