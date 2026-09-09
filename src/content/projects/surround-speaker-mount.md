@@ -2,7 +2,7 @@
 title: 'Surround speaker mount: compact pan and tilt'
 summary: >-
   A three-part printable speaker wall mount with adjustable pan and tilt, parametric FreeCAD models, and an interactive Blender assembly.
-date: 2026-09-08
+date: 2026-09-09
 tags: ['3D CAD', 'FreeCAD', 'Blender', '3D printing', 'Python', 'Audio']
 repo: 'https://github.com/MadsRudolph/surround-speaker-mount'
 featured: false
@@ -19,6 +19,22 @@ Personal project. I designed a compact wall mount for surround speakers, with se
   <img src="/media/surround-speaker-mount/assembly.webp" alt="Rendered speaker mount showing its wall plate, two pivot joints and four cradle clamp screws" width="1200" height="1000" />
   <figcaption>The compact second revision. This is a design render; printing and physical load testing are still pending.</figcaption>
 </figure>
+
+## How this will look
+
+A living-room surround setup with the TV and front speakers ahead of the couch, and the two wall-mounted surrounds behind it. These Blender renders use the actual mount geometry and illustrative walnut speakers sized to the design's 150 × 150 × 180 mm cabinet envelope.
+
+<figure>
+  <a href="/media/surround-speaker-mount/living-room.webp"><img loading="lazy" src="/media/surround-speaker-mount/living-room.webp" alt="Blender living-room render with a TV, couch, front speakers and two surround speakers supported by wall mounts behind the seating" width="2000" height="1400" /></a>
+  <figcaption>The proposed surround setup. Both wall mounts are shown with speakers installed and aimed toward the seating.</figcaption>
+</figure>
+
+<figure>
+  <a href="/media/surround-speaker-mount/mount-in-use.webp"><img loading="lazy" src="/media/surround-speaker-mount/mount-in-use.webp" alt="Close-up Blender render of a walnut speaker held in the wall-mounted cradle, showing the pan and tilt joints, clamp screws and cable loop" width="1800" height="1500" /></a>
+  <figcaption>The mount in use, with 28° pan and 12° downward tilt. The speakers and interior are illustrative; physical fit and load testing remain pending.</figcaption>
+</figure>
+
+[Explore the Blender scene and render script →](https://github.com/MadsRudolph/surround-speaker-mount/tree/main/showcase)
 
 ## Making room for the speaker and its cables
 
