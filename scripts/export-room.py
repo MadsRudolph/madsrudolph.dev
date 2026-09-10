@@ -34,7 +34,8 @@ for m in bpy.data.materials:
     p=m.node_tree.nodes.get('Principled BSDF')
     if not p:continue
     for socket in ['Base Color','Normal']:
-        for l in list(p.inputs[socket].links):m.node_tree.links.remove(l)
+        for l in list(p.inputs[socket].links):
+            if l.from_node.type != 'TEX_IMAGE':m.node_tree.links.remove(l)
     if 'oak' in m.name or 'beech' in m.name:
         size=512;y,x=np.mgrid[0:size,0:size]/size
         grain=np.sin(x*260+np.sin(y*9)*2+np.sin(x*38+y*4))*0.045+rng.normal(0,.012,(size,size))

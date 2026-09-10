@@ -166,3 +166,11 @@ The exporter retains shell metadata for visibility controls. Avoid optimization
 passes that merge the walls with furniture. Blender procedural wood is converted
 to portable texture maps. Browser lighting uses an environment, shadow maps and
 screen-space ambient occlusion; it is distinct from the offline Cycles render.
+
+The personalized room includes two upright JBL 4412 cabinets (362 × 597 × 286 mm),
+four vinyl sleeves with original generated artwork, and the photographed four-screen
+arrangement: two portrait wings, a main landscape screen and a smaller lower screen.
+Screen graphics are original music, waveform, coding and telemetry layouts; the TV
+has an original landscape graphic. The laptop styling addition has been removed.
+Speaker proportions reference the [JBL 4412 manufacturer brochure](https://warehousesound.com/r/jbl4412.pdf).
+The companion repo's `web/update_room.py` and `web/make_screens.py` generate this revision.
