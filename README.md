@@ -174,3 +174,15 @@ Screen graphics are original music, waveform, coding and telemetry layouts; the 
 has an original landscape graphic. The laptop styling addition has been removed.
 Speaker proportions reference the [JBL 4412 manufacturer brochure](https://warehousesound.com/r/jbl4412.pdf).
 The companion repo's `web/update_room.py` and `web/make_screens.py` generate this revision.
+
+The room viewer mirrors the source layout across the 2.55 m room width, as corrected
+by the owner. Camera presets and lighting follow this reflection. Texture coordinates
+are corrected within each mesh's UV range so screen text and album covers stay readable.
+The source CAD remains in its original coordinate system.
+
+The desk speakers are now Yamaha HS7s with black cabinets and white woofers, using
+Yamaha's 210 × 332 × 284 mm dimensions. The four monitors share a front plane;
+the portrait screens align with the outer edges of the central stack, with 9 mm gaps.
+Each display has a modeled articulated arm and clamp at the back edge of the desk.
+The original TV is lowered until its feet meet the cabinet top at 700 mm.
+The main media cabinet is dark grey, and the turntable units have walnut veneer.

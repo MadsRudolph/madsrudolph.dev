@@ -18,19 +18,36 @@ const camera=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,.025,100);
 const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.minDistance=.1;controls.maxDistance=18;controls.maxPolarAngle=Math.PI*.94;
 const env=new RoomEnvironment();const pmrem=new THREE.PMREMGenerator(renderer);scene.environment=pmrem.fromScene(env,.04).texture;scene.environmentIntensity=.45;env.dispose();pmrem.dispose();
 const hemi=new THREE.HemisphereLight(0xe7f0ff,0xa09070,1.7);scene.add(hemi);
-const sun=new THREE.DirectionalLight(0xffebcb,3.2);sun.position.set(-2,5,3);sun.target.position.set(1,0,-3);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-5,right:5,top:5,bottom:-5,near:.1,far:15});sun.shadow.bias=-.0003;sun.shadow.normalBias=.015;scene.add(sun,sun.target);
-const warm=new THREE.PointLight(0xffb665,0,7,2);warm.position.set(1.6,2,-3.5);scene.add(warm);
+const sun=new THREE.DirectionalLight(0xffebcb,3.2);sun.position.set(4.55,5,3);sun.target.position.set(1.55,0,-3);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-5,right:5,top:5,bottom:-5,near:.1,far:15});sun.shadow.bias=-.0003;sun.shadow.normalBias=.015;scene.add(sun,sun.target);
+const warm=new THREE.PointLight(0xffb665,0,7,2);warm.position.set(.95,2,-3.5);scene.add(warm);
 const model=(await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync('/media/room/room.glb',p=>{if(p.total)$('load-text').textContent=`Preparing your room… ${Math.round(p.loaded/p.total*100)}%`;})).scene;
+// Correct the source room's handedness around its 2.55 m centreline.
+model.scale.x=-1;model.position.x=2.55;
+// Reflect artwork within each mesh's sampled horizontal UV range so lettering stays readable.
+const correctedUVs=new WeakSet<THREE.BufferGeometry>();
+model.traverse((o:any)=>{
+ if(!o.isMesh||correctedUVs.has(o.geometry))return;
+ const materials=Array.isArray(o.material)?o.material:[o.material];
+ const sourceUV=o.geometry.getAttribute('uv');
+ if(!sourceUV||!materials.some((m:any)=>m.map))return;
+ // Different GLB meshes can share an accessor; detach it before changing it.
+ const uv=sourceUV.clone();o.geometry.setAttribute('uv',uv);
+ let lo=Infinity,hi=-Infinity;
+ for(let i=0;i<uv.count;i++){lo=Math.min(lo,uv.getX(i));hi=Math.max(hi,uv.getX(i));}
+ for(let i=0;i<uv.count;i++)uv.setX(i,lo+hi-uv.getX(i));
+ uv.needsUpdate=true;correctedUVs.add(o.geometry);
+});
 scene.add(model);const shells:THREE.Object3D[]=[];
 model.traverse((o:any)=>{if(o.isMesh){o.castShadow=!o.name.includes('Window_glazing');o.receiveShadow=true;for(const m of Array.isArray(o.material)?o.material:[o.material]){m.side=THREE.DoubleSide;}if(o.userData.shell)shells.push(o);}});
 const ground=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.MeshStandardMaterial({color:0xe3dfd5,roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.y=-.13;ground.receiveShadow=true;scene.add(ground);
 const composer=new EffectComposer(renderer);composer.addPass(new RenderPass(scene,camera));const ao=new SSAOPass(scene,camera,innerWidth,innerHeight,innerWidth<700?8:16);ao.kernelRadius=.18;ao.minDistance=.001;ao.maxDistance=.12;composer.addPass(ao);composer.addPass(new OutputPass());
-const views:Record<string,number[][]>={overview:[[-5.2,5.2,-7.4],[1.1,.8,-2.35]],inside:[[1.4,1.65,-4.28],[1.27,1.2,-1.4]],bed:[[.35,1.4,-3.353],[2.32,1.25,-2.55]],desk:[[1.324,1.24,-1.40],[1.324,1.16,-.44]],speakers:[[1.5,2.05,-3.5],[.2,2.03,-2.94]]};
+const views:Record<string,number[][]>={overview:[[-5.2,5.2,-7.4],[1.1,.8,-2.35]],inside:[[1.4,1.65,-4.28],[1.27,1.2,-1.4]],bed:[[.35,1.4,-3.353],[2.32,1.065,-2.55]],desk:[[1.324,1.24,-1.40],[1.324,1.16,-.44]],speakers:[[1.5,2.05,-3.5],[.2,2.03,-2.94]]};
+for(const pair of Object.values(views))for(const point of pair)point[0]=2.55-point[0];
 let flying=false;let transition:any=null;const keys=new Set<string>();
 function shellVisibility(){const open=($('open-room') as HTMLInputElement).checked;for(const o of shells)o.visible=!(open&&(o.userData.rear||o.userData.roof||o.userData.side==='left'));}
-function setView(name:string,instant=false){stopFly();document.body.classList.toggle('interior',name!=='overview');camera.fov=name==='overview'?45:70;camera.updateProjectionMatrix();const [p,t]=views[name];($('open-room') as HTMLInputElement).checked=name==='overview';shellVisibility();const dest=new THREE.Vector3(...p);if(name==='overview'&&innerWidth<700)dest.set(-9.5,9.3,-12.8);transition={from:camera.position.clone(),targetFrom:controls.target.clone(),to:dest,target:new THREE.Vector3(...t),start:performance.now(),duration:instant||matchMedia('(prefers-reduced-motion: reduce)').matches?0:1000};document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',(b as HTMLElement).dataset.view===name));}
+function setView(name:string,instant=false){stopFly();document.body.classList.toggle('interior',name!=='overview');camera.fov=name==='overview'?45:70;camera.updateProjectionMatrix();const [p,t]=views[name];($('open-room') as HTMLInputElement).checked=name==='overview';shellVisibility();const dest=new THREE.Vector3(...p);if(name==='overview'&&innerWidth<700)dest.set(12.05,9.3,-12.8);transition={from:camera.position.clone(),targetFrom:controls.target.clone(),to:dest,target:new THREE.Vector3(...t),start:performance.now(),duration:instant||matchMedia('(prefers-reduced-motion: reduce)').matches?0:1000};document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',(b as HTMLElement).dataset.view===name));}
 function stopFly(){flying=false;keys.clear();controls.enabled=true;document.body.classList.remove('flying');$('movement').hidden=true;$('fly').innerHTML='Explore freely <span>⌘</span>';$('hint').textContent='Drag to orbit · Scroll to zoom · Right-drag to pan';if(document.pointerLockElement)document.exitPointerLock();}
-function startFly(){transition=null;flying=true;controls.enabled=false;document.body.classList.add('flying');$('movement').hidden=false;$('fly').textContent='Finish exploring';$('hint').textContent='Drag to look · WASD move · Q / E down / up · Shift faster · Esc exit';($('open-room') as HTMLInputElement).checked=false;shellVisibility();if(camera.position.y>3||camera.position.x<0){camera.position.set(1.4,1.65,-4.2);camera.lookAt(1.27,1.4,-1);} }
+function startFly(){transition=null;flying=true;controls.enabled=false;document.body.classList.add('flying');$('movement').hidden=false;$('fly').textContent='Finish exploring';$('hint').textContent='Drag to look · WASD move · Q / E down / up · Shift faster · Esc exit';($('open-room') as HTMLInputElement).checked=false;shellVisibility();if(camera.position.y>3||camera.position.x<0||camera.position.x>2.55){camera.position.set(1.15,1.65,-4.2);camera.lookAt(1.28,1.4,-1);} }
 document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView((b as HTMLElement).dataset.view!)));
 $('open-room').onchange=shellVisibility;$('evening').onchange=()=>{const night=($('evening') as HTMLInputElement).checked;sun.intensity=night?.25:3.2;hemi.intensity=night?.55:1.7;warm.intensity=night?12:0;scene.environmentIntensity=night?.18:.45;};
 $('fly').onclick=()=>flying?stopFly():startFly();$('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{$('hint').textContent='Full screen is unavailable in this browser.';}};

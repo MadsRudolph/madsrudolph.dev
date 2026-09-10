@@ -20,7 +20,7 @@ for o in list(bpy.data.objects):
         o['rear']=shell and lo[1]>4.39
         o['side']=('left' if hi[0]<.01 else 'right' if lo[0]>2.54 else '') if shell else ''
         # Lightweight, local-space UV mapping for grain on wood surfaces.
-        if any(m and ('oak' in m.name or 'beech' in m.name) for m in o.data.materials):
+        if any(m and ('oak' in m.name or 'beech' in m.name or 'walnut' in m.name) for m in o.data.materials):
             uv=o.data.uv_layers.new(name='Wood UV')
             vs=np.array([v.co[:] for v in o.data.vertices]); span=np.maximum(vs.max(0)-vs.min(0),1e-6); norm=(vs-vs.min(0))/span
             for p in o.data.polygons:
@@ -36,7 +36,7 @@ for m in bpy.data.materials:
     for socket in ['Base Color','Normal']:
         for l in list(p.inputs[socket].links):
             if l.from_node.type != 'TEX_IMAGE':m.node_tree.links.remove(l)
-    if 'oak' in m.name or 'beech' in m.name:
+    if 'oak' in m.name or 'beech' in m.name or 'walnut' in m.name:
         size=512;y,x=np.mgrid[0:size,0:size]/size
         grain=np.sin(x*260+np.sin(y*9)*2+np.sin(x*38+y*4))*0.045+rng.normal(0,.012,(size,size))
         base=np.array([.58,.40,.23] if 'oak' in m.name else [.48,.30,.16])
