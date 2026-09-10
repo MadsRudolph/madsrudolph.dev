@@ -197,3 +197,14 @@ a plant sits on the left HS7 in the mirrored desk view. Sleeve artwork sources:
 
 Album artwork belongs to its respective rights holders. Source-image URLs are
 recorded in the companion project's `web/textures/doom-sources.json`.
+
+The desk worktop now matches [IKEA KARLBY 303.351.91, walnut veneer](https://www.ikea.com/dk/da/p/karlby-bordplade-valnoddetrae-finer-30335191/):
+the existing 1860 × 635 × 38 mm slab receives a narrow-stave walnut top with
+staggered end joints and matching finished edges. Grain is a procedural visualization;
+individual natural-wood boards vary.
+
+An [IKEA MARKUS, Vissle dark grey, 702.611.50](https://www.ikea.com/dk/da/p/markus-kontorstol-vissle-morkegra-70261150/)
+visual model is placed at the desk. It includes an open mesh back, headrest,
+upholstered seat, fixed armrests, gas lift and five-spoke base with twin casters.
+The companion script `web/add_markus.py` creates the chair from IKEA's published
+proportions; it is a modeled approximation rather than a manufacturer CAD asset.

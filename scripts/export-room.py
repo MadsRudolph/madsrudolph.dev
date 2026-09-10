@@ -41,6 +41,21 @@ for m in bpy.data.materials:
         grain=np.sin(x*260+np.sin(y*9)*2+np.sin(x*38+y*4))*0.045+rng.normal(0,.012,(size,size))
         base=np.array([.58,.40,.23] if 'oak' in m.name else [.48,.30,.16])
         pixels=np.ones((size,size,4),np.float32);pixels[:,:,:3]=np.clip(base+grain[:,:,None],0,1)
+        if 'KARLBY' in m.name:
+            # Narrow longitudinal walnut staves with staggered end joints.
+            row=np.minimum((y*9).astype(int),8)
+            phase=row*1.734
+            grain=.018*np.sin(y*1300+np.sin(x*12+phase)*3)+.012*np.sin(y*430+x*5)
+            tone=np.sin(row*2.7)*.038
+            if 'top' in m.name:
+                segment=np.floor(x*3+row*.37)
+                tone=tone+np.sin(segment*8.3+row*4.1)*.032
+                seam=(np.mod(y*9,1)<.007)|(np.mod(x*3+row*.37,1)<.002)
+                grain=grain-np.where(seam,.028,0)
+            else:
+                tone=.015*np.sin(x*8)
+                grain=.013*np.sin(y*80+np.sin(x*8))
+            pixels[:,:,:3]=np.clip(np.array([.43,.285,.19])+tone[:,:,None]+grain[:,:,None],0,1)
         im=bpy.data.images.new(m.name+' grain',width=size,height=size);im.pixels.foreach_set(pixels.ravel());im.pack()
         tex=m.node_tree.nodes.new('ShaderNodeTexImage');tex.image=im;m.node_tree.links.new(tex.outputs['Color'],p.inputs['Base Color'])
 bpy.ops.export_scene.gltf(filepath=str(OUT/'room.glb'),export_format='GLB',export_apply=True,export_extras=True,export_cameras=False,export_lights=False,export_animations=False,export_yup=True)
