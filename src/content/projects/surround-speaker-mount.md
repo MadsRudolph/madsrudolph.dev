@@ -20,6 +20,8 @@ Personal project. I designed a compact wall mount for surround speakers, with se
   <figcaption>The compact mount with the third revision’s indexed tilt interface. This is a design render; printing and physical load testing are still pending.</figcaption>
 </figure>
 
+[Explore my dorm room and the rail-mounted surrounds in interactive 3D →](/room)
+
 ## How this will look
 
 A living-room surround setup with the TV and front speakers ahead of the couch, and the two wall-mounted surrounds behind it. These Blender renders use the actual mount geometry and illustrative walnut speakers sized to the design's 150 × 150 × 180 mm cabinet envelope.

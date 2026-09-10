@@ -142,3 +142,27 @@ python scripts/export-cv.py
 The exporter needs Chromium or Google Chrome installed. It serves the build locally,
 prints both CV pages, and updates the PDFs in both `public/` and `dist/`.
 Commit the updated PDFs with the CV source changes.
+
+### Interactive dorm room
+
+`/room` is a standalone Three.js viewer of the actual Fusion room export, furnished
+in Blender. It supports orbit/pan/zoom, five camera presets, free flight with WASD
+and Q/E (touch movement buttons on phones), removable outer walls and ceiling,
+and daylight/evening lighting. The bed preset uses the estimated seated ear position.
+The geometry follows the source model; textiles, finishes and decorative objects
+are visualization choices, not a photographic scan.
+
+The self-contained model is `public/media/room/room.glb` (about 4.5 MB, Meshopt).
+To regenerate locally from the companion speaker-mount project's Blender scene:
+
+```sh
+blender -b --python scripts/export-room.py
+npx @gltf-transform/cli meshopt public/media/room/room.glb /tmp/room-web.glb
+cp /tmp/room-web.glb public/media/room/room.glb
+npm run build
+```
+
+The exporter retains shell metadata for visibility controls. Avoid optimization
+passes that merge the walls with furniture. Blender procedural wood is converted
+to portable texture maps. Browser lighting uses an environment, shadow maps and
+screen-space ambient occlusion; it is distinct from the offline Cycles render.
