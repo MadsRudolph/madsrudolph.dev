@@ -168,7 +168,7 @@ to portable texture maps. Browser lighting uses an environment, shadow maps and
 screen-space ambient occlusion; it is distinct from the offline Cycles render.
 
 The personalized room includes two upright JBL 4412 cabinets (362 × 597 × 286 mm),
-four vinyl sleeves with original generated artwork, and the photographed four-screen
+four vinyl sleeves with MF DOOM album artwork, and the photographed four-screen
 arrangement: two portrait wings, a main landscape screen and a smaller lower screen.
 Screen graphics are original music, waveform, coding and telemetry layouts; the TV
 has an original landscape graphic. The laptop styling addition has been removed.
@@ -186,3 +186,14 @@ the portrait screens align with the outer edges of the central stack, with 9 mm 
 Each display has a modeled articulated arm and clamp at the back edge of the desk.
 The original TV is lowered until its feet meet the cabinet top at 700 mm.
 The main media cabinet is dark grey, and the turntable units have walnut veneer.
+
+The cabinet plant and turntable lamp are removed. A small ivory ceramic vase with
+a plant sits on the left HS7 in the mirrored desk view. Sleeve artwork sources:
+
+- [Operation: Doomsday](https://mfdoom.bandcamp.com/album/operation-doomsday)
+- [MM..FOOD](https://mfdoom.bandcamp.com/album/mm-food)
+- [Born Like This](https://mfdoom.bandcamp.com/album/doom-born-like-this-2)
+- [Madvillainy](https://madvillain.bandcamp.com/album/madvillainy)
+
+Album artwork belongs to its respective rights holders. Source-image URLs are
+recorded in the companion project's `web/textures/doom-sources.json`.
