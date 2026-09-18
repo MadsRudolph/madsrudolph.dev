@@ -70,6 +70,28 @@ Trading resolution for speed that way produces an enormous amount of quantisatio
   <figcaption>The noise density of both 1-bit streams, measured from the raw capture. Flat at about −127 dBFS/Hz across the audio band, then climbing roughly 68 dB per decade above it. The two channels lie on top of each other, which is the point: after the repairs their loops are indistinguishable. The spike near 13 kHz is the modulator's own idle tone.</figcaption>
 </figure>
 
+### A record through it
+
+Measurements with a signal generator say what the converter can do. This is what it did with a record on the turntable — the first side ripped end to end, as the ripper delivered it to the library.
+
+<figure>
+  <div style="overflow-x:auto">
+  <a href="/media/vinyl-adc/music-spectrogram.svg" target="_blank" rel="noopener">
+    <img style="min-width:680px;width:100%;max-width:900px;height:auto" src="/media/vinyl-adc/music-spectrogram.svg" width="900" height="470" loading="lazy" alt="Spectrogram of 24 seconds of Everything in Its Right Place from the vinyl, 20 Hz to 20 kHz on a log axis, showing the electric piano's harmonic bands and the drums as vertical strokes" />
+  </a>
+  </div>
+  <figcaption>Twenty-four seconds of <em>Everything in Its Right Place</em> off the vinyl. The horizontal bands are the electric piano's harmonics, the vertical strokes are the drums. This rip was made before the right-channel repair — the ripper noticed the oscillating loop and fell back to mono, copying the left channel to both sides — so a true stereo rip is the next thing on the list.</figcaption>
+</figure>
+
+<figure>
+  <div style="overflow-x:auto">
+  <a href="/media/vinyl-adc/music-vs-floor.svg" target="_blank" rel="noopener">
+    <img style="min-width:680px;width:100%;max-width:900px;height:auto" src="/media/vinyl-adc/music-vs-floor.svg" width="900" height="430" loading="lazy" alt="Average spectrum of the record excerpt plotted over the converter's idle noise floor, about 70 dB apart at 1 kHz" />
+  </a>
+  </div>
+  <figcaption>The same excerpt's average spectrum over the converter's own idle floor, measured with the inputs shorted and the same FFT. The record sits about 70 dB above the floor at 1 kHz; the shaded band is the converter's headroom. The record's own noise above 10 kHz is the groove, not the electronics.</figcaption>
+</figure>
+
 Getting there took finding two faults in the right channel that had hidden each other. Its negative supply reached the board only through solder that had wicked up an unplated hole beneath a connector body, where no iron can reach — the board's own KiCad data showed ten connections that depend on a joint on the component side. Underneath that sat a short to ground on the feedback DAC's output, which left the loop with no feedback at all: every integrator ran into the rails and the whole channel oscillated at 42 kHz. Both channels now shape noise identically at the bitstream level.
 
 The measurement itself needed debugging before the hardware could be trusted. Because the ADC generates its own sample clock at 48009 Hz rather than exactly 48000, test tones landed about 190 ppm low and walked out of the analysis window in proportion to frequency — which looked convincingly like a steep analogue rolloff above 5 kHz, and wasn't.
