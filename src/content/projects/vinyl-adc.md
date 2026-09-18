@@ -82,7 +82,7 @@ Measurements with a signal generator say what the converter can do. This is what
   </div>
   <figcaption>Twenty-four seconds of <em>Everything in Its Right Place</em> off the vinyl. The horizontal bands are the electric piano's harmonics, the vertical strokes are the drums. This rip was made before the right-channel repair — the ripper noticed the oscillating loop and fell back to mono, copying the left channel to both sides — so a true stereo rip is the next thing on the list.</figcaption>
 </figure>
-<script src="/js/vinyl-adc-spectrogram.js" defer></script>
+<script src="/js/vinyl-adc-spectrogram.js?v=2" defer></script>
 
 <figure> <audio controls preload="none" style="width:100%;max-width:900px"> <source src="/media/vinyl-adc/eiirp-excerpt.flac" type="audio/flac"> <source src="/media/vinyl-adc/eiirp-excerpt.mp3" type="audio/mpeg"> </audio> <figcaption>The same twenty-four seconds, exactly as ripped: 48 kHz, lossless. Mono fallback — the left channel on both sides. Excerpt of <em>Everything in Its Right Place</em>, Radiohead, from <em>KID A MNESIA</em> (XL Recordings, 2021), reproduced here only to demonstrate the converter that captured it.</figcaption> </figure>
 
