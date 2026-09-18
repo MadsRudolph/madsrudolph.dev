@@ -12,7 +12,7 @@
   const img = document.querySelector('img[src*="music-spectrogram.svg"]');
   if (!img) return;
   const figure = img.closest('figure'); const audio = document.querySelector('figure audio');
-  const BASE = '/media/vinyl-adc/';
+  const BASE = '/media/vinyl-adc/', V = '?v=3';   // bump with the data files: the site caches them for hours
   const LEFT = '#3987e5', SURF = '#151312', INK = '#ffffff', INK2 = '#c3c2b7', MUTED = '#8f8888', LINE = '#3a3935';
   // layout shared with the SVG: the plot, a lane for the loudest note, a lane for the beat, one time axis
   const W = 900, H = 524, X0 = 66, X1 = 812, Y0 = 78, Y1 = 314, CY0 = 330, CY1 = 450, HY0 = 464, HY1 = 494;
@@ -44,9 +44,9 @@
 
   const loadImage = src => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
   Promise.all([
-    fetch(BASE + 'music-spectrogram-data.json').then(r => r.json()),
-    loadImage(BASE + 'music-spectrogram-data.png'),
-    loadImage(BASE + 'music-spectrogram-chroma.png'),
+    fetch(BASE + 'music-spectrogram-data.json' + V).then(r => r.json()),
+    loadImage(BASE + 'music-spectrogram-data.png' + V),
+    loadImage(BASE + 'music-spectrogram-chroma.png' + V),
   ]).then(([meta, dataImg, chromaImg]) => build(meta, dataImg, chromaImg)).catch(() => {});
 
   function pixels(im) {

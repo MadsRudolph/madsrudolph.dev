@@ -76,13 +76,13 @@ Measurements with a signal generator say what the converter can do. This is what
 
 <figure>
   <div style="overflow-x:auto">
-  <a href="/media/vinyl-adc/music-spectrogram.svg" target="_blank" rel="noopener">
-    <img style="min-width:680px;width:100%;max-width:900px;height:auto" src="/media/vinyl-adc/music-spectrogram.svg" width="900" height="524" loading="lazy" alt="Spectrogram of 24 seconds of Everything in Its Right Place from the vinyl, 20 Hz to 20 kHz on a log axis, with the keyboard's chord tones as horizontal bands labelled by note, the beats as vertical stripes, and below it a lane showing which note is loudest at each moment and a lane of beat activity" />
+  <a href="/media/vinyl-adc/music-spectrogram.svg?v=3" target="_blank" rel="noopener">
+    <img style="min-width:680px;width:100%;max-width:900px;height:auto" src="/media/vinyl-adc/music-spectrogram.svg?v=3" width="900" height="524" loading="lazy" alt="Spectrogram of 24 seconds of Everything in Its Right Place from the vinyl, 20 Hz to 20 kHz on a log axis, with the keyboard's chord tones as horizontal bands labelled by note, the beats as vertical stripes, and below it a lane showing which note is loudest at each moment and a lane of beat activity" />
   </a>
   </div>
   <figcaption>Twenty-four seconds of <em>Everything in Its Right Place</em> off the vinyl. Colour is level against the passage's own average at each pitch, so what stands out is what you hear: the horizontal bands are sustained notes — the keyboard's chord tones, named at the right — and the vertical stripes are the beats. Under the picture, on the same time axis: which note is loudest at each moment, and the beat activity. This rip was made before the right-channel repair — the ripper noticed the oscillating loop and fell back to mono, copying the left channel to both sides — so a true stereo rip is the next thing on the list.</figcaption>
 </figure>
-<script src="/js/vinyl-adc-spectrogram.js?v=3" defer></script>
+<script src="/js/vinyl-adc-spectrogram.js?v=4" defer></script>
 
 <figure> <audio controls preload="none" style="width:100%;max-width:900px"> <source src="/media/vinyl-adc/eiirp-excerpt.flac" type="audio/flac"> <source src="/media/vinyl-adc/eiirp-excerpt.mp3" type="audio/mpeg"> </audio> <figcaption>The same twenty-four seconds, exactly as ripped: 48 kHz, lossless. Mono fallback — the left channel on both sides. Excerpt of <em>Everything in Its Right Place</em>, Radiohead, from <em>KID A MNESIA</em> (XL Recordings, 2021), reproduced here only to demonstrate the converter that captured it.</figcaption> </figure>
 
