@@ -1,7 +1,7 @@
 ---
 title: 'Vinyl ADC: a discrete stereo converter'
 summary: >-
-  A stereo audio ADC built from op-amps and logic gates, with four milled PCBs visible through a printable organic lattice enclosure. Designed for 24-bit / 48 kHz output.
+  A stereo audio ADC built from op-amps and logic gates, with four milled PCBs visible through a printable organic lattice enclosure. Measured at 67.9 dB dynamic range and flat within ±0.06 dB across the audio band, against a simulated target of 68 dB.
 date: 2026-09-03
 tags: ['Analog electronics', 'Delta-sigma ADC', 'SPICE', 'DSP', 'KiCad', 'PCB design', 'Raspberry Pi', '3D CAD', 'Audio']
 repo: 'https://github.com/MadsRudolph/vinyl-adc'
@@ -24,12 +24,57 @@ Personal project. I designed the converter, simulated its analog behavior, and s
 
 Comparator delay limited the sampling rate. A third-order loop and delay compensation reached about **68 dB SNR in simulation**. SPICE also caught a reversed charge pump that connectivity checks missed.
 
-## Results
+## Measured results
 
-- **1.536 MHz** modulation; interleaved data sent to a Raspberry Pi over I2S.
-- Simulation and netlist checks cover the four-board design.
+The converter now runs in stereo and has been measured on the bench. The left channel came out within a fraction of a decibel of what SPICE predicted:
 
-**Current status:** Power and digital boards are in initial bench testing. The two channel boards still need decoupling capacitors; audio performance has not yet been measured on the finished hardware. The [assembly guide and bench log](https://vinyl-adc.madsrudolph.dev/) include graphical probe connections, actual readings and the remaining checks.
+| | Simulated | Measured |
+|---|---|---|
+| SNR / dynamic range | ~68 dB | **67.9 dB** |
+| Frequency response, 20 Hz–16.3 kHz | — | **±0.06 dB** |
+| THD at −20 dBFS | — | **0.032 %** |
+| Crosstalk | — | **−92 dB** |
+
+<figure>
+  <div style="overflow-x:auto">
+  <a href="/media/vinyl-adc/frequency-response.svg" target="_blank" rel="noopener">
+    <img style="min-width:680px;width:100%;max-width:900px;height:auto" src="/media/vinyl-adc/frequency-response.svg" width="900" height="380" loading="lazy" alt="Frequency response of both channels, third-octave points from 20 Hz to 16.3 kHz, flat within about a tenth of a decibel" />
+  </a>
+  </div>
+  <figcaption>Both channels, measured at third-octave points. The whole vertical scale is a third of a decibel — the traces are flat within about 0.12 dB, which is the decimator's FIR filter behaving as designed. The sweep stops at 16.3 kHz because the next third-octave step would pass 20 kHz.</figcaption>
+</figure>
+
+For a machine whose source is a record, the benchmark is the source: a good pressing delivers 60–70 dB, so the converter is not the limit. Signal generation was an Analog Discovery 3, whose own 14-bit generator bounds any distortion or noise figure near −80 dB — several of the intermodulation results sit at that floor and are measuring the instrument, not the converter.
+
+### How one bit gets there
+
+The converter doesn't measure the voltage. It compares, a million and a half times a second, and outputs a single bit each time — so the *density* of ones carries the signal, not their value.
+
+<figure>
+  <div style="overflow-x:auto">
+  <a href="/media/vinyl-adc/modulator-bits.svg" target="_blank" rel="noopener">
+    <img style="min-width:680px;width:100%;max-width:900px;height:auto" src="/media/vinyl-adc/modulator-bits.svg" width="900" height="300" loading="lazy" alt="192 modulator bits from each channel drawn as filled cells, a fine irregular hatch at half density" />
+  </a>
+  </div>
+  <figcaption>125 microseconds of the real output, both channels, with the inputs shorted. A fine irregular hatch sitting at half density means the loop is modulating. When the right channel was broken it looked completely different — long solid bars, oscillating rail to rail instead of tracking its input.</figcaption>
+</figure>
+
+Trading resolution for speed that way produces an enormous amount of quantisation noise. The trick is that a third-order feedback loop doesn't remove that noise, it *moves* it — out of the audio band and up into frequencies nothing needs, where the decimation filter discards it.
+
+<figure>
+  <div style="overflow-x:auto">
+  <a href="/media/vinyl-adc/noise-shaping.svg" target="_blank" rel="noopener">
+    <img style="min-width:680px;width:100%;max-width:900px;height:auto" src="/media/vinyl-adc/noise-shaping.svg" width="900" height="430" loading="lazy" alt="Noise power density of both 1-bit streams from 20 Hz to 768 kHz, flat at about -127 dBFS per hertz in the audio band then climbing steeply" />
+  </a>
+  </div>
+  <figcaption>The noise density of both 1-bit streams, measured from the raw capture. Flat at about −127 dBFS/Hz across the audio band, then climbing roughly 68 dB per decade above it. The two channels lie on top of each other, which is the point: after the repairs their loops are indistinguishable. The spike near 13 kHz is the modulator's own idle tone.</figcaption>
+</figure>
+
+Getting there took finding two faults in the right channel that had hidden each other. Its negative supply reached the board only through solder that had wicked up an unplated hole beneath a connector body, where no iron can reach — the board's own KiCad data showed ten connections that depend on a joint on the component side. Underneath that sat a short to ground on the feedback DAC's output, which left the loop with no feedback at all: every integrator ran into the rails and the whole channel oscillated at 42 kHz. Both channels now shape noise identically at the bitstream level.
+
+The measurement itself needed debugging before the hardware could be trusted. Because the ADC generates its own sample clock at 48009 Hz rather than exactly 48000, test tones landed about 190 ppm low and walked out of the analysis window in proportion to frequency — which looked convincingly like a steep analogue rolloff above 5 kHz, and wasn't.
+
+**Current status:** Both channels work and are characterised. The right channel's loop is provably identical to the left, but its input path costs it 9 dB of noise, with an intermittent level trimmer the leading suspect. Absolute input level, running from the Raspberry Pi's own 5 V, and the enclosure as a physical print are still open. The [full test and verification record](https://github.com/MadsRudolph/vinyl-adc/blob/main/docs/test-and-verification.md) covers the method, the instrument's limits and everything not yet verified; the [assembly guide and bench log](https://vinyl-adc.madsrudolph.dev/) include graphical probe connections and actual readings.
 
 <figure data-gif-showcase>
   <img src="/media/vinyl-adc/showcase/electronics-poster.png" data-gif-src="/media/vinyl-adc/showcase/electronics.gif" data-poster-src="/media/vinyl-adc/showcase/electronics-poster.png" width="720" height="540" loading="lazy" alt="The four populated Vinyl ADC circuit boards" />
