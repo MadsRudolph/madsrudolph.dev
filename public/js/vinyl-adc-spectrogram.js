@@ -8,7 +8,7 @@
   const figure = img.closest('figure'); const audio = document.querySelector('figure audio');
   const BASE = '/media/vinyl-adc/';
   const LEFT = '#3987e5', SURF = '#151312', INK = '#ffffff', INK2 = '#c3c2b7', MUTED = '#8f8888', GRID = 'rgba(255,255,255,0.09)';
-  const W = 900, H = 470, X0 = 66, X1 = 838, Y0 = 78, Y1 = 388;
+  const W = 900, H = 470, X0 = 66, X1 = 812, Y0 = 78, Y1 = 388; // 82 px right of the plot for the widest note label
   const NOTES = ['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B'];
   const noteName = f => { const m = Math.round(69 + 12 * Math.log2(f / 440)); return NOTES[((m % 12) + 12) % 12] + (Math.floor(m / 12) - 1); };
   const ramp = v => { // same single-hue ramp as the figures
@@ -30,7 +30,8 @@
     for (let v = 0; v < 256; v++) lut.push(ramp(v / 255));
     for (let i = 0; i < d.length; i += 4) { const c = lut[d[i]]; d[i] = c[0]; d[i + 1] = c[1]; d[i + 2] = c[2]; d[i + 3] = 255; }
     oc.putImageData(px, 0, 0);
-    const grey = oc; // keep the original values for readouts
+    const grey = off; // the colourised canvas (drawImage wants the canvas, not its context)
+    // and the original values, kept for the readouts
     const raw = document.createElement('canvas'); raw.width = dataImg.width; raw.height = dataImg.height;
     raw.getContext('2d').drawImage(dataImg, 0, 0); const rawData = raw.getContext('2d').getImageData(0, 0, raw.width, raw.height).data;
 
@@ -78,7 +79,12 @@
       // onsets: ticks above the plot
       c.strokeStyle = 'rgba(255,255,255,0.45)'; c.lineWidth = 1;
       for (const t of onsets) { const x = tx(t); c.beginPath(); c.moveTo(x, Y0 - 10); c.lineTo(x, Y0 - 2); c.stroke(); }
-      c.fillStyle = MUTED; c.font = '12px system-ui,sans-serif'; c.textAlign = 'left'; c.fillText(`${onsets.length} detected hits`, X0, Y0 - 14);
+      c.fillStyle = MUTED; c.font = '12px system-ui,sans-serif'; c.textAlign = 'right'; c.fillText(`${onsets.length} detected hits`, X1, Y0 - 14);
+      // colour key, above the plot on the left, where nothing else needs the room
+      const kx = X0 + 34, ky = 55; const g = c.createLinearGradient(kx, 0, kx + 160, 0);
+      for (let i = 0; i <= 8; i++) { const col = ramp(i / 8); g.addColorStop(i / 8, `rgb(${col[0]},${col[1]},${col[2]})`); }
+      c.fillStyle = g; c.fillRect(kx, ky, 160, 8);
+      c.fillStyle = MUTED; c.font = '12.5px ui-monospace,monospace'; c.textAlign = 'right'; c.fillText(meta.db_lo, kx - 6, ky + 8); c.textAlign = 'left'; c.fillText(meta.db_hi + ' dBFS', kx + 166, ky + 8);
       // playhead
       if (audio && audio.currentTime > 0) {
         const x = tx(Math.min(secs, audio.currentTime)); c.strokeStyle = LEFT; c.lineWidth = 2; c.beginPath(); c.moveTo(x, Y0); c.lineTo(x, Y1); c.stroke();
@@ -86,11 +92,7 @@
       }
       // hover crosshair
       if (hover) { c.strokeStyle = 'rgba(255,255,255,0.5)'; c.lineWidth = 1; c.setLineDash([4, 4]); c.beginPath(); c.moveTo(hover.x, Y0); c.lineTo(hover.x, Y1); c.moveTo(X0, hover.y); c.lineTo(X1, hover.y); c.stroke(); c.setLineDash([]); }
-      // key and notes
-      const kx = X1 - 200, ky = Y1 + 30; const g = c.createLinearGradient(kx, 0, kx + 200, 0);
-      for (let i = 0; i <= 8; i++) { const col = ramp(i / 8); g.addColorStop(i / 8, `rgb(${col[0]},${col[1]},${col[2]})`); }
-      c.fillStyle = g; c.fillRect(kx, ky, 200, 8);
-      c.fillStyle = MUTED; c.font = '12.5px ui-monospace,monospace'; c.textAlign = 'left'; c.fillText(meta.db_lo, kx, ky + 22); c.textAlign = 'right'; c.fillText(meta.db_hi + ' dBFS', kx + 200, ky + 22);
+      // notes
       c.fillStyle = INK2; c.font = '13px system-ui,sans-serif'; c.textAlign = 'left';
       c.fillText('Horizontal bands are sustained notes: C and D♭, the two chords the song alternates between. Ticks above are drum hits.', 18, H - 34);
       c.fillStyle = MUTED; c.fillText(audio ? 'Click anywhere on the picture to play from that moment; the blue line follows the audio.' : 'Hover for the reading at any point.', 18, H - 14);
