@@ -152,7 +152,8 @@ and daylight/evening lighting. The bed preset uses the estimated seated ear posi
 The geometry follows the source model; textiles, finishes and decorative objects
 are visualization choices, not a photographic scan.
 
-The self-contained model is `public/media/room/room.glb` (about 4.5 MB, Meshopt).
+The self-contained model is `public/media/room/room.glb` (about 6.7 MB, Meshopt).
+Bump the `?v=` on its URL in `src/scripts/room.ts` whenever it changes; media is cached for hours.
 To regenerate locally from the companion speaker-mount project's Blender scene:
 
 ```sh
@@ -166,6 +167,10 @@ The exporter retains shell metadata for visibility controls. Avoid optimization
 passes that merge the walls with furniture. Blender procedural wood is converted
 to portable texture maps. Browser lighting uses an environment, shadow maps and
 screen-space ambient occlusion; it is distinct from the offline Cycles render.
+
+The surround speakers hang from sliding carriages on a UNI1 steel channel that runs
+the length of the wooden rail; `track-mount/update_room.py` in the speaker-mount
+project fits them into the scene before export.
 
 The personalized room includes two upright JBL 4412 cabinets (362 × 597 × 286 mm),
 four vinyl sleeves with MF DOOM album artwork, and the photographed four-screen

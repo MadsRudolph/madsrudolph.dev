@@ -20,7 +20,7 @@ const env=new RoomEnvironment();const pmrem=new THREE.PMREMGenerator(renderer);s
 const hemi=new THREE.HemisphereLight(0xe7f0ff,0xa09070,1.7);scene.add(hemi);
 const sun=new THREE.DirectionalLight(0xffebcb,3.2);sun.position.set(4.55,5,3);sun.target.position.set(1.55,0,-3);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-5,right:5,top:5,bottom:-5,near:.1,far:15});sun.shadow.bias=-.0003;sun.shadow.normalBias=.015;scene.add(sun,sun.target);
 const warm=new THREE.PointLight(0xffb665,0,7,2);warm.position.set(.95,2,-3.5);scene.add(warm);
-const model=(await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync('/media/room/room.glb',p=>{if(p.total)$('load-text').textContent=`Preparing your room… ${Math.round(p.loaded/p.total*100)}%`;})).scene;
+const model=(await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync('/media/room/room.glb?v=2',p=>{if(p.total)$('load-text').textContent=`Preparing your room… ${Math.round(p.loaded/p.total*100)}%`;})).scene;
 // Correct the source room's handedness around its 2.55 m centreline.
 model.scale.x=-1;model.position.x=2.55;
 // Reflect artwork within each mesh's sampled horizontal UV range so lettering stays readable.
