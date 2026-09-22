@@ -45,7 +45,7 @@ const projects = [
     kind: 'Solo',
     bullets: [
       'Found the unpopulated remote header on a bench supply and decoded its protocol with a logic analyzer: 9600 8N1, poll-only ASCII, 100–200 ms command pacing.',
-      'Caught a floating-ground hazard with a multimeter before it destroyed hardware, and designed an isolation-safe ESP32 carrier PCB (ERC-clean, Gerbers exported for fiber-laser etching).',
+      'Found with a multimeter that the supply’s ground floats, which would have destroyed the first board plugged into it, and designed a small isolated ESP32 carrier board for it instead.',
     ],
   },
   {
@@ -108,7 +108,7 @@ const skills = [
   },
   {
     label: 'Embedded firmware',
-    items: ['C on ESP32 (ESP-IDF) and AVR (bare-metal ATmega)', 'PID control, safety watchdogs, state machines', 'Unit-tested firmware cores', 'ESPHome components, Home Assistant'],
+    items: ['Embedded C by hand on ATmega (AVR): ADC sampling, DFT in firmware, power management, UART and SPI', 'ESP32 projects: I design the hardware and define the firmware, have AI write it to that spec, and verify it on the bench', 'Control loops, safety watchdogs, code that runs unattended for months', 'Home Assistant integrations'],
   },
   {
     label: 'Analog, power & signal',
@@ -142,8 +142,8 @@ const skills = [
       5th-semester electrical engineering student at DTU who finds faults at the bench and fixes
       them: a 130 µm board bow that broke PCB milling, a floating ground that would have killed a
       supply, a control loop identified against the wrong plant. I design and fabricate PCBs in
-      KiCad on my own mill and laser, write firmware in C for ESP32 and AVR, and verify with a
-      scope and tests. Available for an internship from late January 2027, with electives aimed
+      KiCad on my own mill and laser, write firmware in C for ATmega microcontrollers, and verify
+      with a scope and tests. Available for an internship from late January 2027, with electives aimed
       at analog, power electronics and electroacoustics.
     </p>
   </section>

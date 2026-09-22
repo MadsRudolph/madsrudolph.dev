@@ -44,7 +44,7 @@ const projects = [
     kind: 'Solo',
     bullets: [
       'Fandt det ubestykkede fjernstik på en laboratorieforsyning og afkodede protokollen med en logikanalysator: 9600 8N1, poll-only ASCII, 100–200 ms mellem kommandoer.',
-      'Fangede en flydende stel med et multimeter, før den ødelagde hardware, og designede et isolationssikkert ESP32-bæreprint (ERC-rent, Gerber-filer eksporteret til fiberlaser-ætsning).',
+      'Fandt med et multimeter, at forsyningens stel flyder, hvilket ville have ødelagt det første print, der blev sat til, og designede i stedet et lille isoleret ESP32-bæreprint til den.',
     ],
   },
   {
@@ -107,7 +107,7 @@ const skills = [
   },
   {
     label: 'Embedded firmware',
-    items: ['C på ESP32 (ESP-IDF) og AVR (bare-metal ATmega)', 'PID-regulering, sikkerheds-watchdogs, tilstandsmaskiner', 'Unit-testede firmware-kerner', 'ESPHome-komponenter, Home Assistant'],
+    items: ['Embedded C skrevet i hånden til ATmega (AVR): ADC-sampling, DFT i firmware, strømstyring, UART og SPI', 'ESP32-projekter: jeg designer hardwaren og definerer firmwaren, lader AI skrive den efter min spec og verificerer den på bænken', 'Reguleringssløjfer, sikkerheds-watchdogs, kode der kører uovervåget i måneder', 'Home Assistant-integrationer'],
   },
   {
     label: 'Analog, effekt & signal',
@@ -141,8 +141,8 @@ const skills = [
       Elektroteknologistuderende på 5. semester på DTU, der finder fejl på bænken og retter dem: en
       130 µm printbue, der brød printfræsningen, en flydende stel, der ville have ødelagt en
       forsyning, en reguleringssløjfe identificeret mod det forkerte system. Jeg designer og
-      fremstiller print i KiCad på min egen fræser og laser, skriver firmware i C til ESP32 og AVR
-      og verificerer med skop og tests. Ledig til praktik fra slutningen af januar 2027, med valgfag
+      fremstiller print i KiCad på min egen fræser og laser, skriver firmware i C til
+      ATmega-mikrocontrollere og verificerer med skop og tests. Ledig til praktik fra slutningen af januar 2027, med valgfag
       rettet mod analog, effektelektronik og elektroakustik.
     </p>
   </section>
