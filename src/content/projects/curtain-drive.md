@@ -8,15 +8,40 @@ featured: false
 order: 1.35
 status: in-progress
 kind: personal
-hero: '/media/curtain-drive/enclosure-open.webp'
-heroAlt: 'Blender render of the open enclosure with the curtain-drive PCB and the servo inside'
+hero: '/media/curtain-drive/drive-closeup.webp'
+heroAlt: 'Render of the curtain drive mounted at the end of a ceiling curtain track, with its belt pulley underneath'
 ---
 
 Personal project. A small box above the window pulls both curtain panels open and closed with a GT2 belt along the ceiling track. It is controlled from Home Assistant. The motor is one of my 20 kg·cm hobby servos, converted to continuous rotation and driven as a geared DC motor. There are no limit switches. The board works out that the curtain has reached the end of the track by watching the motor current, the same idea as sensorless homing on a 3D printer.
 
 <figure>
-  <a href="/media/curtain-drive/enclosure-open.webp"><img src="/media/curtain-drive/enclosure-open.webp" alt="Blender render of the open enclosure: the PCB on standoffs next to the servo, with cut-outs for the barrel jack and USB-C" width="1600" height="1200" /></a>
-  <figcaption>The enclosure with the lid off. The board is the real KiCad 3D export on its standoffs, next to the servo. This is a design render; the board has not been made yet.</figcaption>
+  <a href="/media/curtain-drive/drive-closeup.webp"><img src="/media/curtain-drive/drive-closeup.webp" alt="Render of the off-white drive box with a black lid mounted at the end of a ceiling curtain track: status LED lit, belt pulley underneath, power lead running down the wall" width="1800" height="1500" /></a>
+  <figcaption>The drive at the end of the track. The servo shaft comes down through the floor of the box to a GT2 pulley, and the belt runs along the track. This is a design render; the drive has not been built yet.</figcaption>
+</figure>
+
+## How it will look
+
+A living-room window with a ceiling-hung track and two linen panels that part from the centre. One motor moves both panels: each panel's lead carrier clamps to the opposite run of the same belt loop. The box, board and servo are the real design geometry. The room, track, bracket and carriers are illustrative.
+
+<figure>
+  <a href="/media/curtain-drive/room.webp"><img loading="lazy" src="/media/curtain-drive/room.webp" alt="Render of a bright living-room window with linen curtains partly open on a ceiling track, and the drive box at the left end of the track" width="2000" height="1400" /></a>
+  <figcaption>Installed, curtains partly open. The drive sits at the left end of the track, with the power lead running down the wall.</figcaption>
+</figure>
+
+<figure>
+  <picture>
+    <source media="(prefers-reduced-motion: reduce)" srcset="/media/curtain-drive/curtains-motion-poster.webp" />
+    <img loading="lazy" src="/media/curtain-drive/curtains-motion.gif" alt="Looping animation of both curtain panels closing across the window from the centre, pausing, and opening again as the room darkens and brightens" width="600" height="420" />
+  </picture>
+  <figcaption>Closing and opening. The belt pulls the two panels in opposite directions. The animation runs about 14× faster than the real drive would. <a href="/media/curtain-drive/curtains-motion.gif" download>Download GIF</a>.</figcaption>
+</figure>
+
+<figure>
+  <picture>
+    <source media="(prefers-reduced-motion: reduce)" srcset="/media/curtain-drive/drive-motion-poster.webp" />
+    <img loading="lazy" src="/media/curtain-drive/drive-motion.gif" alt="Looping close-up animation of the pulley turning and the belt pulling a curtain carrier along the track until it stops against the end stop, with the status LED going out" width="640" height="533" />
+  </picture>
+  <figcaption>The end stop. The pulley drives the belt until the lead carrier hits the stop, the motor stalls, and the current spike tells the firmware it has arrived. <a href="/media/curtain-drive/drive-motion.gif" download>Download GIF</a>.</figcaption>
 </figure>
 
 ## How it finds the end stop
@@ -67,13 +92,8 @@ A Python script places every part, lays a locked skeleton of the tracks that dec
 The enclosure is modelled in Blender from a parametric script: a base holding the board and the servo, shaft down through the floor to the belt pulley, and a screw-on lid. The populated board is imported from KiCad as a 3D model. The script checks that each printed part is a single watertight solid, and that nothing collides with the lid closed. The jack and USB-C openings are sized for the plug overmoulds, not only the connector bodies.
 
 <figure>
-  <a href="/media/curtain-drive/enclosure-exploded.webp"><img loading="lazy" src="/media/curtain-drive/enclosure-exploded.webp" alt="Exploded Blender render with the lid lifted above the base, showing the board, the servo and the lid's button and LED holes" width="1600" height="1200" /></a>
-  <figcaption>Exploded view. The lid has pin holes for reset, boot and a user button, plus a window for the status LED.</figcaption>
-</figure>
-
-<figure>
-  <a href="/media/curtain-drive/enclosure-closed.webp"><img loading="lazy" src="/media/curtain-drive/enclosure-closed.webp" alt="Blender render of the closed enclosure showing the barrel-jack opening, the motor-cable slot above it and a mounting ear" width="1600" height="1200" /></a>
-  <figcaption>Closed, 86 × 98 × 44.5 mm. The barrel jack enters through the larger opening, with the motor-cable slot above it. Slotted ears screw it to the wall or track.</figcaption>
+  <a href="/media/curtain-drive/inside.webp"><img loading="lazy" src="/media/curtain-drive/inside.webp" alt="Render of the drive box with its black lid set aside, showing the green PCB and the servo seated inside, next to a GT2 pulley and belt" width="1800" height="1400" /></a>
+  <figcaption>Lid off: the real KiCad board model on its standoffs beside the servo. The box is 86 × 98 × 44.5 mm closed. Its openings for the barrel jack and USB-C are sized for the plugs.</figcaption>
 </figure>
 
 ## Status
