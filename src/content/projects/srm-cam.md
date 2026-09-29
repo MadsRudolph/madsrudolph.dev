@@ -16,6 +16,11 @@ heroAlt: 'A double-sided PCB milled on the SRM-20, held to the light'
 Personal project. I built the CAM software and reverse-engineered the mill’s SPI interface, covering probing, double-sided registration, and machine control.
 
 <figure>
+  <video data-showcase controls preload="metadata" src="/media/srm-cam/showcase.mp4" poster="/media/srm-cam/showcase-poster.jpg" width="1920" height="1080" loop muted playsinline></video>
+  <figcaption>SRM-CAM in forty seconds: KiCad Gerbers in, a milled board out.</figcaption>
+</figure>
+
+<figure>
   <img loading="lazy" src="/media/srm-cam/gui2-traces.png" alt="SRM-CAM v0.5 — the run plan down the left rail, the machine bed with a board and its isolation toolpaths in the middle, and the selected step’s parameters on the right" width="1600" height="1029" />
   <figcaption>The milling interface: board preview and ordered run plan.</figcaption>
 </figure>
