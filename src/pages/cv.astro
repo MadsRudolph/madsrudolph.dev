@@ -22,11 +22,12 @@ const projects = [
   {
     name: 'Vinyl ADC — discrete 3rd-order delta-sigma audio ADC',
     href: '/projects/vinyl-adc',
-    kind: 'Solo · in progress, boards being milled',
+    kind: 'Solo · working; rev D boards sponsored by PCBWay',
     bullets: [
       'Designed a stereo 48 kHz converter from TL07x op-amps, an LM311 and 74HC logic, sized to the DTU parts shop: 1.536 MHz clock, OSR 32, ~68 dB SNR in simulation.',
       'SPICE caught a charge pump drawn backwards (the −5 V rail simulated at +3.4 V) that every connectivity check had passed; found that comparator delay, not op-amp bandwidth, limits the clock.',
       'Split one unroutable single-sided board (45 wire bridges) into four milled boards with a script that proves the split matches the reference netlist.',
+      'Measured 67.9 dB dynamic range on the milled boards against ~68 dB simulated, then redrew it as a four-layer Raspberry Pi HAT made by PCBWay (sponsored): about 8 dB more A-weighted range recording a turntable, on the Pi’s own supply.',
     ],
   },
   {

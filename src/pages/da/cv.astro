@@ -21,11 +21,12 @@ const projects = [
   {
     name: 'Vinyl ADC — diskret 3.-ordens delta-sigma audio-ADC',
     href: '/projects/vinyl-adc',
-    kind: 'Solo · i gang, printene fræses',
+    kind: 'Solo · virker; rev D-print sponsoreret af PCBWay',
     bullets: [
       'Designede en stereo 48 kHz-konverter af TL07x-operationsforstærkere, en LM311 og 74HC-logik, dimensioneret efter DTU’s komponentlager: 1,536 MHz clock, OSR 32, ~68 dB SNR i simulering.',
       'SPICE fangede en ladningspumpe tegnet omvendt (−5 V-skinnen simulerede til +3,4 V), som alle forbindelsestjek havde godkendt; viste at komparatorens forsinkelse, ikke op-amp-båndbredden, begrænser clocken.',
       'Delte ét uroutbart enkeltsidet print (45 trådbroer) op i fire fræsede print med et script, der beviser at opdelingen matcher reference-netlisten.',
+      'Målte 67,9 dB dynamikområde på de fræsede print mod ~68 dB i simulering, og tegnede den derefter om som et 4-lags Raspberry Pi HAT produceret af PCBWay (sponsoreret): ca. 8 dB mere A-vægtet dynamik ved optagelse fra pladespiller, på Pi’ens egen forsyning.',
     ],
   },
   {

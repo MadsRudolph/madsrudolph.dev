@@ -1,18 +1,65 @@
 ---
 title: 'Vinyl ADC: a discrete stereo converter'
 summary: >-
-  A stereo audio ADC built from op-amps and logic gates, with four milled PCBs visible through a printable organic lattice enclosure. Measured at 67.9 dB dynamic range and flat within ±0.06 dB across the audio band, against a simulated target of 68 dB.
+  A stereo audio ADC built from op-amps and logic gates. Born on four hand-milled PCBs and measured at 67.9 dB dynamic range against a simulated 68 dB; now one four-layer Raspberry Pi HAT made by PCBWay, which records a turntable with about 8 dB more range than the milled boards did.
 date: 2026-09-03
 tags: ['Analog electronics', 'Delta-sigma ADC', 'SPICE', 'DSP', 'KiCad', 'PCB design', 'Raspberry Pi', '3D CAD', 'Audio']
 repo: 'https://github.com/MadsRudolph/vinyl-adc'
 featured: true
 order: 1.2
 status: in-progress
-hero: '/media/vinyl-adc/showcase/orbit-poster.png'
-heroAlt: 'Vinyl ADC in a rounded open lattice enclosure, with four visible circuit boards, solid connector mounts and an acrylic lid'
+hero: '/media/vinyl-adc/rev-d/hero.jpg'
+heroAlt: 'The Vinyl ADC rev D board: a four-layer Raspberry Pi HAT with a row of status LEDs along its front edge'
 ---
 
-Personal project. I designed the converter, simulated its analog behavior, and split the circuit into four boards that can be milled in-house.
+Personal project. I designed the converter, simulated its analog behavior, and split the circuit into four boards that could be milled in-house. With PCBWay sponsoring fabrication, it is now one four-layer board that the Raspberry Pi plugs into.
+
+## Rev D: made by PCBWay
+
+<figure>
+  <img src="/media/vinyl-adc/rev-d/hero.jpg" width="1920" height="1280" loading="lazy" alt="Rev D: the converter as one four-layer Raspberry Pi HAT, with eight status LEDs along the front edge" />
+  <figcaption>Rev D, 140 × 136 mm: both channels on the left, clock and supply over the Raspberry Pi 4 underneath, status LEDs along the front. CAD render.</figcaption>
+</figure>
+
+Every board before this one was isolation-milled single-sided, which is why the converter was four stacked boards with dozens of wire links, and why its first bring-up spent a day on a supply rail that reached one board only through solder wicked up an unplated hole. PCBWay offered to make the boards, so I redrew the converter as what it should have been from the start: one board, four layers, a solid ground plane, an analog supply island behind its own choke, status LEDs, and the Pi as a HAT underneath. Five boards came back as 1.6 mm FR-4, 1 oz copper, HASL lead-free.
+
+| | Milled stack | Rev D by PCBWay |
+|---|---|---|
+| Boards | 4 × 100 × 100 mm | **1 × 140 × 136 mm** |
+| Copper | 1 layer, milled | **4 layers**, solid ground plane |
+| Wire links | dozens | **none** |
+| Bring-up | two days, two hidden faults | **both channels healthy at the first capture** |
+
+The comparison that matters is the record. Same turntable, same phono stage, levels set so music peaks at −6 dBFS on both builds, stylus lifted:
+
+| 20 Hz–20 kHz | Milled stack, bench supply | Rev D, Raspberry Pi supply |
+|---|---|---|
+| Idle floor, A-weighted | −61.1 dBFS | **−69.7 dBFS** |
+| Idle floor, 2–20 kHz | −59.6 dBFS | **−76.5 dBFS** |
+| Music to floor, A-weighted | 54.2 dB | **63.7 dB** |
+
+About 8 dB more range from the groove to the file, on the supply that cost the milled boards the most and on the Pi's own clock (rev D's crystal oscillator is still being debugged), so these are a floor for what the board can do. What remains is 50 Hz hum common to both channels, which is the turntable's grounding rather than the converter. The board has a tonearm terminal for that next experiment. The one rev D fault found so far is mine, not the fab's: two comparator inputs swapped in the schematic, which keeps both clip LEDs lit; the fix is two resistors on the underside. Full record: the [rev D bring-up log](https://github.com/MadsRudolph/vinyl-adc/blob/main/docs/bringup-log-2026-10-rev-d.md) and the [rev D page of the bench guide](https://vinyl-adc.madsrudolph.dev/rev-d.html).
+
+<figure data-gif-showcase>
+  <img src="/media/vinyl-adc/rev-d/orbit-poster.png" data-gif-src="/media/vinyl-adc/rev-d/orbit.gif" data-poster-src="/media/vinyl-adc/rev-d/orbit-poster.png" width="720" height="540" loading="lazy" alt="Rev D board turning through a full orbit" />
+  <button type="button" class="btn secondary" style="margin-top:0.75rem" data-gif-toggle aria-pressed="false">Play GIF</button>
+  <figcaption>Rev D on its Raspberry Pi 4. CAD render.</figcaption>
+</figure>
+
+<figure>
+  <a href="/media/vinyl-adc/rev-d/top.jpg" target="_blank" rel="noopener"><img src="/media/vinyl-adc/rev-d/top.jpg" width="1800" height="1800" loading="lazy" alt="Rev D seen from directly above, every part and legend readable" /></a>
+  <figcaption>From above: channel L over channel R on the left, each reading left to right like its schematic, the probe headers in one column, the digital and supply blocks over the Pi, and the front row of LEDs and buttons.</figcaption>
+</figure>
+
+<figure data-gif-showcase>
+  <img src="/media/vinyl-adc/rev-d/explode-poster.png" data-gif-src="/media/vinyl-adc/rev-d/explode.gif" data-poster-src="/media/vinyl-adc/rev-d/explode-poster.png" width="960" height="720" loading="lazy" alt="The rev D board lifting off the Raspberry Pi's header and seating again" />
+  <button type="button" class="btn secondary" style="margin-top:0.75rem" data-gif-toggle aria-pressed="false">Play GIF</button>
+  <figcaption>The HAT on and off the Pi's 40-pin header. CAD render; Raspberry Pi 4 model from the <a href="https://github.com/FreeCAD/FreeCAD-library">FreeCAD parts library</a> (CC BY 3.0).</figcaption>
+</figure>
+
+Thanks to [PCBWay](https://www.pcbway.com) for sponsoring the boards.
+
+## The milled original
 
 <figure data-gif-showcase>
   <img src="/media/vinyl-adc/showcase/orbit-poster.png" data-gif-src="/media/vinyl-adc/showcase/orbit.gif" data-poster-src="/media/vinyl-adc/showcase/orbit-poster.png" width="720" height="540" loading="lazy" alt="A full orbit around the printable organic lattice enclosure" />
@@ -20,11 +67,11 @@ Personal project. I designed the converter, simulated its analog behavior, and s
   <figcaption>The 105 mm tall lattice enclosure, with a clear acrylic lid and reinforced connector islands. CAD render; physical print validation is pending.</figcaption>
 </figure>
 
-## The challenge
+### The challenge
 
 Comparator delay limited the sampling rate. A third-order loop and delay compensation reached about **68 dB SNR in simulation**. SPICE also caught a reversed charge pump that connectivity checks missed.
 
-## Measured results
+### Measured results
 
 The converter now runs in stereo and has been measured on the bench. The left channel came out within a fraction of a decibel of what SPICE predicted:
 
@@ -102,7 +149,7 @@ Getting there took finding two faults in the right channel that had hidden each 
 
 The measurement itself needed debugging before the hardware could be trusted. Because the ADC generates its own sample clock at 48009 Hz rather than exactly 48000, test tones landed about 190 ppm low and walked out of the analysis window in proportion to frequency — which looked convincingly like a steep analogue rolloff above 5 kHz, and wasn't.
 
-**Current status:** Both channels work and are characterised. The right channel's loop is provably identical to the left, but its input path costs it 9 dB of noise, with an intermittent level trimmer the leading suspect. Absolute input level, running from the Raspberry Pi's own 5 V, and the enclosure as a physical print are still open. The [full test and verification record](https://github.com/MadsRudolph/vinyl-adc/blob/main/docs/test-and-verification.md) covers the method, the instrument's limits and everything not yet verified; the [assembly guide and bench log](https://vinyl-adc.madsrudolph.dev/) include graphical probe connections and actual readings.
+**Status of the milled stack:** Both channels work and are characterised. The right channel's loop is provably identical to the left, but its input path costs it 9 dB of noise, with an intermittent level trimmer the leading suspect. Absolute input level, running from the Raspberry Pi's own 5 V, and the enclosure as a physical print are still open. The [full test and verification record](https://github.com/MadsRudolph/vinyl-adc/blob/main/docs/test-and-verification.md) covers the method, the instrument's limits and everything not yet verified; the [assembly guide and bench log](https://vinyl-adc.madsrudolph.dev/) include graphical probe connections and actual readings.
 
 <figure data-gif-showcase>
   <img src="/media/vinyl-adc/showcase/electronics-poster.png" data-gif-src="/media/vinyl-adc/showcase/electronics.gif" data-poster-src="/media/vinyl-adc/showcase/electronics-poster.png" width="720" height="540" loading="lazy" alt="The four populated Vinyl ADC circuit boards" />
