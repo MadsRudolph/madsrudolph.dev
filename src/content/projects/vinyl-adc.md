@@ -62,9 +62,9 @@ Thanks to [PCBWay](https://www.pcbway.com) for sponsoring the boards.
 ## The milled original
 
 <figure data-gif-showcase>
-  <img src="/media/vinyl-adc/showcase/orbit-poster.png" data-gif-src="/media/vinyl-adc/showcase/orbit.gif" data-poster-src="/media/vinyl-adc/showcase/orbit-poster.png" width="720" height="540" loading="lazy" alt="A full orbit around the printable organic lattice enclosure" />
+  <img src="/media/vinyl-adc/showcase/electronics-poster.png" data-gif-src="/media/vinyl-adc/showcase/electronics.gif" data-poster-src="/media/vinyl-adc/showcase/electronics-poster.png" width="720" height="540" loading="lazy" alt="The four populated Vinyl ADC circuit boards" />
   <button type="button" class="btn secondary" style="margin-top:0.75rem" data-gif-toggle aria-pressed="false">Play GIF</button>
-  <figcaption>The 105 mm tall lattice enclosure, with a clear acrylic lid and reinforced connector islands. CAD render; physical print validation is pending.</figcaption>
+  <figcaption>The four milled boards without the enclosure: power, right channel, left channel and digital interface, from bottom to top.</figcaption>
 </figure>
 
 ### The challenge
@@ -151,17 +151,17 @@ The measurement itself needed debugging before the hardware could be trusted. Be
 
 **Status of the milled stack:** Both channels work and are characterised. The right channel's loop is provably identical to the left, but its input path costs it 9 dB of noise, with an intermittent level trimmer the leading suspect. Absolute input level, running from the Raspberry Pi's own 5 V, and the enclosure as a physical print are still open. The [full test and verification record](https://github.com/MadsRudolph/vinyl-adc/blob/main/docs/test-and-verification.md) covers the method, the instrument's limits and everything not yet verified; the [assembly guide and bench log](https://vinyl-adc.madsrudolph.dev/) include graphical probe connections and actual readings.
 
-<figure data-gif-showcase>
-  <img src="/media/vinyl-adc/showcase/electronics-poster.png" data-gif-src="/media/vinyl-adc/showcase/electronics.gif" data-poster-src="/media/vinyl-adc/showcase/electronics-poster.png" width="720" height="540" loading="lazy" alt="The four populated Vinyl ADC circuit boards" />
-  <button type="button" class="btn secondary" style="margin-top:0.75rem" data-gif-toggle aria-pressed="false">Play GIF</button>
-  <figcaption>Power, right channel, left channel, and digital interface, from bottom to top.</figcaption>
-</figure>
-
 ## Printable enclosure
 
 Rounded branches leave all four sides open so the boards remain visible. The enclosure is **144 × 144 × 105 mm**, adding 40 mm for the taller stack and cable routing. Solid mounting islands surround the connectors. Thicker corner ribs support the four M3 heat-set lid inserts, while the original acrylic lid pattern is retained.
 
 The mesh is a single watertight part and has been sliced with organic supports. **Supports are required** for the branch overhangs and upper rim; a successful slice is not a physical strength or fit test. The print package includes STL and 3MF files, reference print settings and a small insert-fit coupon. Board spacing in the animation is illustrative.
+
+<figure data-gif-showcase>
+  <img src="/media/vinyl-adc/showcase/orbit-poster.png" data-gif-src="/media/vinyl-adc/showcase/orbit.gif" data-poster-src="/media/vinyl-adc/showcase/orbit-poster.png" width="720" height="540" loading="lazy" alt="A full orbit around the printable organic lattice enclosure" />
+  <button type="button" class="btn secondary" style="margin-top:0.75rem" data-gif-toggle aria-pressed="false">Play GIF</button>
+  <figcaption>The 105 mm tall lattice enclosure, with a clear acrylic lid and reinforced connector islands. CAD render; physical print validation is pending.</figcaption>
+</figure>
 
 [Download the enclosure and printing instructions](https://github.com/MadsRudolph/vinyl-adc/tree/main/enclosure) · [Download all three GIFs](https://github.com/MadsRudolph/vinyl-adc/tree/main/media/showcase)
 
