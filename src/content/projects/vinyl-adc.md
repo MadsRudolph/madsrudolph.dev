@@ -21,24 +21,87 @@ Personal project. I designed the converter, simulated its analog behavior, and s
   <figcaption>Rev D, 140 × 136 mm: both channels on the left, clock and supply over the Raspberry Pi 4 underneath, status LEDs along the front. CAD render.</figcaption>
 </figure>
 
-Every board before this one was isolation-milled single-sided, which is why the converter was four stacked boards with dozens of wire links, and why its first bring-up spent a day on a supply rail that reached one board only through solder wicked up an unplated hole. PCBWay offered to make the boards, so I redrew the converter as what it should have been from the start: one board, four layers, a solid ground plane, an analog supply island behind its own choke, status LEDs, and the Pi as a HAT underneath. Five boards came back as 1.6 mm FR-4, 1 oz copper, HASL lead-free.
+**One board, four layers, made by PCBWay, and the best-measuring version of this converter so far.**
+
+Every board before this one was isolation-milled single-sided, which is why the converter was four stacked boards with dozens of wire links, and why its first bring-up spent a day on a supply rail that reached one board only through solder wicked up an unplated hole. When [PCBWay](https://www.pcbway.com) offered to sponsor the fabrication, I could finally draw the converter the way a mixed-signal circuit wants to be drawn: one board, a solid ground plane, an analog supply island behind its own choke, status LEDs, and the Pi as a HAT underneath. I'm grateful to PCBWay for that; this section is about what their boards did for the project.
+
+<figure>
+  <a href="/media/vinyl-adc/rev-d/photos/milled-vs-rev-d.jpg" target="_blank" rel="noopener"><img src="/media/vinyl-adc/rev-d/photos/milled-vs-rev-d.jpg" width="1600" height="1200" loading="lazy" alt="The four milled boards of the original Vinyl ADC, stacked, next to the single PCBWay rev D board" /></a>
+  <figcaption>Before and after: the four-board milled stack, and rev D as PCBWay made it.</figcaption>
+</figure>
+
+<figure>
+  <a href="/media/vinyl-adc/rev-d/photos/bare-top.jpg" target="_blank" rel="noopener"><img src="/media/vinyl-adc/rev-d/photos/bare-top.jpg" width="1548" height="1600" loading="lazy" alt="The bare rev D board from PCBWay, component side: green solder mask and white silkscreen" /></a>
+  <figcaption>The bare board as it arrived: component side.</figcaption>
+</figure>
+
+<figure>
+  <a href="/media/vinyl-adc/rev-d/photos/bare-bottom.jpg" target="_blank" rel="noopener"><img src="/media/vinyl-adc/rev-d/photos/bare-bottom.jpg" width="1482" height="1600" loading="lazy" alt="The bare rev D board, copper side, with the Raspberry Pi socket footprint and the board legend" /></a>
+  <figcaption>And the copper side, where the Raspberry Pi plugs in.</figcaption>
+</figure>
+
+### What PCBWay made
+
+| | Rev D, per board |
+|---|---|
+| Stack-up | **4 layers** with a solid ground plane, 1.6 mm FR-4, 1 oz copper |
+| Finish | solder mask both sides, white silkscreen, HASL lead-free |
+| Holes | **649 plated barrels**: 636 through-holes and 13 vias, on each of five boards |
+| Routing | 1,020 tracks, the narrowest 0.25 mm; drills down to 0.4 mm |
+| Legends | 184 reference designators at 1 mm, the smallest labels 0.8 mm |
+
+<figure>
+  <a href="/media/vinyl-adc/rev-d/photos/silkscreen.jpg" target="_blank" rel="noopener"><img src="/media/vinyl-adc/rev-d/photos/silkscreen.jpg" width="1200" height="1600" loading="lazy" alt="Close-up of the rev D silkscreen: reference designators and the designer credit, crisp at under a millimetre" /></a>
+  <figcaption>Legends under a millimetre tall come out clean and sharp.</figcaption>
+</figure>
+
+<figure>
+  <a href="/media/vinyl-adc/rev-d/photos/plated-holes.jpg" target="_blank" rel="noopener"><img src="/media/vinyl-adc/rev-d/photos/plated-holes.jpg" width="1200" height="1600" loading="lazy" alt="Close-up of rows of plated through-holes with HASL finish" /></a>
+  <figcaption>Every barrel plated and tinned, every via tented under the mask.</figcaption>
+</figure>
+
+### Why a fab board, for a converter
+
+A delta-sigma modulator switches at 1.536 MHz right next to integrators that resolve microvolts. On one milled layer, ground was whatever copper was left between tracks; on rev D a whole inner layer is ground, under every signal. Every joint is soldered from one side and carried through by a plated barrel, so the fault that cost the most time in September cannot happen. And there are five identical boards, where every milled board was a one-off.
 
 | | Milled stack | Rev D by PCBWay |
 |---|---|---|
 | Boards | 4 × 100 × 100 mm | **1 × 140 × 136 mm** |
 | Copper | 1 layer, milled | **4 layers**, solid ground plane |
 | Wire links | dozens | **none** |
-| Bring-up | two days, two hidden faults | **both channels healthy at the first capture** |
+| Bring-up | two days, two hidden faults | **both channels healthy and matched at the first capture** |
 
-The comparison that matters is the record. Same turntable, same phono stage, levels set so music peaks at −6 dBFS on both builds, stylus lifted:
+### The record decides
+
+Same turntable, same phono stage, levels set so music peaks at −6 dBFS on both builds, stylus lifted:
 
 | 20 Hz–20 kHz | Milled stack, bench supply | Rev D, Raspberry Pi supply |
 |---|---|---|
 | Idle floor, A-weighted | −61.1 dBFS | **−69.7 dBFS** |
+| Idle floor, 200 Hz–2 kHz | −68.6 dBFS | **−73.7 dBFS** |
 | Idle floor, 2–20 kHz | −59.6 dBFS | **−76.5 dBFS** |
 | Music to floor, A-weighted | 54.2 dB | **63.7 dB** |
 
-About 8 dB more range from the groove to the file, on the supply that cost the milled boards the most and on the Pi's own clock (rev D's crystal oscillator is still being debugged), so these are a floor for what the board can do. What remains is 50 Hz hum common to both channels, which is the turntable's grounding rather than the converter. The board has a tonearm terminal for that next experiment. The one rev D fault found so far is mine, not the fab's: two comparator inputs swapped in the schematic, which keeps both clip LEDs lit; the fix is two resistors on the underside. Full record: the [rev D bring-up log](https://github.com/MadsRudolph/vinyl-adc/blob/main/docs/bringup-log-2026-10-rev-d.md) and the [rev D page of the bench guide](https://vinyl-adc.madsrudolph.dev/rev-d.html).
+About **8 dB more range** from the groove to the file, and a floor 5–17 dB lower above 200 Hz. Rev D does that on the supply that cost the milled boards the most, and these figures were taken on the Pi's own clock, before its crystal was running. What remains is 50 Hz hum common to both channels, which is the turntable's grounding rather than the converter; the board has a tonearm terminal for that next experiment.
+
+### On the bench
+
+With its own crystal running, an Analog Discovery 3 generator into the input and the other input shorted:
+
+| | Milled stack, best channel | Rev D, left |
+|---|---|---|
+| Dynamic range (AES17, A-weighted) | 67.9 dB | **78.7 dB** |
+| THD at −6 dBFS | 0.03 % | **0.019 %** |
+| Crosstalk | −92.4 dB | **−97.8 dB** |
+
+That is **11 dB more dynamic range** than the milled boards ever reached, and 10 dB past what the design was simulated for. The right channel measures 72.2 dB: it carries an extra in-band floor that the milled stack's right channel had as well, now traced to its modulator loop and still being chased.
+
+The one rev D fault found so far is mine, not the fab's: two comparator inputs swapped in the schematic, which keeps both clip LEDs lit; the fix is two resistors on the underside. Full record: the [rev D bring-up log](https://github.com/MadsRudolph/vinyl-adc/blob/main/docs/bringup-log-2026-10-rev-d.md) and the [rev D page of the bench guide](https://vinyl-adc.madsrudolph.dev/rev-d.html).
+
+<figure>
+  <a href="/media/vinyl-adc/rev-d/photos/assembled.jpg" target="_blank" rel="noopener"><img src="/media/vinyl-adc/rev-d/photos/assembled.jpg" width="1200" height="1600" loading="lazy" alt="Rev D assembled on its Raspberry Pi 4, the status LEDs lit" /></a>
+  <figcaption>Assembled and running on its Raspberry Pi 4.</figcaption>
+</figure>
 
 <figure data-gif-showcase>
   <img src="/media/vinyl-adc/rev-d/orbit-poster.png" data-gif-src="/media/vinyl-adc/rev-d/orbit.gif" data-poster-src="/media/vinyl-adc/rev-d/orbit-poster.png" width="720" height="540" loading="lazy" alt="Rev D board turning through a full orbit" />
@@ -57,7 +120,7 @@ About 8 dB more range from the groove to the file, on the supply that cost the m
   <figcaption>The HAT on and off the Pi's 40-pin header. CAD render; Raspberry Pi 4 model from the <a href="https://github.com/FreeCAD/FreeCAD-library">FreeCAD parts library</a> (CC BY 3.0).</figcaption>
 </figure>
 
-Thanks to [PCBWay](https://www.pcbway.com) for sponsoring the boards.
+Boards sponsored by [PCBWay](https://www.pcbway.com). Thank you for making the best version of this project possible.
 
 ## The milled original
 
