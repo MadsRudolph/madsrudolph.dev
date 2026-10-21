@@ -14,6 +14,11 @@ heroAlt: 'The Vinyl ADC rev D board: a four-layer Raspberry Pi HAT with a row of
 
 Personal project. I designed the converter, simulated its analog behavior, and split the circuit into four boards that could be milled in-house. With PCBWay sponsoring fabrication, it is now one four-layer board that the Raspberry Pi plugs into.
 
+<figure>
+  <video controls preload="metadata" playsinline src="/media/vinyl-adc/short/build-story.mp4" poster="/media/vinyl-adc/short/build-story-poster.jpg" width="1080" height="1920" style="max-width:360px;height:auto;display:block;margin:0 auto"></video>
+  <figcaption>The build story in under thirty seconds: from four milled boards to one PCBWay board. Sound on.</figcaption>
+</figure>
+
 ## Rev D: made by PCBWay
 
 <figure>
@@ -120,6 +125,27 @@ The one rev D fault found so far is mine, not the fab's: two comparator inputs s
   <figcaption>The HAT on and off the Pi's 40-pin header. CAD render; Raspberry Pi 4 model from the <a href="https://github.com/FreeCAD/FreeCAD-library">FreeCAD parts library</a> (CC BY 3.0).</figcaption>
 </figure>
 
+### An enclosure for rev D
+
+Rev D gets a box of its own, shaped around the board rather than around a stack: **155 × 168 × 51 mm**, a black PETG tray with the Raspberry Pi screwed to its floor and the HAT on three posts above it, a front plate that carries the controls, and a 3 mm laser-cut acrylic lid so the board stays on show.
+
+<figure>
+  <a href="/media/vinyl-adc/rev-d/enclosure/closed.jpg" target="_blank" rel="noopener"><img src="/media/vinyl-adc/rev-d/enclosure/closed.jpg" width="1600" height="1246" loading="lazy" alt="The rev D enclosure closed: a black tray, a silver front plate with eight status lights and two orange buttons, and a clear acrylic lid" /></a>
+  <figcaption>Closed. Eight printed light pipes carry the status LEDs to the front plate, and the two buttons press the board's power and record switches. CAD render; the acrylic lid is drawn tinted.</figcaption>
+</figure>
+
+<figure>
+  <a href="/media/vinyl-adc/rev-d/enclosure/lid-off.jpg" target="_blank" rel="noopener"><img src="/media/vinyl-adc/rev-d/enclosure/lid-off.jpg" width="1600" height="1246" loading="lazy" alt="The rev D enclosure with the lid removed, showing the HAT inside the tray behind the front plate" /></a>
+  <figcaption>Lid off: the HAT in the tray, with a gutter along the left wall for the terminal-block wires.</figcaption>
+</figure>
+
+<figure>
+  <a href="/media/vinyl-adc/rev-d/enclosure/rear.jpg" target="_blank" rel="noopener"><img src="/media/vinyl-adc/rev-d/enclosure/rear.jpg" width="1600" height="1035" loading="lazy" alt="The back and side of the rev D enclosure: Ethernet and USB openings, panel RCA inputs and a ground post, and the Pi's USB-C and HDMI ports" /></a>
+  <figcaption>The back: panel RCA inputs and a ground post for the turntable, the Pi's Ethernet and USB, and its USB-C, HDMI and audio ports along the side.</figcaption>
+</figure>
+
+Every part was checked in CAD against the board's 3D models and the Raspberry Pi's, with real plugs in every port, before anything was printed; that check moved the port openings, the light-pipe walls and two pockets over the board's screw heads. It has not been printed yet; that, and measuring the parts the models only estimate, come next.
+
 Boards sponsored by [PCBWay](https://www.pcbway.com). Thank you for making the best version of this project possible.
 
 ## The milled original
@@ -214,7 +240,7 @@ The measurement itself needed debugging before the hardware could be trusted. Be
 
 **Status of the milled stack:** Both channels work and are characterised. The right channel's loop is provably identical to the left, but its input path costs it 9 dB of noise, with an intermittent level trimmer the leading suspect. Absolute input level, running from the Raspberry Pi's own 5 V, and the enclosure as a physical print are still open. The [full test and verification record](https://github.com/MadsRudolph/vinyl-adc/blob/main/docs/test-and-verification.md) covers the method, the instrument's limits and everything not yet verified; the [assembly guide and bench log](https://vinyl-adc.madsrudolph.dev/) include graphical probe connections and actual readings.
 
-## Printable enclosure
+### Printable enclosure for the milled stack
 
 Rounded branches leave all four sides open so the boards remain visible. The enclosure is **144 × 144 × 105 mm**, adding 40 mm for the taller stack and cable routing. Solid mounting islands surround the connectors. Thicker corner ribs support the four M3 heat-set lid inserts, while the original acrylic lid pattern is retained.
 
