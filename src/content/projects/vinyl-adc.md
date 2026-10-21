@@ -15,7 +15,16 @@ heroAlt: 'The Vinyl ADC rev D board: a four-layer Raspberry Pi HAT with a row of
 Personal project. I designed the converter, simulated its analog behavior, and split the circuit into four boards that could be milled in-house. With PCBWay sponsoring fabrication, it is now one four-layer board that the Raspberry Pi plugs into.
 
 <figure>
-  <video controls preload="metadata" playsinline src="/media/vinyl-adc/short/build-story.mp4" poster="/media/vinyl-adc/short/build-story-poster.jpg" width="1080" height="1920" style="max-width:360px;height:auto;display:block;margin:0 auto"></video>
+  <div class="video-frame vertical">
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/FzcM-NAf4RI"
+      title="Vinyl ADC: from four milled boards to one PCBWay board"
+      loading="lazy"
+      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+  </div>
   <figcaption>The build story in under thirty seconds: from four milled boards to one PCBWay board. Sound on.</figcaption>
 </figure>
 
