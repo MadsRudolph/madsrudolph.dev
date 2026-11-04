@@ -74,6 +74,14 @@ Every board before this one was isolation-milled single-sided, which is why the 
   <figcaption>Every barrel plated and tinned, every via tented under the mask.</figcaption>
 </figure>
 
+### Ordering and what arrived
+
+These are the first professionally made boards I have ever had, so I was very excited to get my hands on them. The order went in through PCBWay's normal online flow on 25 September, from the Gerbers with the copper layer order in the remarks, and their engineers had no questions for me. That was shortly before China's National Day holiday, so things took a little longer, which is understandable and no problem at all. The boards were built up and running on my bench by 20 October.
+
+The package felt premium: the boards were vacuum-sealed in bubble wrap and cushioned by soft styrofoam, which made unpacking them a pleasure. I found no issues with their quality. Assembling them, every footprint matched its part exactly, the clear silkscreen made placing the components easy, and the pre-tinned HASL pads were very nice to hand-solder.
+
+I have built one board so far, since one is all the project needs, so the others are untested spares. On the one I built, no fault has traced back to the fab.
+
 ### Why a fab board, for a converter
 
 A delta-sigma modulator switches at 1.536 MHz right next to integrators that resolve microvolts. On one milled layer, ground was whatever copper was left between tracks; on rev D a whole inner layer is ground, under every signal. Every joint is soldered from one side and carried through by a plated barrel, so the fault that cost the most time in September cannot happen. And there are five identical boards, where every milled board was a one-off.
