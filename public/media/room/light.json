@@ -1,0 +1,20 @@
+{
+ "day": {
+  "map": "lightmap_day.webp",
+  "env": "env_day.webp",
+  "scale": 7.450520992279053,
+  "exposure": 0.32,
+  "envIntensity": 0.5,
+  "sky": 14.0,
+  "lamps": 0.0
+ },
+ "evening": {
+  "map": "lightmap_evening.webp",
+  "env": "env_evening.webp",
+  "scale": 0.700439453125,
+  "exposure": 1.12,
+  "envIntensity": 0.35,
+  "sky": 1.0,
+  "lamps": 0.8
+ }
+}
