@@ -9,14 +9,17 @@ featured: false
 order: 1.25
 status: working
 kind: personal
-hero: '/media/esp32-surround-processor/board-top.webp'
-heroAlt: 'Top face of the surround processor board: a ground plane with the silkscreen, two DAC module positions and the ESP32 at the east edge'
+hero: '/media/esp32-surround-processor/render-hero_stacked.webp'
+heroAlt: 'The surround processor: a bare-copper milled board with two DAC modules and the green optical receiver module stacked on top'
 ---
 
 Personal project. My TV has an optical output, I have a stereo amplifier with two large front speakers, and a pair of small active monitors behind the couch. This board sits between them: optical in, four line outputs, and the surround decoding done in firmware on an ESP32.
 
-<div class="media-placeholder">PHOTO: the assembled board with both DAC modules, the receiver module and the volume pot</div>
-<!-- PHOTO NEEDED: assembled board on the bench, and one of it wired to the amplifier and the rear speakers -->
+<figure>
+  <a href="/media/esp32-surround-processor/render-hero_stacked.webp" target="_blank" rel="noopener"><img src="/media/esp32-surround-processor/render-hero_stacked.webp" width="1920" height="1280" alt="Render of the assembled processor: the milled copper board with regulators, capacitors and screw terminals, and the green receiver module stacked above the two DAC modules with a six-wire pigtail looping over" /></a>
+  <figcaption>The assembled processor, with the optical receiver module stacked over the two DAC modules. Render from the KiCad board file; the modules are simplified stand-ins.</figcaption>
+</figure>
+<!-- PHOTO NEEDED: the real board on the bench, and one of it wired to the amplifier and the rear speakers -->
 
 ## What it does
 
@@ -35,13 +38,18 @@ Personal project. My TV has an optical output, I have a stereo amplifier with tw
 The board is 101.9 × 73.2 mm with copper on both faces, cut on a desktop CNC mill with a 0.8 mm ball mill. The holes are not plated and there are **no vias and no wire links**. The two faces meet only where a component lead is soldered on the top as well as the bottom: 19 joints in all, each one chosen so the iron can reach it. The top face is a ground plane, and every clock, data and audio net stays on the bottom.
 
 <figure>
-  <a href="/media/esp32-surround-processor/board-top.webp" target="_blank" rel="noopener"><img src="/media/esp32-surround-processor/board-top.webp" width="1900" height="1366" loading="lazy" alt="Top face of the board: ground plane, laser silkscreen labels, and two supply runs" /></a>
-  <figcaption>Top face: ground plane, the two supply runs, and the silkscreen that goes on with a fibre laser. CAD render.</figcaption>
+  <a href="/media/esp32-surround-processor/render-top_34.webp" target="_blank" rel="noopener"><img src="/media/esp32-surround-processor/render-top_34.webp" width="1920" height="1280" loading="lazy" alt="Render of the top face: bare copper ground plane with the dark laser legend, two DAC modules, two regulators, capacitors and screw terminals" /></a>
+  <figcaption>Top face: bare copper, nearly all of it ground, with the legend put on by a fibre laser. Render.</figcaption>
 </figure>
 
 <figure>
-  <a href="/media/esp32-surround-processor/board-bottom.webp" target="_blank" rel="noopener"><img src="/media/esp32-surround-processor/board-bottom.webp" width="1900" height="1366" loading="lazy" alt="Bottom face of the board with all signal routing and the ESP32 module pads" /></a>
-  <figcaption>Bottom face: all the signals, and the ESP32 module's castellated pads. CAD render.</figcaption>
+  <a href="/media/esp32-surround-processor/render-bottom_34.webp" target="_blank" rel="noopener"><img src="/media/esp32-surround-processor/render-bottom_34.webp" width="1920" height="1280" loading="lazy" alt="Render of the bottom face: green solder mask over the signal routing, the ESP32 module with its antenna past the board edge, and four standoffs" /></a>
+  <figcaption>Bottom face: every signal, under a hand-applied solder mask, and the ESP32 module with its antenna off the board edge. Render.</figcaption>
+</figure>
+
+<figure>
+  <a href="/media/esp32-surround-processor/board-bottom.webp" target="_blank" rel="noopener"><img src="/media/esp32-surround-processor/board-bottom.webp" width="1900" height="1366" loading="lazy" alt="Layer plot of the bottom copper: all signal routing and the ESP32 module pads" /></a>
+  <figcaption>The bottom copper as the mill cuts it. Layer plot from KiCad.</figcaption>
 </figure>
 
 The layout is written as code: named anchors, a placement table on a 1.27 mm grid, and routing lanes, so a full place-and-route run takes seconds and every change is looked at in a render. A separate check proves the board is connected with bare holes, which KiCad's own rule check cannot do.
@@ -61,6 +69,20 @@ Measured before any firmware ran: 4.98 V and 3.21 V on the two rails, 128 mA fro
 - **The decoder was 3 % too slow.** The first Dolby Digital build took 33.7 ms to decode a frame that lasts 32 ms, so the sound broke up. Running at 240 MHz and giving the decoder a core to itself brought it to 21 ms. An experiment then showed where the time went: decoding to two channels in place of four took half as long, so the cost was in the per-channel transform. The decoder library (liba52) keeps its FFT temporaries in double precision, and the ESP32 has no hardware for doubles. Changing four declarations to single precision brought it to about 5 ms.
 - **The mute pin does not mute.** The DAC modules ignore the ESP32's mute line, most likely because their own strap is still fitted. Mute is done in the audio data, which works either way.
 
+## Enclosure
+
+<figure>
+  <a href="/media/esp32-surround-processor/enclosure-closed-front.webp" target="_blank" rel="noopener"><img src="/media/esp32-surround-processor/enclosure-closed-front.webp" width="1600" height="1100" loading="lazy" alt="Render of the enclosure: a dark printed base with a volume knob on the front and a clear acrylic lid through which the board is visible" /></a>
+  <figcaption>The enclosure as designed: a printed base and a laser-cut lid in clear acrylic. Design render; not printed yet.</figcaption>
+</figure>
+
+The enclosure is a printed base with a lid cut from 4 mm clear acrylic, held by M3 screws in heat-set inserts. The optical and coax inputs and the four outputs sit on the rear panel and the volume knob on the front, away from the antenna. It is a parametric FreeCAD model generated from a Python script, checked for collisions against the board's 3D export. The dimensions of the bought-in parts are still being measured, so nothing has been printed.
+
+<figure>
+  <a href="/media/esp32-surround-processor/enclosure-exploded.webp" target="_blank" rel="noopener"><img src="/media/esp32-surround-processor/enclosure-exploded.webp" width="1500" height="1500" loading="lazy" alt="Exploded render: base, carrier board with the receiver module above it, the USER button cap and the acrylic lid" /></a>
+  <figcaption>Base, board, receiver module, button cap and lid. Design render.</figcaption>
+</figure>
+
 ## Results
 
 <figure>
@@ -78,7 +100,7 @@ Measured before any firmware ran: 4.98 V and 3.21 V on the two rails, 128 mA fro
 
 The decoder and the bitstream parser are plain C with no ESP32 calls, so the same code builds on a PC. A script wraps any film's AC-3 track the way a TV does, runs it through, and prints the level of each of the four outputs per second. A 5.1 test file I generated, with a known sound in one channel at a time, came out on the right outputs there before the firmware was ever flashed.
 
-What is not done: the board has no enclosure yet, the level match between front and rear is set by ear, and liba52 is a third-party decoder (GPL, which is why the firmware is published under GPL 3). Writing my own AC-3 decoder is the next step.
+What is not done: the enclosure is designed but not printed, the level match between front and rear is set by ear, and liba52 is a third-party decoder (GPL, which is why the firmware is published under GPL 3). Writing my own AC-3 decoder is the next step.
 
 ## Tools and skills
 
