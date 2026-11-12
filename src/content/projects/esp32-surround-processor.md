@@ -4,6 +4,7 @@ summary: >-
   A four-speaker surround processor on a double-sided board I milled myself, with no vias. An ESP32 takes the TV's optical output, decodes Dolby Digital 5.1 in about 5 ms per 32 ms frame, and drives two DACs: front pair and rear pair.
 date: 2026-11-12
 tags: ['ESP32', 'C / firmware', 'DSP', 'Audio', 'KiCad', 'PCB design', 'Measurement', 'Python']
+repo: 'https://github.com/MadsRudolph/esp32-surround-processor'
 featured: false
 order: 1.25
 status: working
@@ -77,7 +78,7 @@ Measured before any firmware ran: 4.98 V and 3.21 V on the two rails, 128 mA fro
 
 The decoder and the bitstream parser are plain C with no ESP32 calls, so the same code builds on a PC. A script wraps any film's AC-3 track the way a TV does, runs it through, and prints the level of each of the four outputs per second. A 5.1 test file I generated, with a known sound in one channel at a time, came out on the right outputs there before the firmware was ever flashed.
 
-What is not done: the board has no enclosure yet, the level match between front and rear is set by ear, and liba52 is a third-party decoder (GPL). Writing my own AC-3 decoder is the next step.
+What is not done: the board has no enclosure yet, the level match between front and rear is set by ear, and liba52 is a third-party decoder (GPL, which is why the firmware is published under GPL 3). Writing my own AC-3 decoder is the next step.
 
 ## Tools and skills
 
