@@ -74,3 +74,5 @@ docs/commits and should be confirmed against reality before you send the link to
 
 - [ ] **ir-blaster-standalone** (private): rotate the leaked WiFi/OTA credentials, scrub `secrets.yaml` from git history, then it can be made public. The writeup links only the clean `ir-remote-wizard` until then.
 - [ ] **ha-addon-budget-dashboard** (public): rotate the Enable Banking key/session leaked in history. Not linked from this site.
+
+- [ ] **esp32-surround-processor**: photo of the assembled board, and one of it wired to the amplifier and rear speakers (placeholder at the top of the page). The repo is private, so the page has no repo link yet.
