@@ -76,7 +76,7 @@ Measured before any firmware ran: 4.98 V and 3.21 V on the two rails, 128 mA fro
   <figcaption>The enclosure as designed: a printed base and a laser-cut lid in clear acrylic. Design render; not printed yet.</figcaption>
 </figure>
 
-The enclosure is a printed base with a lid cut from 4 mm clear acrylic, held by M3 screws in heat-set inserts. The optical and coax inputs and the four outputs sit on the rear panel and the volume knob on the front, away from the antenna. It is a parametric FreeCAD model generated from a Python script, checked for collisions against the board's 3D export. The dimensions of the bought-in parts are still being measured, so nothing has been printed.
+The enclosure is a printed base with a lid cut from 4 mm clear acrylic, held by M3 screws in heat-set inserts. The optical and coax inputs, four RCA outputs and the 9 V jack sit on the rear panel, and the volume knob on the front, away from the antenna. It is a parametric FreeCAD model generated from a Python script, checked for collisions against the board's 3D export. It is built on caliper measurements of the finished board; a few bought-in parts are still on their way, so nothing has been printed.
 
 <figure>
   <a href="/media/esp32-surround-processor/enclosure-exploded.webp" target="_blank" rel="noopener"><img src="/media/esp32-surround-processor/enclosure-exploded.webp" width="1500" height="1500" loading="lazy" alt="Exploded render: base, carrier board with the receiver module above it, the USER button cap and the acrylic lid" /></a>
