@@ -67,16 +67,17 @@ Measured before any firmware ran: 4.98 V and 3.21 V on the two rails, 128 mA fro
 - **Clicks, part two: the data lines were driven too hard.** With the buffers no longer lost, clicks remained, and one observation located them: a test sound on any single speaker was clean, the same sound on all four clicked. That needs both data lines switching together. At the ESP32's default drive strength their edges disturbed the clock lines they run beside, and the DACs misread bits. I made the drive strength adjustable from the debug page and listened: clean on the two weakest settings, clicking on the default, severe on the strongest. The firmware uses the weakest. On the next revision the data lines get ground between them and the clocks.
 - **A false alarm I caused myself.** The first crackle appeared when the volume pot was fitted. The ADC reading wobbles by about ±20 counts, and the firmware applied each wobble as a small volume step twenty times a second. A dead band and a per-sample glide removed it.
 - **The decoder was 3 % too slow.** The first Dolby Digital build took 33.7 ms to decode a frame that lasts 32 ms, so the sound broke up. Running at 240 MHz and giving the decoder a core to itself brought it to 21 ms. An experiment then showed where the time went: decoding to two channels in place of four took half as long, so the cost was in the per-channel transform. The decoder library (liba52) keeps its FFT temporaries in double precision, and the ESP32 has no hardware for doubles. Changing four declarations to single precision brought it to about 5 ms.
+- **Resets inside the box on a 12 V adapter.** The 3.3 V comes from an LM317 fed from the input voltage. On 12 V, in the closed box, it dissipated about half as much again as on 9 V, got too hot, and the ESP32 reset from brown-out every second or so; the serial log showed the resets coming before Wi-Fi had even started, so it was not the radio's current peaks. On the 9 V adapter the board is designed for it runs without a reset. Feeding the LM317 from the 5 V rail would make a 12 V adapter safe.
 - **The mute pin does not mute.** The DAC modules ignore the ESP32's mute line, most likely because their own strap is still fitted. Mute is done in the audio data, which works either way.
 
 ## Enclosure
 
 <figure>
   <a href="/media/esp32-surround-processor/enclosure-closed-front.webp" target="_blank" rel="noopener"><img src="/media/esp32-surround-processor/enclosure-closed-front.webp" width="1600" height="1100" loading="lazy" alt="Render of the enclosure: a dark printed base with a volume knob on the front and a clear acrylic lid through which the board is visible" /></a>
-  <figcaption>The enclosure as designed: a printed base and a laser-cut lid in clear acrylic. Design render; not printed yet.</figcaption>
+  <figcaption>The enclosure as designed: a printed base and a laser-cut lid in clear acrylic. Design render.</figcaption>
 </figure>
 
-The enclosure is a printed base with a lid cut from 4 mm clear acrylic, held by M3 screws in heat-set inserts. The optical and coax inputs, four RCA outputs and the 9 V jack sit on the rear panel, and the volume knob on the front, away from the antenna. It is a parametric FreeCAD model generated from a Python script, checked for collisions against the board's 3D export. It is built on caliper measurements of the finished board; a few bought-in parts are still on their way, so nothing has been printed.
+The enclosure is a printed base with a lid cut from 4 mm clear acrylic, held by M3 screws in heat-set inserts. The optical and coax inputs, four RCA outputs and the 9 V jack sit on the rear panel, and the volume knob on the front, away from the antenna. It is a parametric FreeCAD model generated from a Python script, checked for collisions against the board's 3D export. It is built on caliper measurements of the finished board. Two openings were corrected from test prints: the RCA holes went from 7.3 to 8.0 mm, and the receiver's three connectors sat 4 mm off on the first print. A 20-minute strip of the rear wall showed the first correction overshot by 2 mm, and the final print fits. The base is printed in PLA with a fuzzy-skin finish.
 
 <figure>
   <a href="/media/esp32-surround-processor/enclosure-exploded.webp" target="_blank" rel="noopener"><img src="/media/esp32-surround-processor/enclosure-exploded.webp" width="1500" height="1500" loading="lazy" alt="Exploded render: base, carrier board with the receiver module above it, the USER button cap and the acrylic lid" /></a>
@@ -100,7 +101,27 @@ The enclosure is a printed base with a lid cut from 4 mm clear acrylic, held by 
 
 The decoder and the bitstream parser are plain C with no ESP32 calls, so the same code builds on a PC. A script wraps any film's AC-3 track the way a TV does, runs it through, and prints the level of each of the four outputs per second. A 5.1 test file I generated, with a known sound in one channel at a time, came out on the right outputs there before the firmware was ever flashed.
 
-What is not done: the enclosure is designed but not printed, the level match between front and rear is set by ear, and liba52 is a third-party decoder (GPL, which is why the firmware is published under GPL 3). Writing my own AC-3 decoder is the next step.
+### Tested in the finished box
+
+With the box closed and on its 9 V adapter, I fed it S/PDIF from the Analog Discovery 3: a small script turns the AD3's pattern generator into an S/PDIF transmitter, through two resistors into the coax input, with a 1 kHz tone on the left and 1.5 kHz on the right at −12 dBFS. The AD3's scope read the RCA outputs. The receiver locks in 2 to 3 seconds and the ESP32 sees exactly the −12.0 dBFS that is sent.
+
+<figure>
+  <a href="/media/esp32-surround-processor/box-rear-matrix.svg" target="_blank" rel="noopener">
+    <img style="min-width:680px;width:100%;max-width:900px;height:auto" src="/media/esp32-surround-processor/box-rear-matrix.svg" width="900" height="400" loading="lazy" alt="Rear outputs in surround mode for three inputs: left with inverted right gives about 0.49 V rms on both rears, left equal to right gives 2 mV, and left only gives about 0.245 V" />
+  </a>
+  <figcaption>The rear matrix, measured on the two rear outputs. Half of left minus right: a sound that is the same in both channels cancels by more than 47 dB, and one in antiphase comes out at full level.</figcaption>
+</figure>
+
+<figure>
+  <a href="/media/esp32-surround-processor/box-output-levels.svg" target="_blank" rel="noopener">
+    <img style="min-width:680px;width:100%;max-width:900px;height:auto" src="/media/esp32-surround-processor/box-output-levels.svg" width="900" height="350" loading="lazy" alt="Line output level of the four outputs: 0.514, 0.501, 0.518 and 0.503 V rms on the bench against 0.484, 0.456, 0.488 and 0.458 V rms in the finished box" />
+  </a>
+  <figcaption>Each output carries its own channel at 0.46 to 0.49 V rms. The box reads 0.5 to 0.8 dB under the bench values, which used a different signal source and different leads, so I read little into the difference. On both runs the right channel of each DAC is the lower one.</figcaption>
+</figure>
+
+The volume pot, mute and the mode button all work through the printed panel, and the mode button switches the rears between the matrix, a copy of the fronts, and off.
+
+What is not done: the optical input has not yet been tried with a TV in the closed box, the level match between front and rear is set by ear, and liba52 is a third-party decoder (GPL, which is why the firmware is published under GPL 3). Writing my own AC-3 decoder is the next step.
 
 ## Tools and skills
 
