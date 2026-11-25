@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>Lejlighed 1723</title>
+<style>:root{--lightningcss-light: ;--lightningcss-dark:initial;color-scheme:dark}html,body{color:#f2f0ec;background:#111;height:100%;margin:0;font-family:system-ui,Inter,sans-serif;overflow:hidden}canvas#view{width:100vw;height:100vh;display:block}#start{-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);cursor:pointer;z-index:10;background:#0c0c0e9e;justify-content:center;align-items:center;display:flex;position:fixed;inset:0}#start .card{text-align:center;max-width:30rem;padding:2rem}#start h1{letter-spacing:.01em;margin:0 0 .3rem;font-size:1.9rem;font-weight:600}#start p{color:#cfcbc4;margin:.3rem 0;line-height:1.5}#start .go{color:#151515;background:#f2f0ec;border-radius:999px;margin-top:1.2rem;padding:.7rem 1.6rem;font-weight:600;display:inline-block}#start .keys{color:#a9a59e;margin-top:1.4rem;font-size:.85rem}kbd{font:inherit;color:#eee;background:#2b2b2e;border:1px solid #45454a;border-radius:4px;padding:0 .35em}#bar{z-index:11;background:#333;height:3px;position:fixed;bottom:0;left:0;right:0}#bar i{background:#e8c78a;width:0;height:100%;transition:width .2s;display:block}#room{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);letter-spacing:.03em;pointer-events:none;opacity:0;background:#0f0f118c;border-radius:999px;padding:.35rem 1rem;font-size:.9rem;transition:opacity .4s;position:fixed;top:18px;left:50%;transform:translate(-50%)}#map{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);background:#0f0f118c;border-radius:10px;position:fixed;bottom:16px;left:16px}#hint{color:#c9c5be;pointer-events:none;background:#0f0f1173;border-radius:8px;padding:.4rem .7rem;font-size:.78rem;position:fixed;bottom:16px;right:16px}#pad{pointer-events:none;background:#0f0f1140;border:1.5px solid #ffffff59;border-radius:50%;width:112px;height:112px;margin:-56px;display:none;position:fixed}#knob{background:#ffffff8c;border-radius:50%;width:46px;height:46px;margin:-23px;position:absolute;top:50%;left:50%}.only-touch{display:none}body.touch .only-touch{display:revert}body.touch .only-mouse,body.touch #hint{display:none}body.touch #room{top:14px;left:14px;transform:none}body.touch #map{width:150px;height:121px;inset:12px 12px auto auto}html,body{touch-action:none;overscroll-behavior:none;-webkit-user-select:none;user-select:none}canvas#view{height:100dvh}#dot{pointer-events:none;background:#ffffff8c;border-radius:50%;width:4px;height:4px;margin:-2px;display:none;position:fixed;top:50%;left:50%}</style>
+  <script type="module" crossorigin src="/apartment/assets/index-DHPNO78A.js"></script>
+</head>
+<body>
+<canvas id="view"></canvas>
+<div id="room"></div>
+<canvas id="map" width="260" height="210"></canvas>
+<div id="hint"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> gå · mus: kig · <kbd>Shift</kbd> hurtigt · <kbd>1</kbd>–<kbd>7</kbd> rum · <kbd>M</kbd> kort · <kbd>Esc</kbd> slip musen</div>
+<div id="dot"></div>
+<div id="pad"><div id="knob"></div></div>
+<div id="start">
+  <div class="card">
+    <h1>Lejlighed 1723</h1>
+    <p id="status">Indlæser …</p>
+    <span class="go" id="go" style="display:none">Klik for at gå ind</span>
+    <p class="keys only-touch">Venstre tommelfinger: gå. Højre tommelfinger: se dig omkring.<br>Tryk på kortet for at hoppe til næste rum.</p>
+    <p class="keys only-mouse"><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> eller piletaster for at gå, musen for at se dig omkring.<br><kbd>Shift</kbd> løb · <kbd>1</kbd>–<kbd>7</kbd> hop til et rum · <kbd>M</kbd> kort · <kbd>+</kbd>/<kbd>-</kbd> lysstyrke</p>
+  </div>
+</div>
+<div id="bar"><i></i></div>
+</body>
+</html>

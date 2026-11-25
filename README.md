@@ -143,6 +143,20 @@ The exporter needs Chromium or Google Chrome installed. It serves the build loca
 prints both CV pages, and updates the PDFs in both `public/` and `dist/`.
 Commit the updated PDFs with the CV source changes.
 
+### Apartment walk-through
+
+`/apartment` is a first-person walk-through of a furnished three-bedroom apartment,
+built from a floor plan. It is a separate Vite + Three.js project in
+`~/Projects/apartment-3d`; `public/apartment/` here is only its build output
+(`full/` for computers, `lite/` with smaller textures and lightmaps for phones).
+To update it:
+
+```sh
+cd ~/Projects/apartment-3d/viewer
+node web.mjs && BASE=/apartment/ npx vite build
+rm -rf ~/Projects/madsrudolph.dev/public/apartment && cp -r dist ~/Projects/madsrudolph.dev/public/apartment
+```
+
 ### Interactive dorm room
 
 `/room` is a standalone Three.js viewer of the dorm room, the hall and the bathroom.
