@@ -145,8 +145,9 @@ Commit the updated PDFs with the CV source changes.
 
 ### Apartment walk-through
 
-`/apartment` is a first-person walk-through of a furnished three-bedroom apartment,
-built from a floor plan. It is a separate Vite + Three.js project in
+`/apartment` is a furnishing app for a three-bedroom apartment built from a floor plan:
+walk through it in first person, or switch to "Indret" to move, add and remove furniture
+from a catalogue. Layouts are saved in the browser and shared as links. It is a separate Vite + Three.js project in
 `~/Projects/apartment-3d`; `public/apartment/` here is only its build output
 (`full/` for computers, `lite/` with smaller textures and lightmaps for phones).
 To update it:
