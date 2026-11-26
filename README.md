@@ -154,8 +154,7 @@ To update it:
 
 ```sh
 cd ~/Projects/apartment-3d/viewer
-node web.mjs && BASE=/apartment/ npx vite build
-rm -rf ~/Projects/madsrudolph.dev/public/apartment && cp -r dist ~/Projects/madsrudolph.dev/public/apartment
+node web.mjs && ./publish.sh   # then commit public/apartment here
 ```
 
 ### Interactive dorm room
